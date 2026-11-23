@@ -125,6 +125,9 @@ const USAGE_SEMANTICS = {
   I: { meaning: 'ignored (accepted then discarded by NPHIES)', validator: 'ignored' },
   X: { meaning: 'not used', validator: 'warn-if-present' },
   NP: { meaning: 'SHALL NOT be present', validator: 'error-if-present' },
+  // 'C' arrived with the A08 discharge-update Z-segments (2026-09-20): the condition is prose in the guidance, so it
+  // is shown, never judged.
+  C: { meaning: 'conditional (the condition is stated in the guidance)', validator: 'ok' },
   '-': { meaning: 'segment is not present in this message', validator: 'error-if-present' },
 };
 
@@ -3590,6 +3593,11 @@ const errorsFile = writeJson('errors.json', errorsIn ?? { missing: true, errors:
 if (!goldenIn) warn('golden', 'golden.json absent — no golden sample index is shipped');
 const goldenFile = writeJson('golden.json', goldenIn ?? { missing: true, samples: [] });
 
+// changes.json — "What NPHIES changed": the reviewer's list of what the last refresh changed in the rules and what it has
+// not carried in yet (spec-build/changes.py). Optional: a bundle compiled before any refresh simply has no list.
+const changesIn = existsSync(join(IN_DIR, 'changes.json')) ? readInput('changes').data : null;
+const changesFile = changesIn ? writeJson('changes.json', changesIn) : null;
+
 const { index: valueSetIndex, files: valueSetFiles } = compileValueSets();
 
 // ---------------------------------------------------------------------------
@@ -3854,6 +3862,7 @@ const manifest = {
     valueSetIndex: 'valuesets/index.json',
     specDefects: specDefectsFile,
     sampleDefects: sampleDefectsFile,
+    ...(changesFile ? { changes: changesFile } : {}),
   },
   /**
    * What the six repair passes contributed, and what the compiler normalises on the way in

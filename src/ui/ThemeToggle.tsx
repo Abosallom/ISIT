@@ -1,10 +1,11 @@
 import { cx } from "./cx";
+import { t } from "../i18n";
 import type { ThemeChoice } from "./useTheme";
 
 const OPTIONS: Array<{ id: ThemeChoice; label: string; glyph: string }> = [
-  { id: "system", label: "Match system", glyph: "◑" },
-  { id: "light", label: "Light", glyph: "☀" },
-  { id: "dark", label: "Dark", glyph: "☾" },
+  { id: "system", get label() { return t("Match system"); }, glyph: "◑" },
+  { id: "light", get label() { return t("Light"); }, glyph: "☀" },
+  { id: "dark", get label() { return t("Dark"); }, glyph: "☾" },
 ];
 
 export interface ThemeToggleProps {
@@ -18,7 +19,7 @@ export function ThemeToggle({ theme, onChange, className }: ThemeToggleProps) {
   return (
     <div
       role="radiogroup"
-      aria-label="Colour theme"
+      aria-label={t("Colour theme")}
       className={cx(
         "inline-flex items-center rounded-sm border border-line bg-surface p-px",
         className,

@@ -1,9 +1,10 @@
 import { cx } from "./cx";
+import { t } from "../i18n";
 import type { DensityChoice } from "./useDensity";
 
 const OPTIONS: Array<{ id: DensityChoice; label: string; glyph: string }> = [
-  { id: "dense", label: "Dense layout", glyph: "▤" },
-  { id: "roomy", label: "Presentation layout", glyph: "▣" },
+  { id: "dense", get label() { return t("Dense layout"); }, glyph: "▤" },
+  { id: "roomy", get label() { return t("Presentation layout"); }, glyph: "▣" },
 ];
 
 export interface DensityToggleProps {
@@ -21,7 +22,7 @@ export function DensityToggle({
   return (
     <div
       role="radiogroup"
-      aria-label="Layout density"
+      aria-label={t("Layout density")}
       className={cx(
         "inline-flex items-center rounded-sm border border-line bg-surface p-px",
         className,

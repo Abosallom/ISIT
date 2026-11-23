@@ -449,3 +449,91 @@ textarea {
   color: var(--nw-ignored-ink);
   opacity: 0.72;
 }
+
+/* ==========================================================================
+   The quiet look: ground, surfaces, lines, ink, accent and font. Severity colours stay ISIT's own: red, amber,
+   green and grey mean error, warning, valid and ignored, and nothing else.
+   ========================================================================== */
+:root,
+:root[data-theme="light"],
+:root[data-density="roomy"][data-theme="light"] {
+  --font-sans: "Segoe UI", Tahoma, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --nw-canvas: #f6f5fa;
+  --nw-surface: #ffffff;
+  --nw-raised: #fbfbfd;
+  --nw-inset: #f1f0f6;
+  --nw-line: #e8e6ef;
+  --nw-line-strong: #d4d0e0;
+  --nw-ink: #25212f;
+  --nw-ink-2: #5d596b;
+  --nw-ink-3: #8a8698;
+  --nw-accent: #5a4fc0;
+  --nw-accent-ink: #ffffff;
+  --nw-accent-soft: #efedfb;
+  --nw-focus: #5a4fc0;
+  --nw-sel: #e9e6fa;
+  --nw-sel-line: #f4f2fd;
+  --nw-ai: #5a4fc0;
+  --nw-ai-ink: #ffffff;
+  --nw-ai-soft: #efedfb;
+  --nw-ai-glow: rgba(90, 79, 192, 0.4);
+}
+@media (prefers-color-scheme: light) {
+  :root[data-density="roomy"]:not([data-theme="dark"]) {
+    --nw-canvas: #f6f5fa;
+    --nw-surface: #ffffff;
+    --nw-raised: #fbfbfd;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --nw-canvas: #121119;
+    --nw-surface: #1a1823;
+    --nw-raised: #1f1d29;
+    --nw-inset: #17151f;
+    --nw-line: #2c2938;
+    --nw-line-strong: #3b3749;
+    --nw-ink: #ece9f5;
+    --nw-ink-2: #b4afc4;
+    --nw-ink-3: #8d889c;
+    --nw-accent: #9d94f0;
+    --nw-accent-ink: #15121f;
+    --nw-accent-soft: #2a2645;
+    --nw-focus: #9d94f0;
+    --nw-sel: #2a2645;
+    --nw-sel-line: #221f36;
+    --nw-ai: #9d94f0;
+    --nw-ai-ink: #15121f;
+    --nw-ai-soft: #2a2645;
+    --nw-ai-glow: rgba(157, 148, 240, 0.4);
+  }
+}
+:root[data-theme="dark"] {
+  --nw-canvas: #121119;
+  --nw-surface: #1a1823;
+  --nw-raised: #1f1d29;
+  --nw-inset: #17151f;
+  --nw-line: #2c2938;
+  --nw-line-strong: #3b3749;
+  --nw-ink: #ece9f5;
+  --nw-ink-2: #b4afc4;
+  --nw-ink-3: #8d889c;
+  --nw-accent: #9d94f0;
+  --nw-accent-ink: #15121f;
+  --nw-accent-soft: #2a2645;
+  --nw-focus: #9d94f0;
+  --nw-sel: #2a2645;
+  --nw-sel-line: #221f36;
+  --nw-ai: #9d94f0;
+  --nw-ai-ink: #15121f;
+  --nw-ai-soft: #2a2645;
+  --nw-ai-glow: rgba(157, 148, 240, 0.4);
+}
+
+/* Arabic, right-to-left: the layout mirrors, but a message, a code, a
+   path or a field name reads left-to-right as written, wherever it sits. */
+:root[dir="rtl"] :is(.font-mono, code, pre, kbd, textarea, [data-ltr]) {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+:root[dir="rtl"] :is(.font-mono, code, pre, kbd) { text-align: left; }

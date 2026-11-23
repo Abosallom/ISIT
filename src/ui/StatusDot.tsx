@@ -1,4 +1,5 @@
 import { cx } from "./cx";
+import { t } from "../i18n";
 import { SEV_DOT } from "./severity";
 import { SEVERITY_GLYPH, SEVERITY_LABEL, type Severity } from "./types";
 import type { UseCaseStatus } from "./types";
@@ -49,26 +50,26 @@ export const USE_CASE_STATUS_META: Record<
   { label: string; blurb: string; dot: string; glyph: string }
 > = {
   ready: {
-    label: "Spec compiled",
-    blurb: "Structural rules extracted and cross-checked against a golden sample.",
+    get label() { return t("Spec compiled"); },
+    get blurb() { return t("Structural rules extracted and cross-checked against a golden sample."); },
     dot: "bg-accent",
     glyph: "●",
   },
   partial: {
-    label: "Partial",
-    blurb: "Some tables compiled; sections still unverified. Treat gaps as unknown, not as “not required”.",
+    get label() { return t("Partial"); },
+    get blurb() { return t("Some tables compiled; sections still unverified. Treat gaps as unknown, not as “not required”."); },
     dot: "bg-ink-3",
     glyph: "◐",
   },
   draft: {
-    label: "Draft",
-    blurb: "Extracted but not yet reconciled with a golden sample. Verify before relying on it.",
+    get label() { return t("Draft"); },
+    get blurb() { return t("Extracted but not yet reconciled with a golden sample. Verify before relying on it."); },
     dot: "border border-line-strong bg-transparent",
     glyph: "○",
   },
   missing: {
-    label: "Not compiled",
-    blurb: "No structural rules available for this use case yet.",
+    get label() { return t("Not compiled"); },
+    get blurb() { return t("No structural rules available for this use case yet."); },
     dot: "border border-dashed border-line-strong bg-transparent",
     glyph: "◌",
   },
@@ -94,7 +95,7 @@ export function UseCaseStatusDot({ status, className }: UseCaseStatusDotProps) {
     >
       <span
         role="img"
-        aria-label={`Spec status: ${meta.label}`}
+        aria-label={t("Spec status: {s}", { s: meta.label })}
         className={cx(
           "inline-block h-1.5 w-1.5 shrink-0 rounded-full",
           meta.dot,

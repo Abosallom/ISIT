@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { t } from "../i18n";
 import {
   Badge,
   Button,
@@ -68,8 +69,8 @@ export function ExplainView({
       <EmptyState
         fill
         glyph="§"
-        title="No compiled structure"
-        description="Nothing was extracted for this use case, so there is no rule tree to walk."
+        title={t("No compiled structure")}
+        description={t("Nothing was extracted for this use case, so there is no rule tree to walk.")}
       />
     );
   }
@@ -78,20 +79,20 @@ export function ExplainView({
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <Toolbar
         dense
-        aria-label="Explain"
+        aria-label={t("Explain")}
         end={
           <Button size="xs" onClick={() => setHideIgnored((v) => !v)}>
-            {hideIgnored ? "Show ignored" : "Hide ignored"}
+            {hideIgnored ? t("Show ignored") : t("Hide ignored")}
           </Button>
         }
       >
-        <ToolbarTitle>Explain</ToolbarTitle>
+        <ToolbarTitle>{t("Explain")}</ToolbarTitle>
         {structures.length > 1 ? (
           <select
             className="rounded-xs border border-line bg-surface px-1 py-0.5 font-mono text-2xs text-ink"
             value={structure.id}
             onChange={(e) => onStructureChange(e.target.value)}
-            aria-label="Variant"
+            aria-label={t("Variant")}
           >
             {structures.map((s) => (
               <option key={s.id} value={s.id}>
@@ -101,7 +102,7 @@ export function ExplainView({
             ))}
           </select>
         ) : null}
-        <Badge mono>{adapted.total.toLocaleString()} rules</Badge>
+        <Badge mono>{adapted.total.toLocaleString()}{" "}{t("rules")}</Badge>
         <Tooltip
           wide
           content={
@@ -111,21 +112,21 @@ export function ExplainView({
         >
           <span className="cursor-help">
             <Badge tone={adapted.sampleDerived ? "warn" : "neutral"} mono>
-              {adapted.sampleDerived} sample-derived
+              {adapted.sampleDerived}{" "}{t("sample-derived")}
             </Badge>
           </span>
         </Tooltip>
         {structure.verifiedAgainstSample ? (
-          <Badge tone="ok">verified against an official sample</Badge>
+          <Badge tone="ok">{t("verified against an official sample")}</Badge>
         ) : (
-          <Badge tone="warn">no official sample</Badge>
+          <Badge tone="warn">{t("no official sample")}</Badge>
         )}
       </Toolbar>
 
       <div className="flex min-h-0 flex-1">
-        <div className="min-w-0 flex-1 border-r border-line">
+        <div className="min-w-0 flex-1 border-e border-line">
           <StructureTree
-            aria-label="Structure rules"
+            aria-label={t("Structure rules")}
             nodes={adapted.tree as StructureNode[]}
             selectedId={selectedId}
             onSelect={(n) => setSelectedId(n.id)}
@@ -172,7 +173,7 @@ function DetailPanel({
         <div className="mt-1 break-all font-mono text-2xs text-ink-3">{detail.path}</div>
       </header>
 
-      <Section title="Usage" roomy={roomy}>
+      <Section title={t("Usage")} roomy={roomy}>
         {detail.usage.length ? (
           <div className="flex flex-wrap gap-1">
             {detail.usage.map((r, i) => (
@@ -186,21 +187,20 @@ function DetailPanel({
           </div>
         ) : (
           <p className="text-ink-3">
-            No usage is stated for this position. The workbench will not invent one, so nothing
-            is enforced here.
+            {t("No usage is stated for this position. The workbench will not invent one, so nothing is enforced here.")}
           </p>
         )}
-        {detail.repeats ? <p className="mt-1 text-ink-2">This position may repeat.</p> : null}
+        {detail.repeats ? <p className="mt-1 text-ink-2">{t("This position may repeat.")}</p> : null}
       </Section>
 
       {detail.datatype ? (
-        <Section title="Datatype" roomy={roomy}>
+        <Section title={t("Datatype")} roomy={roomy}>
           <code className="font-mono text-ink">{detail.datatype}</code>
         </Section>
       ) : null}
 
       {detail.fixedValues.length ? (
-        <Section title="Fixed values" roomy={roomy}>
+        <Section title={t("Fixed values")} roomy={roomy}>
           <ul className="space-y-1">
             {detail.fixedValues.map((f, i) => (
               <li key={i} className="break-all">
@@ -210,13 +210,13 @@ function DetailPanel({
             ))}
           </ul>
           <p className="mt-1 text-ink-3">
-            The specification pins these exactly. Any other value is a structural defect.
+            {t("The specification pins these exactly. Any other value is a structural defect.")}
           </p>
         </Section>
       ) : null}
 
       {detail.templateIds.length ? (
-        <Section title="templateId" roomy={roomy}>
+        <Section title={t("templateId")} roomy={roomy}>
           <ul className="space-y-0.5 font-mono text-2xs text-ink">
             {detail.templateIds.map((t) => (
               <li key={t} className="break-all">
@@ -228,44 +228,43 @@ function DetailPanel({
       ) : null}
 
       {detail.valueSets.length ? (
-        <Section title="Value sets" roomy={roomy}>
+        <Section title={t("Value sets")} roomy={roomy}>
           <ul className="space-y-1">
             {detail.valueSets.map((v, i) => (
               <li key={i}>
                 <span className="text-ink">{v.title ?? v.valueSetId ?? "unnamed"}</span>
                 {v.external ? (
-                  <Badge tone="warn" className="ml-1">
-                    NHIC-hosted
+                  <Badge tone="warn" className="ms-1">
+                    {t("NHIC-hosted")}
                   </Badge>
                 ) : null}
                 {v.resolvedVia ? (
-                  <span className="ml-1 text-2xs text-ink-3">matched by {v.resolvedVia}</span>
+                  <span className="ms-1 text-2xs text-ink-3">{t("matched by")}{" "}{v.resolvedVia}</span>
                 ) : null}
               </li>
             ))}
           </ul>
           {detail.valueSets.some((v) => v.external) ? (
             <p className="mt-1 text-ink-3">
-              An NHIC-hosted set is not shipped with the workbench, so membership is not
-              checked — only the format. The checker says so rather than passing it silently.
+              {t("An NHIC-hosted set is not shipped with the workbench, so membership is not checked — only the format. The checker says so rather than passing it silently.")}
             </p>
           ) : null}
         </Section>
       ) : null}
 
       {detail.codeSet ? (
-        <Section title="Code set column" roomy={roomy}>
+        <Section title={t("Code set column")} roomy={roomy}>
           <p className="whitespace-pre-wrap text-ink-2">{detail.codeSet}</p>
         </Section>
       ) : null}
 
       {detail.guidance ? (
-        <Section title="Guidance" roomy={roomy}>
+        <Section title={t("Guidance")} roomy={roomy}>
           <p className="whitespace-pre-wrap text-ink-2">{detail.guidance}</p>
         </Section>
       ) : null}
 
-      <Section title="Where this comes from" roomy={roomy}>
+      <Section title={t("Where this comes from")} roomy={roomy}>
         {detail.provenance?.pageId && detail.provenance.quote ? (
           // SourceNote pins its blockquote at leading-4, which the mono scale outgrows in
           // presentation mode; it is a shared primitive, so the quote is loosened from here.
@@ -283,29 +282,27 @@ function DetailPanel({
           </div>
         ) : detail.provenance?.sample ? (
           <p className="text-ink-2">
-            This rule is not in the published specification. It was recovered from the official
-            sample <code className="font-mono">{detail.provenance.sample}</code>, so it describes
-            what NPHIES actually sends — not what NPHIES requires.
+            {t("This rule is not in the published specification. It was recovered from the official sample")}{" "}<code className="font-mono">{detail.provenance.sample}</code>{t(", so it describes what NPHIES actually sends — not what NPHIES requires.")}
           </p>
         ) : (
           <p className="text-ink-3">
-            No source was recorded for this rule, so the workbench does not enforce it.
+            {t("No source was recorded for this rule, so the workbench does not enforce it.")}
           </p>
         )}
         <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5 text-2xs text-ink-3">
           {detail.derivation ? (
             <>
-              <dt>derivation</dt>
+              <dt>{t("derivation")}</dt>
               <dd className="text-ink-2">{detail.derivation}</dd>
             </>
           ) : null}
           {detail.confidence ? (
             <>
-              <dt>confidence</dt>
+              <dt>{t("confidence")}</dt>
               <dd className="text-ink-2">{detail.confidence}</dd>
             </>
           ) : null}
-          <dt>official sample</dt>
+          <dt>{t("official sample")}</dt>
           <dd className="text-ink-2">
             {detail.verifiedAgainstSample ? "checked against one" : "not checked against one"}
           </dd>
@@ -324,12 +321,11 @@ function EnvelopePanel({ structure, roomy }: { structure: MessageStructure; room
         <div className="font-mono text-2xs text-ink-3">{structure.id}</div>
       </header>
       <p className="text-ink-2">
-        Pick any position on the left to see the rule that governs it, and the verbatim text of
-        the specification page it came from.
+        {t("Pick any position on the left to see the rule that governs it, and the verbatim text of the specification page it came from.")}
       </p>
 
       {env ? (
-        <Section title="Envelope" roomy={roomy}>
+        <Section title={t("Envelope")} roomy={roomy}>
           <dl className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5">
             {Object.entries(env)
               .filter(([, v]) => v !== null && v !== undefined && typeof v !== "object")
@@ -344,8 +340,8 @@ function EnvelopePanel({ structure, roomy }: { structure: MessageStructure; room
       ) : null}
 
       {structure.notes.length ? (
-        <Section title="Caveats the compiler recorded" roomy={roomy}>
-          <ul className="list-disc space-y-1 pl-4 text-ink-2">
+        <Section title={t("Caveats the compiler recorded")} roomy={roomy}>
+          <ul className="list-disc space-y-1 ps-4 text-ink-2">
             {structure.notes.map((n, i) => (
               <li key={i}>{n}</li>
             ))}

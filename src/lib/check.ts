@@ -2475,7 +2475,16 @@ function codeCandidates(state: RunState, node: SpecNode, instance: TreeNode): { 
   return out;
 }
 
+/**
+ * A field may cite several value sets — ZPV1.49 takes "a value out of the following value sets: CS-Clinical-OPD1 …
+ * OPD12" (2026-09-20). A code is valid when ANY cited set holds it, so a code is reported only when it is in none of
+ * them; judging it against each set on its own reported a conformant code as wrong eleven times. When one of the cited
+ * sets cannot be checked (external, or published without codes) the code may come from that one, so no verdict is
+ * given beyond the "not checked" notice.
+ */
 function checkValueSets(state: RunState, node: SpecNode, instance: TreeNode, path: string, ceiling: Severity): void {
+  const checkable: { binding: ValueSetBinding; set: ValueSet }[] = [];
+  let unchecked = false;
   for (const binding of node.valueSets) {
     if (!binding.valueSetId) continue;
     const set = state.opts.valueSets?.get(binding.valueSetId);
@@ -2483,70 +2492,87 @@ function checkValueSets(state: RunState, node: SpecNode, instance: TreeNode, pat
     // NEVER report a pass we did not perform.
     if (!set || binding.external || set.external || set.validation !== "enumerated" || !set.concepts?.length) {
       noticeValueSetNotChecked(state, node, binding, set ?? null, path);
+      unchecked = true;
       continue;
     }
+    if (!checkable.some((c) => c.set === set)) checkable.push({ binding, set });
+  }
+  if (!checkable.length) return;
 
-    const candidates = codeCandidates(state, node, instance);
-    if (!candidates.length) continue;
-    const evidence: Evidence = {
-      provenance: binding.provenance ?? node.provenance,
-      confidence: (binding.confidence as Confidence) ?? node.confidence ?? "medium",
-      derivation: node.derivation,
-      verifiedAgainstSample: node.verifiedAgainstSample,
-    };
-    // A fuzzily-resolved binding is not a rule we can defend as an error.
-    const fuzzy = binding.resolvedVia === "fuzzy" || evidence.confidence === "low";
-    const cap = capSeverity(capSeverity(ceilingFor(evidence), ceiling), fuzzy ? "warn" : "error");
+  const candidates = codeCandidates(state, node, instance);
+  if (!candidates.length) return;
+  const { binding, set } = checkable[0];
+  const evidence: Evidence = {
+    provenance: binding.provenance ?? node.provenance,
+    confidence: (binding.confidence as Confidence) ?? node.confidence ?? "medium",
+    derivation: node.derivation,
+    verifiedAgainstSample: node.verifiedAgainstSample,
+  };
+  // A fuzzily-resolved binding is not a rule we can defend as an error — unless another cited set is bound firmly.
+  const fuzzy = checkable.every(
+    ({ binding: b }) => b.resolvedVia === "fuzzy" || ((b.confidence as Confidence) ?? evidence.confidence) === "low",
+  );
+  const cap = capSeverity(capSeverity(ceilingFor(evidence), ceiling), fuzzy ? "warn" : "error");
+  const titleOf = (c: { binding: ValueSetBinding; set: ValueSet }) => c.set.title ?? c.binding.valueSetId;
 
-    for (const { value, at } of candidates) {
-      const exact = set.concepts.some((c) => c.code === value);
-      if (exact) continue;
-      const insensitive = set.concepts.find((c) => c.code.toLowerCase() === value.toLowerCase());
-      if (insensitive) {
-        state.sink.push({
-          code: "valueset-code-case",
-          severity: capSeverity("warn", cap),
-          title: `"${value}" matches ${set.title ?? binding.valueSetId} only if case is ignored`,
-          detail: `The value set lists the code as "${insensitive.code}". NPHIES code comparison is case-sensitive.`,
-          notes: [ceilingReason(evidence)],
-          path,
-          specNodeId: node.id,
-          location: at.loc ?? null,
-          documentOrder: orderOf(state.index, at),
-          provenance: evidence.provenance,
-          confidence: evidence.confidence,
-          expected: insensitive.code,
-          actual: value,
-          fix: `Send "${insensitive.code}".`,
-        });
-        continue;
-      }
-      const near = set.concepts
-        .filter((c) => c.code.toLowerCase().startsWith(value.slice(0, 2).toLowerCase()))
-        .slice(0, 3)
-        .map((c) => `${c.code}${c.display ? ` (${c.display})` : ""}`);
+  for (const { value, at } of candidates) {
+    if (checkable.some((c) => c.set.concepts.some((x) => x.code === value))) continue;
+    if (unchecked) continue;
+    const caseHit = checkable
+      .map((c) => ({ c, hit: c.set.concepts.find((x) => x.code.toLowerCase() === value.toLowerCase()) }))
+      .find((x) => x.hit);
+    if (caseHit?.hit) {
+      const insensitive = caseHit.hit;
       state.sink.push({
-        code: "valueset-code-unknown",
-        severity: capSeverity("error", cap),
-        title: `"${value}" is not in ${set.title ?? binding.valueSetId}`,
-        detail:
-          `${labelOf(node)} is bound to the value set "${set.title ?? binding.valueSetId}" ` +
-          `(${set.conceptCount} concepts${binding.referenceText ? `, cited as "${binding.referenceText}"` : ""}), and "${value}" is not one of them.` +
-          (near.length ? ` Codes starting similarly: ${near.join(", ")}.` : ""),
-        notes: [
-          ceilingReason(evidence),
-          fuzzy ? `The binding to this value set was resolved by ${binding.resolvedVia}, so it is reported as a warning.` : null,
-        ],
+        code: "valueset-code-case",
+        severity: capSeverity("warn", cap),
+        title: `"${value}" matches ${titleOf(caseHit.c)} only if case is ignored`,
+        detail: `The value set lists the code as "${insensitive.code}". NPHIES code comparison is case-sensitive.`,
+        notes: [ceilingReason(evidence)],
         path,
         specNodeId: node.id,
         location: at.loc ?? null,
         documentOrder: orderOf(state.index, at),
         provenance: evidence.provenance,
         confidence: evidence.confidence,
-        expected: `a code from ${set.title ?? binding.valueSetId}`,
+        expected: insensitive.code,
         actual: value,
+        fix: `Send "${insensitive.code}".`,
       });
+      continue;
     }
+    const near = checkable
+      .flatMap((c) => c.set.concepts)
+      .filter((c) => c.code.toLowerCase().startsWith(value.slice(0, 2).toLowerCase()))
+      .slice(0, 3)
+      .map((c) => `${c.code}${c.display ? ` (${c.display})` : ""}`);
+    const one = checkable.length === 1;
+    state.sink.push({
+      code: "valueset-code-unknown",
+      severity: capSeverity("error", cap),
+      title: one
+        ? `"${value}" is not in ${titleOf(checkable[0])}`
+        : `"${value}" is not in any of the ${checkable.length} value sets this field cites`,
+      detail: one
+        ? `${labelOf(node)} is bound to the value set "${titleOf(checkable[0])}" ` +
+          `(${set.conceptCount} concepts${binding.referenceText ? `, cited as "${binding.referenceText}"` : ""}), and "${value}" is not one of them.` +
+          (near.length ? ` Codes starting similarly: ${near.join(", ")}.` : "")
+        : `${labelOf(node)} takes a code from any of ${checkable.map((c) => `"${titleOf(c)}"`).join(", ")}, ` +
+          `and "${value}" is in none of them.` +
+          (near.length ? ` Codes starting similarly: ${near.join(", ")}.` : ""),
+      notes: [
+        ceilingReason(evidence),
+        fuzzy ? `The binding to this value set was resolved by ${binding.resolvedVia}, so it is reported as a warning.` : null,
+      ],
+      path,
+      specNodeId: node.id,
+      location: at.loc ?? null,
+      documentOrder: orderOf(state.index, at),
+      provenance: evidence.provenance,
+      confidence: evidence.confidence,
+      expected: one ? `a code from ${titleOf(checkable[0])}` : `a code from one of ${checkable.map(titleOf).join(", ")}`,
+      actual: value,
+    });
   }
 }
 

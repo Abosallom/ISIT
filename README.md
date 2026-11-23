@@ -26,6 +26,7 @@ It is a static, client-side page. **Nothing you paste ever leaves your browser.*
 | **Readiness** | "Which use cases have I verified, and which have I never checked?" |
 | **Error Decoder** | "NPHIES returned this rejection — which part of my message caused it?" |
 | **Coverage** | "Where is this tool's own knowledge incomplete or contradicted?" |
+| **NPHIES changes** | "What did NPHIES change in its published pages since the rules were compiled, and what is not in the rules yet?" |
 
 ★ Check is the loop-closer. Build without Check just moves the guessing earlier.
 
@@ -35,7 +36,9 @@ designed state throughout the UI, not an absence.
 
 ## Covered
 
-26 use cases across five families, compiled from 289 published NPHIES specification pages:
+26 use cases across five families, compiled from 292 published NPHIES specification pages,
+including the changes NPHIES published on 20 Sep and 13 Oct 2026 (read in after review; the
+**NPHIES changes** tab lists each one, and the changed pages not in the rules yet):
 
 - **HL7 v2.5.1** — ADT (17 events + ACK/NACK), Vital Signs ORU^R01
 - **FHIR R4** — medication prescription & dispense (incl. Raqeeb controlled), laboratory
@@ -45,6 +48,12 @@ designed state throughout the UI, not an absence.
   immunization documents
 - **IHE XDS.b / SOAP** — ITI-41, ITI-18, ITI-43
 - **SSO** — the SAML assertion
+
+## English and Arabic
+
+Every screen is in English and Arabic (right to left). Switch with the **عربي / English** button
+in the header, or open the page with `?lang=ar` or `?lang=en`; the choice is remembered in this
+browser. The specification's own words (field names, codes, Confluence quotes) stay as written.
 
 ## Run it
 
@@ -57,7 +66,8 @@ npm run build    # typecheck + production bundle into dist/
 
 `npm run compile` rebuilds `src/spec/` from the raw Confluence scrape in `spec-source/`
 (gitignored, large, re-derivable). The compiled bundle and the 62 official sample messages are
-both committed, so the app and the tests run without it.
+both committed, so the app runs and builds without it; the golden, detector and mutation suites
+in `npm test` read the samples from `spec-source/golden/` and need the scrape present.
 
 ## How far to trust it
 

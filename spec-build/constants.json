@@ -81,6 +81,23 @@
     "confidenceNotes": [
       "Every record carries a verbatim source.quote taken from the rendered Confluence body. No quote is synthesised.",
       "Where the source page contradicts itself or the golden samples, the record keeps the verbatim spec text and adds a sourceAnomaly / warning field rather than silently correcting it."
+    ],
+    "refreshes": [
+      {
+        "id": "2026-10",
+        "at": "2026-11-03T00:00:00+00:00",
+        "note": "NPHIES changes published 20 Sep and 13 Oct 2026: PID, PV1, DG1 and PR1 moved to new page ids",
+        "changed": [
+          "oid 2.16.840.1.113883.3.3731.50.2",
+          "oid 2.16.840.1.113883.3.3731.50.3",
+          "constants.oids.items[146].examplePages",
+          "constants.oids.items[190].examplePages",
+          "constants.oids.items[333].examplePages",
+          "constants.oids.items[334].examplePages",
+          "constants.identityOids.authorities[0].verifiedOn",
+          "constants.identityOids.authorities[1].verifiedOn"
+        ]
+      }
     ]
   },
   "oids": {
@@ -3807,8 +3824,8 @@
         "pageCount": 18,
         "examplePages": [
           "7766314",
-          "7766425",
-          "7766519",
+          "873496616",
+          "873824257",
           "171180143",
           "23167398"
         ],
@@ -4902,7 +4919,7 @@
         "pageCount": 2,
         "examplePages": [
           "23168870",
-          "7766519"
+          "873824257"
         ],
         "exampleQuote": "2.16.840.1.113883.3.3731.1.204.15",
         "source": {
@@ -8495,14 +8512,14 @@
         "refCount": 1,
         "pageCount": 1,
         "examplePages": [
-          "7766519"
+          "873824257"
         ],
-        "exampleQuote": "If code element belongs to the Australian Classification of Health Interventions (ACHI) = 2.16.840.1.113883.3.3731.50.2",
+        "exampleQuote": "If code element belongs to the Australian Classification of Health Interventions (ACHI): 2.16.840.1.113883.3.3731.50.2",
         "source": {
-          "pageId": "7766519",
+          "pageId": "873824257",
           "pageTitle": "PR1",
-          "row": "Name of Coding System",
-          "quote": "If code element belongs to the Australian Classification of Health Interventions (ACHI) = 2.16.840.1.113883.3.3731.50.2"
+          "row": "PR1.3",
+          "quote": "If code element belongs to the Australian Classification of Health Interventions (ACHI): 2.16.840.1.113883.3.3731.50.2"
         },
         "nphiesArc": "2.16.840.1.113883.3.3731.50",
         "nphiesArcMeaning": "nphies internal arc"
@@ -8517,14 +8534,14 @@
         "refCount": 1,
         "pageCount": 1,
         "examplePages": [
-          "7766519"
+          "873824257"
         ],
-        "exampleQuote": "If code element belongs to The Australian Schedule of Dental Services and Glossary (ADA) = 2.16.840.1.113883.3.3731.50.3",
+        "exampleQuote": "If code element belongs to The Australian Schedule of Dental Services and Glossary (ADA): 2.16.840.1.113883.3.3731.50.3",
         "source": {
-          "pageId": "7766519",
+          "pageId": "873824257",
           "pageTitle": "PR1",
-          "row": "Name of Coding System",
-          "quote": "If code element belongs to The Australian Schedule of Dental Services and Glossary (ADA) = 2.16.840.1.113883.3.3731.50.3"
+          "row": "PR1.3",
+          "quote": "If code element belongs to The Australian Schedule of Dental Services and Glossary (ADA): 2.16.840.1.113883.3.3731.50.3"
         },
         "nphiesArc": "2.16.840.1.113883.3.3731.50",
         "nphiesArcMeaning": "nphies internal arc"
@@ -8977,7 +8994,7 @@
           "54689860",
           "67960992",
           "7766314",
-          "7766393",
+          "873496585",
           "7766542"
         ],
         "whereUsed": {
@@ -9034,9 +9051,9 @@
           "68026521",
           "7766314",
           "7766408",
-          "7766425",
-          "7766496",
-          "7766519"
+          "873496616",
+          "873496667",
+          "873824257"
         ],
         "whereUsed": {
           "cda": "assignedAuthor/id/@root, assignedEntity/id/@root, associatedEntity/id/@root",

@@ -27,12 +27,12 @@ export function Tooltip({
 
   const pos =
     side === "top"
-      ? "bottom-full left-1/2 -translate-x-1/2 mb-1.5"
+      ? "bottom-full start-1/2 -translate-x-1/2 mb-1.5"
       : side === "bottom"
-        ? "top-full left-1/2 -translate-x-1/2 mt-1.5"
+        ? "top-full start-1/2 -translate-x-1/2 mt-1.5"
         : side === "right"
-          ? "left-full top-1/2 -translate-y-1/2 ml-1.5"
-          : "right-full top-1/2 -translate-y-1/2 mr-1.5";
+          ? "start-full top-1/2 -translate-y-1/2 ms-1.5"
+          : "end-full top-1/2 -translate-y-1/2 me-1.5";
 
   return (
     <span

@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState } from "react";
+import { t } from "../i18n";
 import {
   Badge,
   Button,
@@ -233,8 +234,8 @@ export function BuildView({
     return (
       <EmptyState
         fill
-        title="No compiled structure"
-        description="Nothing was extracted for this use case, so there is no required surface to state."
+        title={t("No compiled structure")}
+        description={t("Nothing was extracted for this use case, so there is no required surface to state.")}
       />
     );
   }
@@ -257,11 +258,11 @@ export function BuildView({
   const sampleBadge = profile.sampleDerived ? (
     <Tooltip
       wide
-      content="Rules with no Confluence page behind them. They came from the official sample messages, so they describe what NPHIES sends rather than what it requires."
+      content={t("Rules with no Confluence page behind them. They came from the official sample messages, so they describe what NPHIES sends rather than what it requires.")}
     >
-      <span className="ml-auto cursor-help">
+      <span className="ms-auto cursor-help">
         <Badge tone="warn" mono>
-          {profile.sampleDerived} sample-derived
+          {profile.sampleDerived}{" "}{t("sample-derived")}
         </Badge>
       </span>
     </Tooltip>
@@ -271,13 +272,13 @@ export function BuildView({
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <Toolbar
         dense
-        aria-label="Build"
+        aria-label={t("Build")}
         end={
           <div className="flex items-center gap-1.5">
             <CopyButton
               size="xs"
               value={() => profileToMarkdown(profile)}
-              label="Copy for vendor"
+              label={t("Copy for vendor")}
               what="the integration profile"
               toast
             />
@@ -285,13 +286,13 @@ export function BuildView({
               size="xs"
               onClick={() => download(`${profile.structureId}-profile.json`, profileToJson(profile), "application/json")}
             >
-              JSON
+              {t("JSON")}
             </Button>
             <Button
               size="xs"
               onClick={() => download(`${profile.structureId}-profile.csv`, profileToCsv(profile), "text/csv")}
             >
-              CSV
+              {t("CSV")}
             </Button>
             <input
               ref={fileRef}
@@ -308,22 +309,22 @@ export function BuildView({
             />
             <Tooltip
               wide
-              content="Lay a vendor's exported profile (the JSON this surface writes) beside the compiled structure. The file is read here in the browser and changes nothing."
+              content={t("Lay a vendor's exported profile (the JSON this surface writes) beside the compiled structure. The file is read here in the browser and changes nothing.")}
             >
               <Button size="xs" onClick={() => fileRef.current?.click()}>
-                Import profile…
+                {t("Import profile…")}
               </Button>
             </Tooltip>
           </div>
         }
       >
-        <ToolbarTitle>Build</ToolbarTitle>
+        <ToolbarTitle>{t("Build")}</ToolbarTitle>
         {structures.length > 1 ? (
           <select
             className="rounded-xs border border-line bg-surface px-1 py-0.5 font-mono text-2xs text-ink"
             value={structure.id}
             onChange={(e) => onStructureChange(e.target.value)}
-            aria-label="Variant"
+            aria-label={t("Variant")}
           >
             {structures.map((s) => (
               <option key={s.id} value={s.id}>
@@ -336,14 +337,14 @@ export function BuildView({
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Filter positions…"
+          placeholder={t("Filter positions…")}
           className="w-44 rounded-xs border border-line bg-surface px-1.5 py-0.5 text-2xs text-ink outline-none placeholder:text-ink-3 focus:border-accent"
         />
       </Toolbar>
 
       {density === "roomy" ? (
         <section
-          aria-label="Build summary"
+          aria-label={t("Build summary")}
           className="shrink-0 border-b border-line bg-surface px-4 py-3"
         >
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -366,20 +367,18 @@ export function BuildView({
             </div>
             <div className="flex min-w-0 flex-1 flex-col gap-2.5">
               <p className="max-w-prose text-sm leading-relaxed text-ink">
-                <strong className="font-semibold">{INT.format(profile.counts.must)}</strong> of{" "}
-                {INT.format(total)} positions must be built.{" "}
+                <strong className="font-semibold">{INT.format(profile.counts.must)}</strong>{" "}{t("of")}{" "}
+                {INT.format(total)}{" "}{t("positions must be built.")}{" "}
                 {profile.counts.ignored > 0 ? (
                   <>
-                    <strong className="font-semibold">{INT.format(profile.counts.ignored)}</strong> of{" "}
-                    {INT.format(total)} are accepted and discarded by NPHIES — building them is
-                    wasted work.
+                    <strong className="font-semibold">{INT.format(profile.counts.ignored)}</strong>{" "}{t("of")}{" "}
+                    {INT.format(total)}{" "}{t("are accepted and discarded by NPHIES — building them is wasted work.")}
                   </>
                 ) : (
-                  <>NPHIES discards none of them: there is no ignored surface to skip here.</>
+                  <>{t("NPHIES discards none of them: there is no ignored surface to skip here.")}</>
                 )}{" "}
                 <span className="text-ink-2">
-                  Optional and unstated positions carry no verdict either way; NPHIES leaves
-                  them to you.
+                  {t("Optional and unstated positions carry no verdict either way; NPHIES leaves them to you.")}
                 </span>
               </p>
               <ProportionBar
@@ -428,7 +427,7 @@ export function BuildView({
           {OBLIGATION_HINT[filter === "all" ? "must" : filter]}{" "}
           {filter === "ignored" ? (
             <strong className="font-semibold text-ink">
-              This list is the fastest saving available: none of it needs building.
+              {t("This list is the fastest saving available: none of it needs building.")}
             </strong>
           ) : null}
         </p>
@@ -436,12 +435,12 @@ export function BuildView({
           <table className="w-full border-collapse text-xs">
             <thead className="sticky top-0 bg-surface text-2xs uppercase tracking-wide text-ink-3">
               <tr className="border-b border-line">
-                <th className="px-3 py-1 text-left font-semibold">Position</th>
-                <th className="px-3 py-1 text-left font-semibold">Field</th>
-                <th className="px-2 py-1 text-left font-semibold">Usage</th>
-                <th className="px-2 py-1 text-left font-semibold">Type</th>
-                <th className="px-2 py-1 text-left font-semibold">Fixed / value set</th>
-                <th className="px-2 py-1 text-left font-semibold">Source</th>
+                <th className="px-3 py-1 text-start font-semibold">{t("Position")}</th>
+                <th className="px-3 py-1 text-start font-semibold">{t("Field")}</th>
+                <th className="px-2 py-1 text-start font-semibold">{t("Usage")}</th>
+                <th className="px-2 py-1 text-start font-semibold">{t("Type")}</th>
+                <th className="px-2 py-1 text-start font-semibold">{t("Fixed / value set")}</th>
+                <th className="px-2 py-1 text-start font-semibold">{t("Source")}</th>
               </tr>
             </thead>
             <tbody>
@@ -452,9 +451,9 @@ export function BuildView({
           </table>
         ) : (
           <EmptyState
-            title="Nothing in this group"
+            title={t("Nothing in this group")}
             description={
-              query ? "No position matches the filter." : "The compiled structure has no position with this obligation."
+              query ? t("No position matches the filter.") : t("The compiled structure has no position with this obligation.")
             }
           />
         )}
@@ -463,7 +462,7 @@ export function BuildView({
       {samples.length ? (
         <footer className="shrink-0 border-t border-line bg-surface px-3 py-2">
           <div className="mb-1 text-2xs font-semibold uppercase tracking-wide text-ink-3">
-            Reference: the official NPHIES message
+            {t("Reference: the official NPHIES message")}
           </div>
           <div className="flex flex-wrap gap-1.5">
             {samples.map((s) => (
@@ -506,20 +505,20 @@ function ImportPanel({
   const pad = density === "roomy" ? "px-4 py-3" : "px-3 py-2";
   const heading = (
     <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-      <h2 className="text-xs font-semibold text-ink">Vendor profile vs this compiled structure</h2>
+      <h2 className="text-xs font-semibold text-ink">{t("Vendor profile vs this compiled structure")}</h2>
       <span className="font-mono text-2xs text-ink-3">{imported.source}</span>
-      <Button size="xs" variant="ghost" className="ml-auto" onClick={onDismiss}>
-        Clear import
+      <Button size="xs" variant="ghost" className="ms-auto" onClick={onDismiss}>
+        {t("Clear import")}
       </Button>
     </div>
   );
 
   if ("error" in imported) {
     return (
-      <section aria-label="Profile import" className={`border-b border-line bg-surface ${pad}`}>
+      <section aria-label={t("Profile import")} className={`border-b border-line bg-surface ${pad}`}>
         {heading}
         <p role="alert" className="mt-1.5 max-w-prose text-2xs leading-relaxed text-ink">
-          <strong className="font-semibold">Could not read the file.</strong> {imported.error}
+          <strong className="font-semibold">{t("Could not read the file.")}</strong> {imported.error}
         </p>
       </section>
     );
@@ -542,23 +541,23 @@ function ImportPanel({
   );
 
   return (
-    <section aria-label="Profile import" className={`border-b border-line bg-surface ${pad}`}>
+    <section aria-label={t("Profile import")} className={`border-b border-line bg-surface ${pad}`}>
       {heading}
       <p className="mt-1.5 max-w-prose text-2xs leading-relaxed text-ink-2">
-        The compiled structure is the specification. The file is the vendor&apos;s claim about it —{" "}
-        <span className="font-mono text-ink">{vendor.title}</span> (<code>{vendor.structureId}</code>, generated{" "}
-        {vendor.generatedAt}). Nothing in it is applied to the table below; the differences are the deliverable.
+        {t("The compiled structure is the specification. The file is the vendor's claim about it —")}{" "}
+        <span className="font-mono text-ink">{vendor.title}</span> (<code>{vendor.structureId}</code>{t(", generated")}{" "}
+        {vendor.generatedAt}{t("). Nothing in it is applied to the table below; the differences are the deliverable.")}
       </p>
       {otherStructure ? (
         <p className="mt-1 max-w-prose text-2xs leading-relaxed text-ink-2">
-          The file describes <code>{vendor.structureId}</code>, but this surface has compiled{" "}
-          <code>{current.structureId}</code>. Every difference below may be nothing more than that.
+          {t("The file describes")}{" "}<code>{vendor.structureId}</code>{t(", but this surface has compiled")}{" "}
+          <code>{current.structureId}</code>{t(". Every difference below may be nothing more than that.")}
         </p>
       ) : null}
       {warnings.length ? (
         <div className="mt-2 max-w-prose text-2xs leading-relaxed">
-          <div className="font-semibold text-ink">Repaired on import — read before trusting the file:</div>
-          <ul className="mt-0.5 list-disc pl-4 text-ink-2">
+          <div className="font-semibold text-ink">{t("Repaired on import — read before trusting the file:")}</div>
+          <ul className="mt-0.5 list-disc ps-4 text-ink-2">
             {warnings.map((w, i) => (
               <li key={i}>{w}</li>
             ))}
@@ -575,19 +574,18 @@ function ImportPanel({
 
       {differs === 0 ? (
         <p className="mt-2 max-w-prose text-2xs leading-relaxed text-ink">
-          Every one of {INT.format(total)} positions matches: the vendor&apos;s file agrees with the compiled
-          structure.
+          {t("Every one of")}{" "}{INT.format(total)}{" "}{t("positions matches: the vendor's file agrees with the compiled structure.")}
         </p>
       ) : (
         <div className="mt-3 overflow-x-auto">
           <table className="w-full border-collapse text-xs">
             <thead className="text-2xs uppercase tracking-wide text-ink-3">
               <tr className="border-b border-line">
-                <th className="py-1 pr-2 text-left font-semibold">Difference</th>
-                <th className="py-1 pr-2 text-left font-semibold">Position</th>
-                <th className="py-1 pr-2 text-left font-semibold">Field</th>
-                <th className="py-1 pr-2 text-left font-semibold">Compiled structure (specification)</th>
-                <th className="py-1 text-left font-semibold">Vendor&apos;s file (claim)</th>
+                <th className="py-1 pe-2 text-start font-semibold">{t("Difference")}</th>
+                <th className="py-1 pe-2 text-start font-semibold">{t("Position")}</th>
+                <th className="py-1 pe-2 text-start font-semibold">{t("Field")}</th>
+                <th className="py-1 pe-2 text-start font-semibold">{t("Compiled structure (specification)")}</th>
+                <th className="py-1 text-start font-semibold">{t("Vendor's file (claim)")}</th>
               </tr>
             </thead>
             <tbody>
@@ -665,20 +663,20 @@ function DiffRow({
     );
   return (
     <tr className="border-b border-line/60 align-top">
-      <td className="py-1 pr-2">
+      <td className="py-1 pe-2">
         <Badge>{kind}</Badge>
       </td>
-      <td className="py-1 pr-2">
+      <td className="py-1 pe-2">
         <Position row={row} />
       </td>
-      <td className="py-1 pr-2 text-ink-2">
+      <td className="py-1 pe-2 text-ink-2">
         {row.label}
         {after && before && after.label !== before.label ? (
-          <div className="text-2xs text-ink-3">file says: {after.label}</div>
+          <div className="text-2xs text-ink-3">{t("file says:")}{" "}{after.label}</div>
         ) : null}
       </td>
       {changed ? (
-        <td className="py-1 pr-2" colSpan={2}>
+        <td className="py-1 pe-2" colSpan={2}>
           {changed.rule.length ? (
             <dl className="grid grid-cols-[auto_1fr] gap-x-2 gap-y-0.5 text-2xs">
               {changed.rule.map((f) => (
@@ -686,7 +684,7 @@ function DiffRow({
                   <dt className="text-ink-3">{RULE_LABEL[f]}</dt>
                   <dd className="flex flex-wrap items-center gap-1.5">
                     {value(before as ProfileRow, f)}
-                    <span aria-label="becomes, in the vendor's file" className="text-ink-3">
+                    <span aria-label={t("becomes, in the vendor's file")} className="text-ink-3">
                       →
                     </span>
                     {value(after as ProfileRow, f)}
@@ -697,13 +695,13 @@ function DiffRow({
           ) : null}
           {changed.other.length ? (
             <div className="mt-0.5 text-2xs text-ink-3">
-              Also differs in {changed.other.join(", ")} — the rule itself is the same.
+              {t("Also differs in")}{" "}{changed.other.join(", ")}{" "}{t("— the rule itself is the same.")}
             </div>
           ) : null}
         </td>
       ) : (
         <>
-          <td className="py-1 pr-2">{before ? <RuleSummary row={before} /> : <span className="text-ink-3">—</span>}</td>
+          <td className="py-1 pe-2">{before ? <RuleSummary row={before} /> : <span className="text-ink-3">—</span>}</td>
           <td className="py-1">{after ? <RuleSummary row={after} /> : <span className="text-ink-3">—</span>}</td>
         </>
       )}
@@ -769,7 +767,7 @@ function ObligationChips({
         aria-pressed={filter === "all"}
         className={chip(filter === "all")}
       >
-        All <span className="font-mono text-ink-3">{profile.rows.length}</span>
+        {t("All")}{" "}<span className="font-mono text-ink-3">{profile.rows.length}</span>
       </button>
     </>
   );
@@ -788,7 +786,7 @@ function Row({
     <tr className="border-b border-line/60 align-top hover:bg-inset">
       <td className="px-3 py-1 font-mono text-ink">
         {showObligation ? (
-          <Badge tone={TONE[row.obligation]} className="mr-1.5">
+          <Badge tone={TONE[row.obligation]} className="me-1.5">
             {OBLIGATION_LABEL[row.obligation]}
           </Badge>
         ) : null}
@@ -823,7 +821,7 @@ function Row({
         ) : row.valueSet ? (
           <span className="text-ink-2">
             {row.valueSet}
-            {row.valueSetExternal ? <Badge tone="warn" className="ml-1">NHIC</Badge> : null}
+            {row.valueSetExternal ? <Badge tone="warn" className="ms-1">{t("NHIC")}</Badge> : null}
           </span>
         ) : (
           <span className="text-ink-3">—</span>
@@ -838,9 +836,9 @@ function Row({
         ) : (
           <Tooltip
             wide
-            content="No Confluence page states this rule. It was read off an official sample message, so it is real but not normative."
+            content={t("No Confluence page states this rule. It was read off an official sample message, so it is real but not normative.")}
           >
-            <span className="cursor-help text-warn">sample</span>
+            <span className="cursor-help text-warn">{t("sample")}</span>
           </Tooltip>
         )}
       </td>

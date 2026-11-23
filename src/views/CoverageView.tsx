@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { t } from "../i18n";
 import {
   Badge,
   EmptyState,
@@ -190,50 +191,47 @@ export function CoverageView({ registry, baseUrl, density = "dense" }: CoverageV
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <Toolbar
         dense
-        aria-label="Coverage"
+        aria-label={t("Coverage")}
         end={
           <Tabs
-            aria-label="Coverage pane"
+            aria-label={t("Coverage pane")}
             activeId={pane}
             onChange={(id) => setPane(id as Pane)}
             items={[
-              { id: "spec", label: `Spec defects (${specDefects.length})` },
-              { id: "samples", label: `Sample defects (${sampleDefects.length})` },
-              { id: "soap", label: "SOAP provenance" },
+              { id: "spec", label: t("Spec defects ({n})", { n: specDefects.length }) },
+              { id: "samples", label: t("Sample defects ({n})", { n: sampleDefects.length }) },
+              { id: "soap", label: t("SOAP provenance") },
             ]}
           />
         }
       >
-        <ToolbarTitle>Coverage</ToolbarTitle>
-        <Badge mono>{Number(counts.specNodes ?? 0).toLocaleString()} rules</Badge>
-        <Badge mono>{Number(counts.messageStructures ?? 0)} structures</Badge>
-        <Badge mono>{Number(counts.valueSetConcepts ?? 0).toLocaleString()} concepts</Badge>
+        <ToolbarTitle>{t("Coverage")}</ToolbarTitle>
+        <Badge mono>{Number(counts.specNodes ?? 0).toLocaleString()}{" "}{t("rules")}</Badge>
+        <Badge mono>{Number(counts.messageStructures ?? 0)}{" "}{t("structures")}</Badge>
+        <Badge mono>{Number(counts.valueSetConcepts ?? 0).toLocaleString()}{" "}{t("concepts")}</Badge>
       </Toolbar>
 
       <div className="min-h-0 flex-1 overflow-auto p-3">
         {pane === "spec" ? (
           <section className="space-y-3">
             <Intro>
-              Places the <strong className="font-semibold">published specification</strong> is wrong
-              or contradicts itself. The Confluence wording is kept verbatim and the conflict is
-              shown — the workbench never silently rewrites either side, because an integrator
-              hitting the contradiction needs to know it exists.
+              {t("Places the")}{" "}<strong className="font-semibold">{t("published specification")}</strong>{" "}{t("is wrong or contradicts itself. The Confluence wording is kept verbatim and the conflict is shown — the workbench never silently rewrites either side, because an integrator hitting the contradiction needs to know it exists.")}
             </Intro>
             {registry ? (
               <div className="grid grid-cols-2 gap-2 text-xs sm:grid-cols-4">
-                <Stat density={density} label="Use cases with a structure" value={`${coverage?.useCasesWithStructure ?? 0}`} />
-                <Stat density={density} label="Without an official sample" value={`${coverage?.useCasesWithoutGolden.length ?? 0}`} />
-                <Stat density={density} label="Quarantined placeholder OIDs" value={`${counts.quarantinedOids ?? 0}`} />
-                <Stat density={density} label="Structures verified against a sample" value={`${counts.structuresVerifiedAgainstSample ?? 0}`} />
+                <Stat density={density} label={t("Use cases with a structure")} value={`${coverage?.useCasesWithStructure ?? 0}`} />
+                <Stat density={density} label={t("Without an official sample")} value={`${coverage?.useCasesWithoutGolden.length ?? 0}`} />
+                <Stat density={density} label={t("Quarantined placeholder OIDs")} value={`${counts.quarantinedOids ?? 0}`} />
+                <Stat density={density} label={t("Structures verified against a sample")} value={`${counts.structuresVerifiedAgainstSample ?? 0}`} />
               </div>
             ) : null}
-            {defects.loading ? <EmptyState title="Loading…" /> : null}
+            {defects.loading ? <EmptyState title={t("Loading…")} /> : null}
             {specByKind.length > 0 ? (
-              <ChartCard title="Spec defects by kind" note={`${specDefects.length} catalogued`}>
+              <ChartCard title={t("Spec defects by kind")} note={`${specDefects.length} catalogued`}>
                 <MiniBars
                   rows={specByKind}
                   barHeight={size.bar}
-                  aria-label="Spec defects by kind"
+                  aria-label={t("Spec defects by kind")}
                 />
               </ChartCard>
             ) : null}
@@ -244,9 +242,9 @@ export function CoverageView({ registry, baseUrl, density = "dense" }: CoverageV
                     {d.kind ? <Badge mono>{d.kind}</Badge> : null}
                     {d.confidence ? <Badge tone={d.confidence === "high" ? "ok" : "warn"}>{d.confidence}</Badge> : null}
                     {d.wireWins ? (
-                      <Tooltip wide content="The wire format disagrees with the published page, and the wire is what NPHIES actually accepts.">
+                      <Tooltip wide content={t("The wire format disagrees with the published page, and the wire is what NPHIES actually accepts.")}>
                         <span className="cursor-help">
-                          <Badge tone="warn">the wire wins</Badge>
+                          <Badge tone="warn">{t("the wire wins")}</Badge>
                         </span>
                       </Tooltip>
                     ) : null}
@@ -254,14 +252,14 @@ export function CoverageView({ registry, baseUrl, density = "dense" }: CoverageV
                   {d.whatItIs ? <p className="text-ink-2">{d.whatItIs}</p> : null}
                   {d.confluenceSpelling && d.wireSpelling ? (
                     <p className="mt-1 font-mono text-2xs">
-                      <span className="text-ink-3">Confluence</span> <span className="text-ink">{d.confluenceSpelling}</span>
+                      <span className="text-ink-3">{t("Confluence")}</span> <span className="text-ink">{d.confluenceSpelling}</span>
                       {"  ·  "}
-                      <span className="text-ink-3">wire</span> <span className="text-ink">{d.wireSpelling}</span>
+                      <span className="text-ink-3">{t("wire")}</span> <span className="text-ink">{d.wireSpelling}</span>
                     </p>
                   ) : null}
                   {d.action ? (
                     <p className="mt-1 text-ink-2">
-                      <span className="text-2xs font-semibold uppercase tracking-wide text-ink-3">Do this: </span>
+                      <span className="text-2xs font-semibold uppercase tracking-wide text-ink-3">{t("Do this:")}{" "}</span>
                       {d.action}
                     </p>
                   ) : null}
@@ -285,29 +283,27 @@ export function CoverageView({ registry, baseUrl, density = "dense" }: CoverageV
         ) : pane === "samples" ? (
           <section className="space-y-3">
             <Intro>
-              Defects in the <strong className="font-semibold">official NPHIES sample messages</strong>{" "}
-              themselves. They are catalogued so the workbench never copies a sample's mistake into
-              a rule, and so that pasting one into Check tells you the sample is broken instead of
-              blaming your HIS.
+              {t("Defects in the")}{" "}<strong className="font-semibold">{t("official NPHIES sample messages")}</strong>{" "}
+              {t("themselves. They are catalogued so the workbench never copies a sample's mistake into a rule, and so that pasting one into Check tells you the sample is broken instead of blaming your HIS.")}
             </Intro>
-            {defects.loading ? <EmptyState title="Loading…" /> : null}
+            {defects.loading ? <EmptyState title={t("Loading…")} /> : null}
             {sampleDefects.length > 0 ? (
               <div className="grid gap-2 md:grid-cols-2">
                 <ChartCard
-                  title="By severity"
-                  note={`${sampleDefects.length} defects · the sample compiler's own grading`}
+                  title={t("By severity")}
+                  note={t("{n} defects · the sample compiler's own grading", { n: sampleDefects.length })}
                 >
                   <ProportionBar
                     segments={sampleBySeverity}
                     height={size.proportion}
-                    aria-label="Sample defects by severity"
+                    aria-label={t("Sample defects by severity")}
                   />
                 </ChartCard>
-                <ChartCard title="By defect type" note={`top ${TOP_N}; the rest folded into other`}>
+                <ChartCard title={t("By defect type")} note={t("top {n}; the rest folded into other", { n: TOP_N })}>
                   <MiniBars
                     rows={sampleByType}
                     barHeight={size.bar}
-                    aria-label="Sample defects by type"
+                    aria-label={t("Sample defects by type")}
                   />
                 </ChartCard>
               </div>
@@ -329,7 +325,7 @@ export function CoverageView({ registry, baseUrl, density = "dense" }: CoverageV
                     </pre>
                   ) : null}
                   {d.impact ? <p className="mt-1 text-2xs text-ink-3">{d.impact}</p> : null}
-                  {d.workaround ? <p className="mt-1 text-2xs text-ink-2">Workaround: {d.workaround}</p> : null}
+                  {d.workaround ? <p className="mt-1 text-2xs text-ink-2">{t("Workaround:")}{" "}{d.workaround}</p> : null}
                 </li>
               ))}
             </ul>
@@ -338,13 +334,13 @@ export function CoverageView({ registry, baseUrl, density = "dense" }: CoverageV
           <section className="space-y-3 text-xs">
             <Intro>{XDS_INDEPENDENCE_HEADLINE}</Intro>
             <ChartCard
-              title="Independently sourced, by element kind"
+              title={t("Independently sourced, by element kind")}
               note="rules stated on a published page, as a share of rules found"
             >
               <MiniBars
                 rows={independenceRows}
                 barHeight={size.bar}
-                aria-label="Independently sourced rules by element kind"
+                aria-label={t("Independently sourced rules by element kind")}
               />
             </ChartCard>
             {/* The accessible twin of the bars, and the only place `overall` and the exact
@@ -352,10 +348,10 @@ export function CoverageView({ registry, baseUrl, density = "dense" }: CoverageV
             <table className="w-full border-collapse">
               <thead className="text-2xs uppercase tracking-wide text-ink-3">
                 <tr className="border-b border-line">
-                  <th className="py-1 text-left font-semibold">Element kind</th>
-                  <th className="py-1 text-right font-semibold">Found</th>
-                  <th className="py-1 text-right font-semibold">Independently sourced</th>
-                  <th className="py-1 text-right font-semibold">Share</th>
+                  <th className="py-1 text-start font-semibold">{t("Element kind")}</th>
+                  <th className="py-1 text-end font-semibold">{t("Found")}</th>
+                  <th className="py-1 text-end font-semibold">{t("Independently sourced")}</th>
+                  <th className="py-1 text-end font-semibold">{t("Share")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -365,17 +361,15 @@ export function CoverageView({ registry, baseUrl, density = "dense" }: CoverageV
                     className={kind === "overall" ? "border-t border-line-strong font-medium" : "border-b border-line/60"}
                   >
                     <td className="py-1 font-mono text-ink">{kind}</td>
-                    <td className="py-1 text-right tabular-nums text-ink-2">{v.found}</td>
-                    <td className="py-1 text-right tabular-nums text-ink-2">{v.independent}</td>
-                    <td className="py-1 text-right font-mono tabular-nums text-ink">{(v.share * 100).toFixed(1)}%</td>
+                    <td className="py-1 text-end tabular-nums text-ink-2">{v.found}</td>
+                    <td className="py-1 text-end tabular-nums text-ink-2">{v.independent}</td>
+                    <td className="py-1 text-end font-mono tabular-nums text-ink">{(v.share * 100).toFixed(1)}%</td>
                   </tr>
                 ))}
               </tbody>
             </table>
             <p className="text-ink-2">
-              A rule that is only sample-derived may still be right — thirteen samples agreeing is
-              strong evidence — but it is not normative, and every SOAP/XDS finding says which kind
-              it rests on rather than presenting both as the specification.
+              {t("A rule that is only sample-derived may still be right — thirteen samples agreeing is strong evidence — but it is not normative, and every SOAP/XDS finding says which kind it rests on rather than presenting both as the specification.")}
             </p>
             <Intro>{MTOM_LIMITATION}</Intro>
           </section>

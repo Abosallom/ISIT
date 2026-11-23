@@ -6,6 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { t, tr } from "../i18n";
 import { cx } from "./cx";
 import { SEV_DOT, SEV_CHIP, IGNORED_EXPLANATION } from "./severity";
 import {
@@ -395,18 +396,18 @@ export function SplitView({
     >
       {/* ================================================== LEFT: message == */}
       <section
-        className="flex min-w-0 flex-col border-r border-line"
+        className="flex min-w-0 flex-col border-e border-line"
         style={{ width: `${ratio * 100}%` }}
-        aria-label="Message"
+        aria-label={t("Message")}
       >
         <header className="flex h-7 shrink-0 items-center gap-2 border-b border-line bg-raised px-2">
           <span className="truncate text-xs font-semibold uppercase tracking-wider text-ink-3">
             {codeTitle}
           </span>
           <span className="font-mono text-2xs text-ink-3 tabular-nums">
-            {lines.length} lines
+            {lines.length}{" "}{t("lines")}
           </span>
-          <div className="ml-auto flex shrink-0 items-center gap-1.5">
+          <div className="ms-auto flex shrink-0 items-center gap-1.5">
             <SeverityLegend counts={counts} />
             {codeActions}
             <CopyButton value={text} what="the message" toast size="xs" />
@@ -460,7 +461,7 @@ export function SplitView({
       <div
         role="separator"
         aria-orientation="vertical"
-        aria-label="Resize panes"
+        aria-label={t("Resize panes")}
         aria-valuenow={Math.round(ratio * 100)}
         aria-valuemin={20}
         aria-valuemax={85}
@@ -485,20 +486,20 @@ export function SplitView({
       {/* =========================================== RIGHT: structure ====== */}
       <section
         className="flex min-w-0 flex-1 flex-col"
-        aria-label="Structure and findings"
+        aria-label={t("Structure and findings")}
       >
         <header className="flex h-7 shrink-0 items-center gap-2 border-b border-line bg-raised px-2">
           <span className="shrink-0 text-xs font-semibold uppercase tracking-wider text-ink-3">
-            {structureTitle}
+            {typeof structureTitle === "string" ? t(structureTitle) : structureTitle}
           </span>
-          <label className="ml-auto flex shrink-0 cursor-pointer items-center gap-1 text-2xs text-ink-2">
+          <label className="ms-auto flex shrink-0 cursor-pointer items-center gap-1 text-2xs text-ink-2">
             <input
               type="checkbox"
               checked={hideIgnored}
               onChange={(e) => setHideIgnored(e.target.checked)}
               className="h-3 w-3 accent-[var(--nw-accent)]"
             />
-            Hide ignored
+            {t("Hide ignored")}
           </label>
         </header>
 
@@ -512,26 +513,25 @@ export function SplitView({
               {selectedNode?.rules?.length ? (
                 <UsageRuleList rules={selectedNode.rules} className="shrink-0" />
               ) : null}
-              <CopyButton value={path} what="the path" size="xs" label="path" />
+              <CopyButton value={path} what="the path" size="xs" label={t("path")} />
               <button
                 type="button"
                 onClick={() => select({ regionId: null, nodeId: null, origin: "external" })}
                 className="shrink-0 rounded-xs px-1 text-2xs text-ink-3 hover:bg-inset hover:text-ink"
               >
-                clear
+                {t("clear")}
               </button>
             </>
           ) : (
             <span className="text-2xs text-ink-3">
-              Nothing selected &mdash; click a token in the message or a row in
-              the tree.
+              {t("Nothing selected — click a token in the message or a row in the tree.")}
             </span>
           )}
         </div>
 
         <div className="min-h-0 flex-1">
           <StructureTree
-            aria-label="Message structure"
+            aria-label={t("Message structure")}
             nodes={tree}
             hideIgnored={hideIgnored}
             rowHeight={treeRowHeight}
@@ -542,8 +542,8 @@ export function SplitView({
 
         {selectedNode?.severity === "ignored" ? (
           <div className="shrink-0 border-t border-line bg-ignored-bg px-2.5 py-1.5 text-2xs leading-4 text-ignored-ink">
-            <strong className="font-semibold">Ignored by NPHIES.</strong>{" "}
-            {selectedNode.ignoredReason ?? IGNORED_EXPLANATION}
+            <strong className="font-semibold">{t("Ignored by NPHIES.")}</strong>{" "}
+            {selectedNode.ignoredReason ? tr(selectedNode.ignoredReason) : t(IGNORED_EXPLANATION)}
           </div>
         ) : null}
 
@@ -557,7 +557,7 @@ export function SplitView({
         <div className="flex h-[38%] min-h-24 shrink-0 flex-col border-t border-line">
           <div className="flex h-6 shrink-0 items-center gap-2 border-b border-line bg-raised px-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-ink-3">
-              Findings
+              {t("Findings")}
             </span>
             <span className="font-mono text-2xs text-ink-3 tabular-nums">
               {scopedFindings.length}
@@ -568,11 +568,11 @@ export function SplitView({
             {scopedFindings.length === 0 ? (
               <EmptyState
                 glyph={"✓"}
-                title="No findings here"
+                title={t("No findings here")}
                 description={
                   path
-                    ? "Nothing to report for the selected element."
-                    : "This message matches the compiled structural rules."
+                    ? t("Nothing to report for the selected element.")
+                    : t("This message matches the compiled structural rules.")
                 }
               />
             ) : (
@@ -706,7 +706,7 @@ function CodeLine({
         aria-hidden="true"
         style={{ width: gutterWidth, height }}
         className={cx(
-          "sticky left-0 z-10 flex shrink-0 items-center justify-end gap-1 border-r border-line pr-1.5",
+          "sticky start-0 z-10 flex shrink-0 items-center justify-end gap-1 border-e border-line pe-1.5",
           "select-none text-2xs text-ink-3 tabular-nums",
           isSelectedLine ? "bg-sel-line" : "bg-raised",
         )}
@@ -749,7 +749,7 @@ function CodeLine({
                 title={`${r.label} — ${r.path} — ${
                   r.severity === "ignored"
                     ? "ignored by NPHIES"
-                    : SEVERITY_LABEL[r.severity]
+                    : t(SEVERITY_LABEL[r.severity])
                 }`}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -788,12 +788,12 @@ function SeverityLegend({ counts }: { counts: Record<Severity, number> }) {
             s === "ignored" ? (
               <span className="block">
                 <span className="block font-medium text-ink">
-                  Ignored by NPHIES
+                  {t("Ignored by NPHIES")}
                 </span>
-                <span className="block">{IGNORED_EXPLANATION}</span>
+                <span className="block">{t(IGNORED_EXPLANATION)}</span>
               </span>
             ) : (
-              SEVERITY_LABEL[s]
+              t(SEVERITY_LABEL[s])
             )
           }
         >

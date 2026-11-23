@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { t } from "../i18n";
 import { cx } from "./cx";
 import { FAMILIES, type Family, type UseCase } from "./types";
 import { UseCaseStatusDot } from "./StatusDot";
@@ -106,22 +107,22 @@ export const UseCaseRail = forwardRef<UseCaseRailHandle, UseCaseRailProps>(
 
     return (
       <nav
-        aria-label="Use cases"
+        aria-label={t("Use cases")}
         className={cx(
-          "flex h-full w-60 shrink-0 flex-col border-r border-line bg-raised",
+          "flex h-full w-60 shrink-0 flex-col border-e border-line bg-raised",
           className,
         )}
       >
         <div className="shrink-0 border-b border-line p-1.5">
           <label htmlFor="rail-filter" className="sr-only">
-            Filter use cases
+            {t("Filter use cases")}
           </label>
           <input
             id="rail-filter"
             ref={inputRef}
             type="search"
             value={q}
-            placeholder={"Filter use cases…"}
+            placeholder={t("Filter use cases…")}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "ArrowDown") {
@@ -138,7 +139,7 @@ export const UseCaseRail = forwardRef<UseCaseRailHandle, UseCaseRailProps>(
         <div
           ref={listRef}
           role="tree"
-          aria-label="NPHIES use cases"
+          aria-label={t("NPHIES use cases")}
           className="min-h-0 flex-1 overflow-auto py-1"
           onKeyDown={(e) => {
             const els = listRef.current?.querySelectorAll<HTMLElement>(
@@ -165,7 +166,7 @@ export const UseCaseRail = forwardRef<UseCaseRailHandle, UseCaseRailProps>(
         >
           {rows.length === 0 ? (
             <p className="px-3 py-4 text-xs text-ink-3">
-              No use case matches &ldquo;{q}&rdquo;.
+              {t("No use case matches “")}{q}&rdquo;.
             </p>
           ) : null}
 
@@ -197,7 +198,7 @@ export const UseCaseRail = forwardRef<UseCaseRailHandle, UseCaseRailProps>(
                     }
                   }}
                   className={cx(
-                    "flex w-full items-center gap-1.5 px-2 py-1 text-left",
+                    "flex w-full items-center gap-1.5 px-2 py-1 text-start",
                     "text-2xs font-semibold uppercase tracking-wider text-ink-3",
                     "hover:bg-inset hover:text-ink-2",
                     i > 0 && "mt-1",
@@ -234,10 +235,10 @@ export const UseCaseRail = forwardRef<UseCaseRailHandle, UseCaseRailProps>(
                   }
                 }}
                 className={cx(
-                  "flex w-full items-center gap-2 border-l-2 py-1 pl-4 pr-2 text-left text-xs",
+                  "flex w-full items-center gap-2 border-s-2 py-1 ps-4 pe-2 text-start text-xs",
                   active
-                    ? "border-l-accent bg-sel text-ink"
-                    : "border-l-transparent text-ink-2 hover:bg-inset hover:text-ink",
+                    ? "border-s-accent bg-sel text-ink"
+                    : "border-s-transparent text-ink-2 hover:bg-inset hover:text-ink",
                 )}
               >
                 <UseCaseStatusDot status={uc.status} />
@@ -251,7 +252,7 @@ export const UseCaseRail = forwardRef<UseCaseRailHandle, UseCaseRailProps>(
         </div>
 
         <div className="shrink-0 border-t border-line px-2 py-1 text-2xs text-ink-3 tabular-nums">
-          {shown === total ? `${total} use cases` : `${shown} of ${total}`}
+          {shown === total ? t("{n} use cases", { n: total }) : t("{a} of {b}", { a: shown, b: total })}
         </div>
       </nav>
     );

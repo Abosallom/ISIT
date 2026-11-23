@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { t } from "../i18n";
 import { cx } from "./cx";
 import { SEV_CHIP } from "./severity";
 import { SEVERITY_GLYPH, type Severity } from "./types";
@@ -86,7 +87,7 @@ export function ToastViewport({
     <div
       aria-live="polite"
       aria-atomic="false"
-      className="pointer-events-none fixed bottom-3 right-3 z-[100] flex w-80 flex-col gap-1.5"
+      className="pointer-events-none fixed bottom-3 end-3 z-[100] flex w-80 flex-col gap-1.5"
     >
       {items.map((t) => (
         <Toast key={t.id} toast={t} onDismiss={() => onDismiss(t.id)} />
@@ -131,8 +132,8 @@ export function Toast({
       <button
         type="button"
         onClick={onDismiss}
-        aria-label="Dismiss notification"
-        className="-mr-1 -mt-0.5 shrink-0 rounded-xs px-1 text-ink-3 hover:bg-inset hover:text-ink"
+        aria-label={t("Dismiss notification")}
+        className="-me-1 -mt-0.5 shrink-0 rounded-xs px-1 text-ink-3 hover:bg-inset hover:text-ink"
       >
         <span aria-hidden="true">&times;</span>
       </button>

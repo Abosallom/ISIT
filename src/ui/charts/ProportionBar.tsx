@@ -6,6 +6,7 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
+import { t } from "../../i18n";
 import { cx } from "../cx";
 import { SEV_DOT } from "../severity";
 import { SEVERITY_LABEL, type Severity } from "../types";
@@ -133,7 +134,7 @@ export function SegmentTip({
     <span className="block">
       <span className="block font-medium tabular-nums text-ink">
         {fmtInt(segment.value)}
-        <span className="ml-1 font-normal text-ink-3">{fmtPct(segment.value / total)}</span>
+        <span className="ms-1 font-normal text-ink-3">{fmtPct(segment.value / total)}</span>
       </span>
       <span className="block">{segment.label}</span>
       {segment.detail ? <span className="block text-ink-3">{segment.detail}</span> : null}
@@ -145,7 +146,7 @@ export function SegmentTip({
 export function SeverityCountsLine({ counts }: { counts: Record<Severity, number> }) {
   const order: Severity[] = ["error", "warn", "ok", "ignored", "info"];
   const present = order.filter((s) => counts[s] > 0);
-  if (present.length === 0) return <span className="block text-ink-3">No findings</span>;
+  if (present.length === 0) return <span className="block text-ink-3">{t("No findings")}</span>;
   return (
     <span className="flex flex-wrap gap-x-2 tabular-nums">
       {present.map((s) => (

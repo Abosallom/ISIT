@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import { t } from "../i18n";
 import { Badge, Button, Tooltip, useApiKey } from "../ui";
 import type { Finding } from "../lib/check";
 import type { MessageStructure } from "../lib/structure";
@@ -82,10 +83,10 @@ export function AiExplain({ finding, structure, skeletonWindow, windowLine }: Ai
     return (
       <Tooltip
         wide
-        content="Set an Anthropic API key in the header to have a model turn this finding into a HIS-side fix. The structural verdict above does not use it, and nothing is sent without a key."
+        content={t("Set an Anthropic API key in the header to have a model turn this finding into a HIS-side fix. The structural verdict above does not use it, and nothing is sent without a key.")}
       >
         <span className="cursor-help font-mono text-2xs text-ink-3">
-          AI explanation needs a key
+          {t("AI explanation needs a key")}
         </span>
       </Tooltip>
     );
@@ -96,35 +97,34 @@ export function AiExplain({ finding, structure, skeletonWindow, windowLine }: Ai
     return (
       <div className="rounded-sm border border-dashed border-ai/50 bg-inset p-2 text-xs" data-advisory>
         <div className="mb-1 flex items-center gap-1.5">
-          <Badge mono tone="ai">Model</Badge>
-          <span className="text-2xs text-ink-3">model confidence: {r.confidence}</span>
+          <Badge mono tone="ai">{t("Model")}</Badge>
+          <span className="text-2xs text-ink-3">{t("model confidence:")}{" "}{r.confidence}</span>
           <button
             type="button"
             onClick={() => setState({ loading: false, error: null, result: null })}
-            className="ml-auto font-mono text-2xs text-ink-3 hover:text-ink"
+            className="ms-auto font-mono text-2xs text-ink-3 hover:text-ink"
           >
-            dismiss
+            {t("dismiss")}
           </button>
         </div>
         <p className="text-ink">{r.plainLanguage}</p>
         <p className="mt-1 text-ink-2">
-          <span className="text-2xs uppercase tracking-wide text-ink-3">Usually caused by: </span>
+          <span className="text-2xs uppercase tracking-wide text-ink-3">{t("Usually caused by:")}{" "}</span>
           {r.hisSideCause}
         </p>
         <p className="mt-1 text-ink-2">
-          <span className="text-2xs uppercase tracking-wide text-ink-3">Fix: </span>
+          <span className="text-2xs uppercase tracking-wide text-ink-3">{t("Fix:")}{" "}</span>
           {r.fix}
         </p>
         {r.unresolved.length ? (
-          <ul className="mt-1 list-disc pl-4 text-2xs text-ink-2">
+          <ul className="mt-1 list-disc ps-4 text-2xs text-ink-2">
             {r.unresolved.map((u, i) => (
               <li key={i}>{u}</li>
             ))}
           </ul>
         ) : null}
         <p className="mt-1.5 text-2xs text-ink-3">
-          Model opinion — not a structural verdict. Nothing here changes the findings. The verdict
-          above came from the compiled specification, not from this.
+          {t("Model opinion — not a structural verdict. Nothing here changes the findings. The verdict above came from the compiled specification, not from this.")}
         </p>
       </div>
     );
@@ -134,7 +134,7 @@ export function AiExplain({ finding, structure, skeletonWindow, windowLine }: Ai
     <div className="flex flex-col gap-1">
       <div className="flex flex-wrap items-center gap-1.5">
         <Button size="xs" variant="ai" onClick={run} disabled={state.loading}>
-          {state.loading ? "Asking…" : "Explain for my HIS team"}
+          {state.loading ? t("Asking…") : t("Explain for my HIS team")}
         </Button>
         <span className="text-2xs text-ink-3">{sends}</span>
         <button
@@ -143,9 +143,9 @@ export function AiExplain({ finding, structure, skeletonWindow, windowLine }: Ai
           onClick={() => setPreviewing((p) => !p)}
           aria-expanded={previewing}
         >
-          {previewing ? "Hide preview" : "Preview what will be sent"}
+          {previewing ? t("Hide preview") : t("Preview what will be sent")}
         </button>
-        {state.error ? <span className="text-2xs text-ink-2">Not answered: {state.error}</span> : null}
+        {state.error ? <span className="text-2xs text-ink-2">{t("Not answered:")}{" "}{state.error}</span> : null}
       </div>
       {previewing ? (
         <pre className="max-h-48 overflow-auto rounded-sm border border-line bg-surface p-2 font-mono text-2xs leading-4 whitespace-pre-wrap text-ink-2">

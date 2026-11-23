@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { t } from "../i18n";
 import {
   Badge,
   EmptyState,
@@ -49,33 +50,33 @@ export function ReadinessView({ registry, results, onOpen }: ReadinessViewProps)
   const checked = Object.keys(results).length;
   const clean = Object.values(results).filter((r) => r.errors === 0).length;
 
-  if (!registry) return <EmptyState fill title="Loading the compiled spec…" />;
+  if (!registry) return <EmptyState fill title={t("Loading the compiled spec…")} />;
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-canvas">
-      <Toolbar dense aria-label="Readiness">
-        <ToolbarTitle>Readiness</ToolbarTitle>
-        <Badge mono>{registry.entries.length} use cases</Badge>
+      <Toolbar dense aria-label={t("Readiness")}>
+        <ToolbarTitle>{t("Readiness")}</ToolbarTitle>
+        <Badge mono>{registry.entries.length}{" "}{t("use cases")}</Badge>
         <Badge mono tone={checked ? "accent" : "neutral"}>
-          {checked} checked this session
+          {checked}{" "}{t("checked this session")}
         </Badge>
         {checked ? (
           <Badge mono tone={clean === checked ? "ok" : "warn"}>
-            {clean} submitted clean
+            {clean}{" "}{t("submitted clean")}
           </Badge>
         ) : null}
         <select
-          className="ml-2 rounded-xs border border-line bg-surface px-1 py-0.5 text-2xs text-ink"
+          className="ms-2 rounded-xs border border-line bg-surface px-1 py-0.5 text-2xs text-ink"
           value={family}
           onChange={(e) => setFamily(e.target.value)}
-          aria-label="Family"
+          aria-label={t("Family")}
         >
-          <option value="all">All families</option>
-          <option value="hl7v2">HL7 v2.5.1</option>
-          <option value="fhir">FHIR R4</option>
-          <option value="cda">CDA R2</option>
-          <option value="xds">XDS / SOAP</option>
-          <option value="sso">SSO</option>
+          <option value="all">{t("All families")}</option>
+          <option value="hl7v2">{t("HL7 v2.5.1")}</option>
+          <option value="fhir">{t("FHIR R4")}</option>
+          <option value="cda">{t("CDA R2")}</option>
+          <option value="xds">{t("XDS / SOAP")}</option>
+          <option value="sso">{t("SSO")}</option>
         </select>
       </Toolbar>
 
@@ -85,12 +86,12 @@ export function ReadinessView({ registry, results, onOpen }: ReadinessViewProps)
             {/* The rule is a box-shadow on the cells, not a border on the row: under
                 border-collapse a sticky header leaves its border behind when it scrolls. */}
             <tr className="[&>th]:shadow-[inset_0_-1px_0_var(--nw-line)]">
-              <th className="px-3 py-1.5 text-left font-semibold">Use case</th>
-              <th className="px-2 py-1.5 text-left font-semibold">Spec</th>
-              <th className="px-2 py-1.5 text-left font-semibold whitespace-nowrap">Official sample</th>
-              <th className="px-2 py-1.5 text-left font-semibold">Variants</th>
-              <th className="px-2 py-1.5 text-left font-semibold whitespace-nowrap">Your message</th>
-              <th className="px-2 py-1.5 text-left font-semibold whitespace-nowrap">Required covered</th>
+              <th className="px-3 py-1.5 text-start font-semibold">{t("Use case")}</th>
+              <th className="px-2 py-1.5 text-start font-semibold">{t("Spec")}</th>
+              <th className="px-2 py-1.5 text-start font-semibold whitespace-nowrap">{t("Official sample")}</th>
+              <th className="px-2 py-1.5 text-start font-semibold">{t("Variants")}</th>
+              <th className="px-2 py-1.5 text-start font-semibold whitespace-nowrap">{t("Your message")}</th>
+              <th className="px-2 py-1.5 text-start font-semibold whitespace-nowrap">{t("Required covered")}</th>
             </tr>
           </thead>
           <tbody>
@@ -106,10 +107,7 @@ export function ReadinessView({ registry, results, onOpen }: ReadinessViewProps)
         </table>
 
         <p className="border-t border-line px-3 py-2 text-2xs leading-relaxed text-ink-3">
-          “Spec” is what the workbench compiled from the published pages; “Your message” is what
-          the checker found in a message you pasted in this session. A use case with a complete
-          spec and no pasted message is <strong className="font-semibold">not checked</strong> —
-          the workbench cannot tell you your HIS is ready for something it has never seen.
+          {t("“Spec” is what the workbench compiled from the published pages; “Your message” is what the checker found in a message you pasted in this session. A use case with a complete spec and no pasted message is")}{" "}<strong className="font-semibold">{t("not checked")}</strong>{" "}{t("— the workbench cannot tell you your HIS is ready for something it has never seen.")}
         </p>
       </div>
     </div>
@@ -140,7 +138,7 @@ function Row({
         </div>
       </td>
       <td className="px-2 py-1.5">
-        <Tooltip wide content={summary.statusReasons.join(" ") || "Compiled from the published specification pages."}>
+        <Tooltip wide content={summary.statusReasons.join(" ") || t("Compiled from the published specification pages.")}>
           <span className="cursor-help">
             <Badge tone={summary.status === "complete" ? "ok" : summary.status === "partial" ? "warn" : "error"}>
               {summary.status}
@@ -152,8 +150,8 @@ function Row({
         {summary.goldenSampleCount ? (
           `${summary.goldenSampleCount}`
         ) : (
-          <Tooltip wide content={summary.goldenMissing?.note ?? summary.goldenMissing?.reason ?? "No official sample is published."}>
-            <span className="cursor-help text-warn">none</span>
+          <Tooltip wide content={summary.goldenMissing?.note ?? summary.goldenMissing?.reason ?? t("No official sample is published.")}>
+            <span className="cursor-help text-warn">{t("none")}</span>
           </Tooltip>
         )}
       </td>
@@ -164,15 +162,15 @@ function Row({
             <SeverityCount severity="error" count={result.errors} />
             <SeverityCount severity="warn" count={result.warns} />
             {result.errors === 0 ? (
-              <Badge tone="ok">would be accepted</Badge>
+              <Badge tone="ok">{t("would be accepted")}</Badge>
             ) : (
-              <Badge tone="error">would be rejected</Badge>
+              <Badge tone="error">{t("would be rejected")}</Badge>
             )}
           </span>
         ) : (
           <span className="flex items-center gap-1.5 whitespace-nowrap text-ink-3">
-            <StatusDot severity="info" hollow label="Not checked" />
-            not checked
+            <StatusDot severity="info" hollow label={t("Not checked")} />
+            {t("not checked")}
           </span>
         )}
       </td>

@@ -48,7 +48,7 @@ export const SEVERITY_LABEL: Record<Severity, string> = {
 /* ----------------------------------------------------------------- usage -- */
 
 /** NPHIES usage legend, page 171278410, cross-tabbed against cardinality. */
-export type Usage = "M" | "R" | "R2" | "O" | "I" | "X" | "NP";
+export type Usage = "M" | "R" | "R2" | "O" | "I" | "X" | "NP" | "C";
 
 export interface UsageMeaning {
   /** Expansion of the letter, verbatim from the legend where one exists. */
@@ -95,6 +95,11 @@ export const USAGE_MEANING: Record<Usage, UsageMeaning> = {
     title: "SHALL NOT be present",
     validator: "Error if present. Blocks submission.",
     severityIfViolated: "error",
+  },
+  C: {
+    title: "Conditional",
+    validator: "Required only when the condition in its guidance holds. The condition is not checked; read it in Explain.",
+    severityIfViolated: "info",
   },
 };
 

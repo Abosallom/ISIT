@@ -1,4 +1,5 @@
 import { useCallback, useRef, useState } from "react";
+import { t } from "../i18n";
 import { Button, type ButtonProps } from "./Button";
 import { useToast } from "./Toast";
 
@@ -50,7 +51,7 @@ export function CopyButton({
         ok
           ? { title: what ? `Copied ${what}` : "Copied to clipboard" }
           : {
-              title: "Could not copy",
+              title: t("Could not copy"),
               detail: "The browser blocked clipboard access. Select the text and copy manually.",
             },
       );
@@ -63,13 +64,13 @@ export function CopyButton({
         variant={variant}
         size={size}
         onClick={onClick}
-        aria-label={what ? `Copy ${what}` : label}
+        aria-label={what ? t("Copy {w}", { w: what }) : t(label)}
         {...rest}
       >
-        {failed ? "Copy failed" : copied ? copiedLabel : label}
+        {failed ? t("Copy failed") : copied ? t(copiedLabel) : t(label)}
       </Button>
       <span aria-live="polite" className="sr-only">
-        {copied ? `${what ?? "Content"} copied to clipboard` : ""}
+        {copied ? `${what ?? t("Content")} copied to clipboard` : ""}
       </span>
     </>
   );

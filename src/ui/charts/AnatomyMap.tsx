@@ -6,6 +6,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { t } from "../../i18n";
 import { cx } from "../cx";
 import { SEVERITY_GLYPH, SEVERITY_LABEL, type Severity } from "../types";
 import {
@@ -150,11 +151,10 @@ export function AnatomyMap({
           <span className="block">
             <span className="block font-medium text-ink">
               <span className="font-mono">{b.label}</span>
-              {b.detail ? <span className="ml-1.5 font-normal text-ink-2">{b.detail}</span> : null}
+              {b.detail ? <span className="ms-1.5 font-normal text-ink-2">{b.detail}</span> : null}
             </span>
             <span className="block tabular-nums text-ink-3">
-              {fmtInt(b.nodeCount)} {b.nodeCount === 1 ? "node" : "nodes"} · {fmtInt(b.bytes)} chars ·
-              line {fmtInt(b.firstLine)}
+              {fmtInt(b.nodeCount)} {b.nodeCount === 1 ? "node" : "nodes"} · {fmtInt(b.bytes)}{" "}{t("chars · line")}{" "}{fmtInt(b.firstLine)}
             </span>
             <span className="mt-1 block">
               <SeverityCountsLine counts={b.counts} />

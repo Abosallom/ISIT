@@ -1,4 +1,5 @@
 import { Button } from "../ui";
+import { t } from "../i18n";
 import type { MessageStructure } from "../lib/structure";
 import type { DetectCandidate, DetectEvidence, DetectGrade, DetectResult } from "../lib/detect";
 
@@ -60,13 +61,13 @@ function EvidenceLine({ e }: { e: DetectEvidence }) {
   const note = basisNote(e);
   return (
     <span className="block">
-      <span className="text-ink-2">{fieldName(e)}</span> reads{" "}
-      <code className="rounded-xs bg-inset px-1 font-mono text-ink">{e.fragment}</code> at line{" "}
+      <span className="text-ink-2">{fieldName(e)}</span>{" "}{t("reads")}{" "}
+      <code className="rounded-xs bg-inset px-1 font-mono text-ink">{e.fragment}</code>{" "}{t("at line")}{" "}
       {e.line}
       {e.expected !== e.fragment ? (
         <>
           {" "}
-          — expected <code className="font-mono text-ink-2">{e.expected}</code>
+          {t("— expected")}{" "}<code className="font-mono text-ink-2">{e.expected}</code>
         </>
       ) : null}
       {note ? <span className="text-ink-3"> ({note})</span> : null}
@@ -112,7 +113,7 @@ export function DetectionBanner({
   if (!top) {
     return (
       <Strip tone="muted" role="status">
-        <span className="font-medium text-ink-2">Not identified.</span> {result.reason}
+        <span className="font-medium text-ink-2">{t("Not identified.")}</span> {result.reason}
       </Strip>
     );
   }
@@ -127,9 +128,9 @@ export function DetectionBanner({
     const e = primaryEvidence(top);
     return (
       <Strip tone="muted" role="status">
-        Detected{" "}
+        {t("Detected")}{" "}
         <code className="rounded-xs bg-inset px-1 font-mono text-ink">{e?.fragment ?? top.structureId}</code>
-        {e ? ` from ${fieldName(e)} at line ${e.line}` : ""} — matches your selection
+        {e ? ` from ${fieldName(e)} at line ${e.line}` : ""}{" "}{t("— matches your selection")}
         <span className="text-ink-3"> ({GRADE_WORD[top.grade]})</span>
         {e && basisNote(e) ? <span className="text-ink-3"> · {basisNote(e)}</span> : null}
       </Strip>
@@ -141,13 +142,13 @@ export function DetectionBanner({
     const e = primaryEvidence(top);
     return (
       <Strip tone="muted" role="status">
-        Kept {currentLabel}.{" "}
+        {t("Kept")}{" "}{currentLabel}.{" "}
         {result.outcome === "ambiguous"
-          ? `The detector listed ${result.candidates.length} candidates it could not separate`
-          : `The message reads ${e?.fragment ?? top.structureId}, which is ${qualifiedLabel(top, currentUseCaseId, structures)}`}
+          ? t("The detector listed {n} candidates it could not separate", { n: result.candidates.length })
+          : t("The message reads {a}, which is {b}", { a: e?.fragment ?? top.structureId, b: qualifiedLabel(top, currentUseCaseId, structures) })}
         .{" "}
         <button type="button" onClick={onShow} className="underline decoration-dotted hover:text-ink">
-          show
+          {t("show")}
         </button>
       </Strip>
     );
@@ -164,8 +165,7 @@ export function DetectionBanner({
     return (
       <Strip tone="attention" role="status">
         <div className="font-medium">
-          The message could be {result.candidates.length} compiled structures — the detector could not
-          separate them; you pick.
+          {t("The message could be")}{" "}{result.candidates.length}{" "}{t("compiled structures — the detector could not separate them; you pick.")}
         </div>
         <ul className="mt-1 flex flex-col gap-1">
           {result.candidates.map((c) => {
@@ -177,7 +177,7 @@ export function DetectionBanner({
                   <span className="font-medium text-ink">
                     {qualifiedLabel(c, currentUseCaseId, structures)}
                     <span className="font-normal text-ink-3"> — {c.title}</span>
-                    {isCurrent ? <span className="font-normal text-ink-3"> · your selection</span> : null}
+                    {isCurrent ? <span className="font-normal text-ink-3">{" "}{t("· your selection")}</span> : null}
                   </span>
                   <span className="text-ink-3"> — {GRADE_WORD[c.grade]}</span>
                   {c.evidence.map((e, i) => (
@@ -191,7 +191,7 @@ export function DetectionBanner({
                 </span>
                 {!isCurrent && act ? (
                   <Button size="xs" onClick={act}>
-                    Select {qualifiedLabel(c, currentUseCaseId, structures)}
+                    {t("Select")}{" "}{qualifiedLabel(c, currentUseCaseId, structures)}
                   </Button>
                 ) : null}
               </li>
@@ -200,7 +200,7 @@ export function DetectionBanner({
         </ul>
         <div className="mt-1">
           <Button size="xs" variant="ghost" onClick={onKeep}>
-            Keep {currentLabel}
+            {t("Keep")}{" "}{currentLabel}
           </Button>
         </div>
       </Strip>
@@ -218,21 +218,21 @@ export function DetectionBanner({
         <span className="min-w-0 flex-1">
           {e ? (
             <>
-              <span className="font-medium">{fieldName(e)}</span> reads{" "}
-              <code className="rounded-xs bg-inset px-1 font-mono text-ink">{e.fragment}</code> at line{" "}
+              <span className="font-medium">{fieldName(e)}</span>{" "}{t("reads")}{" "}
+              <code className="rounded-xs bg-inset px-1 font-mono text-ink">{e.fragment}</code>{" "}{t("at line")}{" "}
               {e.line} —{" "}
             </>
           ) : null}
-          the compiled {e?.fragment ?? top.title} structure is{" "}
+          {t("the compiled")}{" "}{e?.fragment ?? top.title}{" "}{t("structure is")}{" "}
           <code className="font-mono">{top.structureId}</code>
           {crossUseCase ? (
             <>
               {" "}
-              in use case <code className="font-mono">{top.useCaseId}</code>
+              {t("in use case")}{" "}<code className="font-mono">{top.useCaseId}</code>
             </>
           ) : null}
-          ; you have {currentLabel} selected.
-          <span className="text-ink-3"> ({GRADE_WORD[top.grade]} match)</span>
+          {t("; you have")}{" "}{currentLabel}{" "}{t("selected.")}
+          <span className="text-ink-3"> ({GRADE_WORD[top.grade]}{" "}{t("match)")}</span>
           {e && basisNote(e) ? <span className="block text-ink-3">{basisNote(e)}</span> : null}
           {top.caveats.map((t, i) => (
             <span key={i} className="block text-ink-3">
@@ -243,11 +243,11 @@ export function DetectionBanner({
         <span className="flex shrink-0 items-center gap-1.5">
           {act ? (
             <Button size="xs" variant="primary" onClick={act}>
-              Switch to {targetLabel}
+              {t("Switch to")}{" "}{targetLabel}
             </Button>
           ) : null}
           <Button size="xs" onClick={onKeep}>
-            Keep
+            {t("Keep")}
           </Button>
         </span>
       </div>

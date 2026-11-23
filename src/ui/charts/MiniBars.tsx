@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { t } from "../../i18n";
 import { cx } from "../cx";
 import {
   ChartTip,
@@ -84,8 +85,8 @@ export function MiniBars({
             <span className="block">
               <span className="block font-medium tabular-nums text-ink">
                 {fmtInt(row.value)}
-                <span className="font-normal text-ink-3"> of {fmtInt(row.of)}</span>
-                <span className="ml-1 font-normal text-ink-3">{fmtPct(frac)}</span>
+                <span className="font-normal text-ink-3">{" "}{t("of")}{" "}{fmtInt(row.of)}</span>
+                <span className="ms-1 font-normal text-ink-3">{fmtPct(frac)}</span>
               </span>
               <span className="block">{row.label}</span>
               {row.detail ? <span className="block text-ink-3">{row.detail}</span> : null}
@@ -190,7 +191,7 @@ export function MiniBars({
             </span>
             <span className="whitespace-nowrap tabular-nums text-ink-2">
               <span className="font-medium text-ink">{fmtInt(row.value)}</span>
-              <span className="text-ink-3"> of </span>
+              <span className="text-ink-3">{" "}{t("of")}{" "}</span>
               {fmtInt(row.of)}
             </span>
           </div>

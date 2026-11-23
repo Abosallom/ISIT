@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import { t } from "../i18n";
 import { Badge, Button, CopyButton, useApiKey, type DensityChoice } from "../ui";
 import type { Finding as EngineFinding } from "../lib/check";
 import type { MessageStructure } from "../lib/structure";
@@ -159,41 +160,37 @@ export function AdvisoryPanel({
     <section
       className="shrink-0 border-t border-dashed border-ai/50 bg-surface"
       data-advisory-panel
-      aria-label="Model advisory"
+      aria-label={t("Model advisory")}
     >
       <button
         type="button"
         onClick={onToggle}
         aria-expanded={open}
-        className={`flex w-full items-center gap-2 px-3 text-left hover:bg-inset ${roomy ? "py-2" : "py-1"}`}
+        className={`flex w-full items-center gap-2 px-3 text-start hover:bg-inset ${roomy ? "py-2" : "py-1"}`}
       >
         <span aria-hidden="true" className="font-mono text-2xs text-ink-3">
           {open ? "▾" : "▸"}
         </span>
-        <Badge mono tone="ai">Model</Badge>
-        <span className="text-xs font-medium text-ink">Second opinion and open questions</span>
+        <Badge mono tone="ai">{t("Model")}</Badge>
+        <span className="text-xs font-medium text-ink">{t("Second opinion and open questions")}</span>
         <span className="text-2xs text-ink-3">{summary}</span>
-        <span className="ml-auto text-2xs text-ink-3">{DISCLAIMER}</span>
+        <span className="ms-auto text-2xs text-ink-3">{DISCLAIMER}</span>
       </button>
 
       {open ? (
         <div className={`overflow-auto border-t border-line px-3 ${roomy ? "max-h-[55vh] space-y-4 py-3" : "max-h-[40vh] space-y-3 py-2"}`}>
           <p className="text-2xs text-ink-2">
-            {DISCLAIMER} Every claim below was checked against what was actually sent — a quote
-            that is not verbatim, a rule id that was not in the list, or a line the skeleton does
-            not show is discarded and counted, never shown as fact.
+            {DISCLAIMER}{" "}{t("Every claim below was checked against what was actually sent — a quote that is not verbatim, a rule id that was not in the list, or a line the skeleton does not show is discarded and counted, never shown as fact.")}
           </p>
 
           {!key ? (
             <p className="rounded-sm border border-line bg-inset px-2 py-1 text-2xs text-ink-2">
-              No Anthropic API key is set in the header, so the two buttons below are inert. The
-              questions, the closed option lists and the payload previews work without one — nothing
-              is sent until you add a key and click.
+              {t("No Anthropic API key is set in the header, so the two buttons below are inert. The questions, the closed option lists and the payload previews work without one — nothing is sent until you add a key and click.")}
             </p>
           ) : null}
 
           {!input ? (
-            <p className="text-2xs text-ink-3">Run a check first. The panel is about a completed check and nothing else.</p>
+            <p className="text-2xs text-ink-3">{t("Run a check first. The panel is about a completed check and nothing else.")}</p>
           ) : (
             <>
               <SecondOpinion
@@ -255,10 +252,10 @@ function SendControls({
     <div className="flex flex-col gap-1">
       <div className="flex flex-wrap items-center gap-1.5">
         <Button size="xs" variant="ai" onClick={onRun} disabled={disabled || busy}>
-          {busy ? "Asking…" : label}
+          {busy ? t("Asking…") : label}
         </Button>
         <span className="text-2xs text-ink-3">
-          sends ~{parts.estimatedTokens.toLocaleString()} tokens ({roughCost(parts.estimatedTokens)} of input at list price; the reply is billed on top) — {note}
+          {t("sends ~")}{parts.estimatedTokens.toLocaleString()}{" "}{t("tokens (")}{roughCost(parts.estimatedTokens)}{" "}{t("of input at list price; the reply is billed on top) —")}{" "}{note}
         </span>
         <button
           type="button"
@@ -266,13 +263,13 @@ function SendControls({
           onClick={() => setPreviewing((p) => !p)}
           aria-expanded={previewing}
         >
-          {previewing ? "Hide preview" : "Preview what will be sent"}
+          {previewing ? t("Hide preview") : t("Preview what will be sent")}
         </button>
       </div>
       {previewing ? (
         <pre
           className="max-h-64 overflow-auto rounded-sm border border-line bg-inset p-2 font-mono text-2xs leading-4 whitespace-pre-wrap text-ink-2"
-          aria-label="Exact text that will be sent"
+          aria-label={t("Exact text that will be sent")}
         >
           {parts.text}
         </pre>
@@ -286,7 +283,7 @@ function Quotes({ quotes }: { quotes: readonly string[] }) {
   return (
     <ul className="mt-1 space-y-0.5">
       {quotes.map((q, i) => (
-        <li key={i} className="border-l-2 border-line-strong pl-2 font-mono text-2xs whitespace-pre-wrap text-ink-2">
+        <li key={i} className="border-s-2 border-line-strong ps-2 font-mono text-2xs whitespace-pre-wrap text-ink-2">
           {q}
         </li>
       ))}
@@ -308,7 +305,7 @@ function AboutFinding({
   const label = f ? f.title : findingId;
   return (
     <div className="mt-1 text-2xs text-ink-3">
-      about finding{" "}
+      {t("about finding")}{" "}
       {onSelectFinding && f?.location ? (
         <button
           type="button"
@@ -330,12 +327,12 @@ function ResultFooter({ model, usage, digest, stale }: { model: string; usage: A
     <p className="mt-2 flex flex-wrap gap-x-3 font-mono text-2xs text-ink-3" data-advisory-footer>
       <span>{model}</span>
       <span>
-        in {usage.inputTokens.toLocaleString()} · out {usage.outputTokens.toLocaleString()}
+        {t("in")}{" "}{usage.inputTokens.toLocaleString()}{" "}{t("· out")}{" "}{usage.outputTokens.toLocaleString()}
         {usage.cacheReadTokens ? ` · cached ${usage.cacheReadTokens.toLocaleString()}` : ""}
         {usage.cacheWriteTokens ? ` · cache write ${usage.cacheWriteTokens.toLocaleString()}` : ""}
       </span>
-      <span>about the check as of {shortDigest(digest)}</span>
-      {stale ? <span className="text-ink-2">stale — the check has changed since; ask again</span> : null}
+      <span>{t("about the check as of")}{" "}{shortDigest(digest)}</span>
+      {stale ? <span className="text-ink-2">{t("stale — the check has changed since; ask again")}</span> : null}
     </p>
   );
 }
@@ -387,21 +384,21 @@ function SecondOpinion({
 
   return (
     <div data-advisory-section="second-opinion">
-      <h3 className="mb-1 text-2xs font-semibold uppercase tracking-wide text-ink-3">Second opinion</h3>
+      <h3 className="mb-1 text-2xs font-semibold uppercase tracking-wide text-ink-3">{t("Second opinion")}</h3>
       <SendControls
-        label={review ? "Ask again" : "Ask for a second opinion"}
+        label={review ? t("Ask again") : t("Ask for a second opinion")}
         busy={busy}
         disabled={!apiKey}
         parts={parts}
         onRun={run}
         note={`${input.findings.length} redacted ${input.findings.length === 1 ? "finding" : "findings"}${input.withheld ? ` (${input.withheld} positive ones held back)` : ""}, the redacted skeleton and the rule list; never the message`}
       />
-      {error ? <p className="mt-1 text-2xs text-ink-2">Not answered: {error}</p> : null}
+      {error ? <p className="mt-1 text-2xs text-ink-2">{t("Not answered:")}{" "}{error}</p> : null}
 
       {review ? (
         <div className={roomy ? "mt-3 space-y-3" : "mt-2 space-y-2"}>
           <p className="text-2xs text-ink-3">
-            {review.advisories.length} verified {review.advisories.length === 1 ? "claim" : "claims"}
+            {review.advisories.length}{" "}{t("verified")}{" "}{review.advisories.length === 1 ? "claim" : "claims"}
             {review.dropped.length ? ` · ${review.dropped.length} unverifiable ${review.dropped.length === 1 ? "claim" : "claims"} discarded` : " · 0 unverifiable claims discarded"}
             {review.notReviewed.length ? ` · ${review.notReviewed.length} not reviewed` : ""}
           </p>
@@ -410,7 +407,7 @@ function SecondOpinion({
           ))}
           {additional.length ? (
             <>
-              <p className="text-2xs text-ink-3">Additional observations the model offers — not findings, and not counted anywhere:</p>
+              <p className="text-2xs text-ink-3">{t("Additional observations the model offers — not findings, and not counted anywhere:")}</p>
               {additional.map((a) => (
                 <AdvisoryCard key={a.id} advisory={a} findingsById={findingsById} onSelectFinding={onSelectFinding} />
               ))}
@@ -418,7 +415,7 @@ function SecondOpinion({
           ) : null}
           {review.notReviewed.length ? (
             <p className="text-2xs text-ink-3">
-              Not assessed by the model: {review.notReviewed.map((id) => findingsById.get(id)?.title ?? id).join("; ")}
+              {t("Not assessed by the model:")}{" "}{review.notReviewed.map((id) => findingsById.get(id)?.title ?? id).join("; ")}
             </p>
           ) : null}
           <ResultFooter model={review.model} usage={review.usage} digest={review.digest} stale={stale} />
@@ -442,13 +439,13 @@ function AdvisoryCard({
     <article className="rounded-sm border border-dashed border-ai/50 bg-raised p-2 text-xs" data-advisory-card data-verdict={a.verdict ?? "observation"}>
       <div className="flex flex-wrap items-baseline gap-x-2">
         <span className="font-medium text-ink">{head}</span>
-        <span className="text-2xs text-ink-3">model confidence: {CONFIDENCE_WORD[a.modelConfidence]}</span>
+        <span className="text-2xs text-ink-3">{t("model confidence:")}{" "}{CONFIDENCE_WORD[a.modelConfidence]}</span>
         {a.about.line !== null && a.about.line !== undefined ? <span className="font-mono text-2xs text-ink-3">L{a.about.line}</span> : null}
       </div>
       <p className="mt-0.5 text-ink">{a.claim}</p>
       {a.reasoning && a.reasoning !== a.claim ? <p className="mt-0.5 text-ink-2">{a.reasoning}</p> : null}
       <Quotes quotes={a.quotes} />
-      {a.ruleIds.length ? <p className="mt-1 font-mono text-2xs text-ink-3">rests on {a.ruleIds.join(", ")}</p> : null}
+      {a.ruleIds.length ? <p className="mt-1 font-mono text-2xs text-ink-3">{t("rests on")}{" "}{a.ruleIds.join(", ")}</p> : null}
       <AboutFinding findingId={a.about.findingId} findingsById={findingsById} onSelectFinding={onSelectFinding} />
     </article>
   );
@@ -526,19 +523,18 @@ function OpenQuestions({
   return (
     <div data-advisory-section="open-questions">
       <h3 className="mb-1 text-2xs font-semibold uppercase tracking-wide text-ink-3">
-        Questions the checker could not answer ({input.gaps.length})
+        {t("Questions the checker could not answer (")}{input.gaps.length})
       </h3>
       {!input.gaps.length ? (
-        <p className="text-2xs text-ink-3">None. Every rule the checker applied was settled by the message and the spec.</p>
+        <p className="text-2xs text-ink-3">{t("None. Every rule the checker applied was settled by the message and the spec.")}</p>
       ) : (
         <>
           <p className="mb-1 text-2xs text-ink-2">
-            Each question comes with the closed list of answers the spec admits. A model may propose one;
-            only your click declares it, and the checker then re-runs and decides for itself.
+            {t("Each question comes with the closed list of answers the spec admits. A model may propose one; only your click declares it, and the checker then re-runs and decides for itself.")}
           </p>
           {parts && gapInput ? (
             <SendControls
-              label={outcome ? "Ask again" : "Ask which answer the skeleton supports"}
+              label={outcome ? t("Ask again") : t("Ask which answer the skeleton supports")}
               busy={busy}
               disabled={!apiKey}
               parts={parts}
@@ -546,10 +542,10 @@ function OpenQuestions({
               note="the questions, their closed option lists, the redacted skeleton and the rule list; never the message"
             />
           ) : null}
-          {error ? <p className="mt-1 text-2xs text-ink-2">Not answered: {error}</p> : null}
+          {error ? <p className="mt-1 text-2xs text-ink-2">{t("Not answered:")}{" "}{error}</p> : null}
           {declared ? (
             <p className="mt-1 text-2xs text-ink-2" data-declared-note>
-              Checked as {declared.conditions.join(", ")} — condition declared by analyst, suggested by model.
+              {t("Checked as")}{" "}{declared.conditions.join(", ")}{" "}{t("— condition declared by analyst, suggested by model.")}
             </p>
           ) : null}
 
@@ -573,8 +569,8 @@ function OpenQuestions({
           {outcome ? (
             <div className="mt-2">
               <p className="text-2xs text-ink-3">
-                {outcome.advisories.length} verified {outcome.advisories.length === 1 ? "proposal" : "proposals"} ·{" "}
-                {outcome.dropped.length} unverifiable {outcome.dropped.length === 1 ? "claim" : "claims"} discarded
+                {outcome.advisories.length}{" "}{t("verified")}{" "}{outcome.advisories.length === 1 ? "proposal" : "proposals"} ·{" "}
+                {outcome.dropped.length}{" "}{t("unverifiable")}{" "}{outcome.dropped.length === 1 ? "claim" : "claims"}{" "}{t("discarded")}
                 {outcome.unresolved.length ? ` · ${outcome.unresolved.length} left unresolved by the model` : ""}
               </p>
               <ResultFooter model={outcome.model} usage={outcome.usage} digest={outcome.digest} stale={stale} />
@@ -609,24 +605,24 @@ function Proposal({
   return (
     <div className="mt-1.5 rounded-sm border border-dashed border-ai/50 bg-surface p-2" data-advisory-card>
       <div className="flex flex-wrap items-baseline gap-x-2">
-        <Badge mono tone="ai">Model</Badge>
-        <span className="text-2xs text-ink-3">model confidence: {CONFIDENCE_WORD[a.modelConfidence]}</span>
+        <Badge mono tone="ai">{t("Model")}</Badge>
+        <span className="text-2xs text-ink-3">{t("model confidence:")}{" "}{CONFIDENCE_WORD[a.modelConfidence]}</span>
       </div>
       <p className="mt-0.5 text-ink">{a.reasoning || a.claim}</p>
       <Quotes quotes={a.quotes} />
       <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
         {action?.type === "declare-condition" ? (
           <Button size="xs" onClick={() => onRecheck(action.condition)}>
-            Re-check as {action.condition}
+            {t("Re-check as")}{" "}{action.condition}
           </Button>
         ) : action?.type === "copy-code" ? (
           <CopyButton size="xs" variant="default" value={action.code} label={`Copy code ${action.code}`} copiedLabel="Copied" what={`code ${action.code}`} />
         ) : rule && rule.type === "rule" ? (
           <span className="text-2xs text-ink-2">
-            Suggests it belongs to <span className="font-mono">{rule.ruleId}</span> ({rule.label}) — nothing to apply; correct the HIS output if so.
+            {t("Suggests it belongs to")}{" "}<span className="font-mono">{rule.ruleId}</span> ({rule.label}{t(") — nothing to apply; correct the HIS output if so.")}
           </span>
         ) : (
-          <span className="text-2xs text-ink-3">No listed answer chosen.</span>
+          <span className="text-2xs text-ink-3">{t("No listed answer chosen.")}</span>
         )}
       </div>
       <AboutFinding findingId={a.about.findingId} findingsById={findingsById} onSelectFinding={onSelectFinding} />

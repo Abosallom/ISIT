@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { t } from "../i18n";
 import { cx } from "./cx";
 import { SEV_CHIP } from "./severity";
 import {
@@ -75,14 +76,14 @@ export function SeverityTag({
   className,
 }: SeverityTagProps) {
   return (
-    <Badge tone={severity} className={className} title={SEVERITY_LABEL[severity]}>
+    <Badge tone={severity} className={className} title={t(SEVERITY_LABEL[severity])}>
       <span aria-hidden="true" className="font-mono">
         {SEVERITY_GLYPH[severity]}
       </span>
       {withLabel ? (
-        <span>{SEVERITY_LABEL[severity]}</span>
+        <span>{t(SEVERITY_LABEL[severity])}</span>
       ) : (
-        <span className="sr-only">{SEVERITY_LABEL[severity]}</span>
+        <span className="sr-only">{t(SEVERITY_LABEL[severity])}</span>
       )}
     </Badge>
   );
@@ -108,6 +109,7 @@ const USAGE_TONE: Record<Usage, BadgeProps["tone"]> = {
   I: "ignored",
   X: "warn",
   NP: "error",
+  C: "neutral",
 };
 
 export function UsageBadge({
@@ -123,16 +125,16 @@ export function UsageBadge({
       content={
         <span className="block space-y-1">
           <span className="block font-medium text-ink">
-            {usage} &mdash; {meaning.title}
+            {usage} &mdash; {t(meaning.title)}
           </span>
-          <span className="block">{meaning.validator}</span>
+          <span className="block">{t(meaning.validator)}</span>
           {cardinality ? (
             <span className="block font-mono text-ink-3">
-              cardinality {cardinality}
+              {t("cardinality")}{" "}{cardinality}
             </span>
           ) : null}
           {condition ? (
-            <span className="block text-ink-3">applies when: {condition}</span>
+            <span className="block text-ink-3">{t("applies when:")}{" "}{condition}</span>
           ) : null}
         </span>
       }
@@ -155,7 +157,7 @@ export function UsageBadge({
         ) : null}
         <span className="sr-only">
           {" "}
-          {meaning.title}. {meaning.validator}
+          {t(meaning.title)}. {t(meaning.validator)}
         </span>
       </span>
     </Tooltip>

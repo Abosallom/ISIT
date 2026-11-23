@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { t, tr } from "../i18n";
 import { cx } from "./cx";
 import { SEV_CHIP, SEV_RULE, IGNORED_EXPLANATION } from "./severity";
 import { SEVERITY_GLYPH, SEVERITY_LABEL, type Finding } from "./types";
@@ -53,7 +54,7 @@ export function FindingRow({
         }
       }}
       className={cx(
-        "group w-full cursor-pointer border-b border-l-2 border-b-line px-2.5 py-1.5 text-left",
+        "group w-full cursor-pointer border-b border-s-2 border-b-line px-2.5 py-1.5 text-start",
         "transition-colors hover:bg-inset",
         SEV_RULE[sev],
         selected && "bg-sel-line",
@@ -80,8 +81,8 @@ export function FindingRow({
                 isIgnored ? "text-ignored-ink" : "text-ink",
               )}
             >
-              <span className="sr-only">{SEVERITY_LABEL[sev]}: </span>
-              {finding.title}
+              <span className="sr-only">{t(SEVERITY_LABEL[sev])}: </span>
+              {tr(finding.title)}
             </span>
             {finding.line != null ? (
               <span className="shrink-0 font-mono text-2xs text-ink-3 tabular-nums">
@@ -103,9 +104,9 @@ export function FindingRow({
               </code>
             ) : null}
             {isIgnored ? (
-              <Tooltip wide content={IGNORED_EXPLANATION} side="top">
+              <Tooltip wide content={t(IGNORED_EXPLANATION)} side="top">
                 <span className="cursor-help font-mono text-2xs text-ignored-ink underline decoration-dotted underline-offset-2">
-                  ignored by NPHIES
+                  {t("ignored by NPHIES")}
                 </span>
               </Tooltip>
             ) : null}
@@ -118,7 +119,7 @@ export function FindingRow({
                 isIgnored ? "text-ignored-ink" : "text-ink-2",
               )}
             >
-              {finding.detail}
+              {tr(finding.detail)}
             </p>
           ) : null}
 
@@ -150,14 +151,14 @@ export function FindingRow({
               e.stopPropagation();
               onReveal(finding);
             }}
-            aria-label={`Reveal ${finding.path} in the message`}
+            aria-label={t("Reveal {p} in the message", { p: finding.path })}
             className={cx(
               "shrink-0 rounded-xs px-1 py-0.5 font-mono text-2xs text-ink-3",
               "opacity-0 transition-opacity hover:bg-inset hover:text-ink",
               "group-hover:opacity-100 focus-visible:opacity-100",
             )}
           >
-            reveal
+            {t("reveal")}
           </button>
         ) : null}
       </div>

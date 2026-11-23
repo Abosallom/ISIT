@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { t } from "../i18n";
 import { cx } from "./cx";
 import type { Provenance } from "./types";
 
@@ -46,14 +47,14 @@ export function SourceNote({
         <span aria-hidden="true" className="font-mono text-2xs">
           {open ? "▾" : "▸"}
         </span>
-        Source
+        {t("Source")}
         <span className="font-mono text-2xs opacity-70">
           {source.pageId}
           {source.row ? ` · ${source.row}` : ""}
         </span>
       </button>
       {open ? (
-        <div className="mt-1 border-l-2 border-line pl-2">
+        <div className="mt-1 border-s-2 border-line ps-2">
           <div className="text-2xs uppercase tracking-wide text-ink-3">
             {baseUrl ? (
               <a

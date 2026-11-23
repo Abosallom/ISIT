@@ -311,7 +311,7 @@
           }
         },
         {
-          "id": "7766496/Table-13.1",
+          "id": "873496667/Table-13.1",
           "kind": "accepted-component-list",
           "anchor": "#Table-13.1",
           "parentField": "DG1.3",
@@ -337,9 +337,12 @@
               "nameInTable": "Name of Coding System",
               "resolvedDatatype": "ID",
               "resolution": "direct",
-              "maxLengthCellIsConstraint": true,
+              "maxLengthCellIsConstraint": false,
               "fixedValue": "2.16.840.1.113883.6.135",
-              "constraintKind": "fixed-oid"
+              "constraintKind": "fixed-oid",
+              "maxLength": 100,
+              "constraintSource": "guidance",
+              "constraintQuote": "Element “Name of Coding System” SHALL be present and SHALL be set to “2.16.840.1.113883.6.135”"
             },
             {
               "component": "4",
@@ -365,14 +368,24 @@
           ],
           "provenance": "nphies-table",
           "source": {
-            "pageId": "7766496",
+            "pageId": "873496667",
             "pageTitle": "DG1",
-            "row": "Table 13.1 (DG1.3)",
-            "quote": "Field | Length\nIdentifier | 50\nText | 2000\nName of Coding System | 2.16.840.1.113883.6.135\nAlternate Identifier | 50\nAlternate Text | 2000\nName of Alternate Coding System | 100"
-          }
+            "row": "DG1.3 component table",
+            "quote": "Field | Length\nIdentifier | 50\nText | 2000\nName of Coding System | 100\nAlternate Identifier | 50\nAlternate Text | 2000\nName of Alternate Coding System | 100"
+          },
+          "supersedes": {
+            "id": "7766496/Table-13.1",
+            "source": {
+              "pageId": "7766496",
+              "pageTitle": "DG1",
+              "row": "Table 13.1 (DG1.3)",
+              "quote": "Field | Length\nIdentifier | 50\nText | 2000\nName of Coding System | 2.16.840.1.113883.6.135\nAlternate Identifier | 50\nAlternate Text | 2000\nName of Alternate Coding System | 100"
+            }
+          },
+          "refresh": "2026-10"
         },
         {
-          "id": "7766519/Table-14.1",
+          "id": "873824257/Table-14.1",
           "kind": "accepted-component-list",
           "anchor": "#Table-14.1",
           "parentField": "PR1.3",
@@ -398,9 +411,12 @@
               "nameInTable": "Name of Coding System",
               "resolvedDatatype": "ID",
               "resolution": "direct",
-              "maxLengthCellIsConstraint": true,
+              "maxLengthCellIsConstraint": false,
               "constraintText": "If code element belongs to the Australian Classification of Health Interventions (ACHI) = 2.16.840.1.113883.3.3731.50.2\nIf code element belongs to The Australian Schedule of Dental Services and Glossary (ADA) = 2.16.840.1.113883.3.3731.50.3\nIf code element belongs to “Imaging Procedure” value set= 2.16.840.1.113883.3.3731.1.204.15",
-              "constraintKind": "conditional-fixed-value"
+              "constraintKind": "conditional-fixed-value",
+              "maxLength": 100,
+              "constraintSource": "guidance",
+              "constraintQuote": "Element “Name of Coding System” SHALL be present and SHALL be set to:"
             },
             {
               "component": "4",
@@ -426,14 +442,24 @@
           ],
           "provenance": "nphies-table",
           "source": {
-            "pageId": "7766519",
+            "pageId": "873824257",
             "pageTitle": "PR1",
-            "row": "Table 14.1 (PR1.3)",
-            "quote": "Field | Length\nIdentifier | 50\nText | 2000\nName of Coding System | If code element belongs to the Australian Classification of Health Interventions (ACHI) = 2.16.840.1.113883.3.3731.50.2\nIf code element belongs to The Australian Schedule of Dental Services and Glossary (ADA) = 2.16.840.1.113883.3.3731.50.3\nIf code element belongs to “Imaging Procedure” value set= 2.16.840.1.113883.3.3731.1.204.15\nAlternate Identifier | 50\nAlternate Text | 2000\nName of Alternate Coding System | 100"
-          }
+            "row": "PR1.3 component table",
+            "quote": "Field | Length\nIdentifier | 50\nText | 2000\nName of Coding System | 100\nAlternate Identifier | 50\nAlternate Text | 2000\nName of Alternate Coding System | 100"
+          },
+          "supersedes": {
+            "id": "7766519/Table-14.1",
+            "source": {
+              "pageId": "7766519",
+              "pageTitle": "PR1",
+              "row": "Table 14.1 (PR1.3)",
+              "quote": "Field | Length\nIdentifier | 50\nText | 2000\nName of Coding System | If code element belongs to the Australian Classification of Health Interventions (ACHI) = 2.16.840.1.113883.3.3731.50.2\nIf code element belongs to The Australian Schedule of Dental Services and Glossary (ADA) = 2.16.840.1.113883.3.3731.50.3\nIf code element belongs to “Imaging Procedure” value set= 2.16.840.1.113883.3.3731.1.204.15\nAlternate Identifier | 50\nAlternate Text | 2000\nName of Alternate Coding System | 100"
+            }
+          },
+          "refresh": "2026-10"
         },
         {
-          "id": "7766519/Table-14.2",
+          "id": "873824257/Table-14.2",
           "kind": "accepted-component-list",
           "anchor": "#Table-14.2",
           "parentField": "PR1.15",
@@ -459,9 +485,12 @@
               "nameInTable": "Name of Coding System",
               "resolvedDatatype": "ID",
               "resolution": "direct",
-              "maxLengthCellIsConstraint": true,
+              "maxLengthCellIsConstraint": false,
               "fixedValue": "2.16.840.1.113883.6.135",
-              "constraintKind": "fixed-oid"
+              "constraintKind": "fixed-oid",
+              "maxLength": 100,
+              "constraintSource": "guidance",
+              "constraintQuote": "Element “Name of Coding System” SHALL be present and SHALL be set to “2.16.840.1.113883.6.135”"
             },
             {
               "component": "4",
@@ -487,11 +516,21 @@
           ],
           "provenance": "nphies-table",
           "source": {
-            "pageId": "7766519",
+            "pageId": "873824257",
             "pageTitle": "PR1",
-            "row": "Table 14.2 (PR1.15)",
-            "quote": "Field | Length\nIdentifier | 50\nText | 2000\nName of Coding System | 2.16.840.1.113883.6.135\nAlternate Identifier | 50\nAlternate Text | 2000\nName of Alternate Coding System | 100"
-          }
+            "row": "PR1.15 component table",
+            "quote": "Field | Length\nIdentifier | 50\nText | 2000\nName of Coding System | 100\nAlternate Identifier | 50\nAlternate Text | 2000\nName of Alternate Coding System | 100"
+          },
+          "supersedes": {
+            "id": "7766519/Table-14.2",
+            "source": {
+              "pageId": "7766519",
+              "pageTitle": "PR1",
+              "row": "Table 14.2 (PR1.15)",
+              "quote": "Field | Length\nIdentifier | 50\nText | 2000\nName of Coding System | 2.16.840.1.113883.6.135\nAlternate Identifier | 50\nAlternate Text | 2000\nName of Alternate Coding System | 100"
+            }
+          },
+          "refresh": "2026-10"
         }
       ],
       "nphiesPerComponentLengths": [
@@ -1151,7 +1190,7 @@
       ],
       "nphiesConstraints": [
         {
-          "id": "7766425/Table-10.2",
+          "id": "873496616/Table-10.2",
           "kind": "accepted-component-list",
           "anchor": "#Table-10.2",
           "parentField": "PV1.5",
@@ -1170,9 +1209,11 @@
               "nameInTable": "Assigning Authority Universal ID",
               "resolvedDatatype": "ST",
               "resolution": "Assigning Authority (CX.4) -> Universal ID",
-              "maxLengthCellIsConstraint": true,
+              "maxLengthCellIsConstraint": false,
               "constraintText": "Participant OID",
-              "constraintKind": "named-value"
+              "constraintKind": "named-value",
+              "maxLength": 100,
+              "constraintSource": "guidance"
             },
             {
               "component": "5",
@@ -1184,11 +1225,21 @@
           ],
           "provenance": "nphies-table",
           "source": {
-            "pageId": "7766425",
+            "pageId": "873496616",
             "pageTitle": "PV1",
-            "row": "Table 10.2 (PV1.5)",
+            "row": "PV1.5 component table",
             "quote": "Field | Length\nID Number | 50\nAssigning Authority Universal ID | Participant OID\nIdentifier Type Code | 50"
-          }
+          },
+          "supersedes": {
+            "id": "7766425/Table-10.2",
+            "source": {
+              "pageId": "7766425",
+              "pageTitle": "PV1",
+              "row": "Table 10.2 (PV1.5)",
+              "quote": "Field | Length\nID Number | 50\nAssigning Authority Universal ID | Participant OID\nIdentifier Type Code | 50"
+            }
+          },
+          "refresh": "2026-10"
         }
       ],
       "nphiesPerComponentLengths": [
@@ -1335,7 +1386,7 @@
               "pageTitle": "Segment Description"
             },
             {
-              "pageId": "7766393",
+              "pageId": "873496585",
               "pageTitle": "PID"
             }
           ]
@@ -1363,7 +1414,7 @@
               "pageTitle": "Segment Description"
             },
             {
-              "pageId": "7766393",
+              "pageId": "873496585",
               "pageTitle": "PID"
             }
           ]
@@ -2515,7 +2566,7 @@
       ],
       "nphiesConstraints": [
         {
-          "id": "7766425/Table-10.1",
+          "id": "873496616/Table-10.1",
           "kind": "accepted-component-list",
           "anchor": "#Table-10.1",
           "parentField": "PV1.3",
@@ -2548,9 +2599,11 @@
               "nameInTable": "Facility Universal ID",
               "resolvedDatatype": "ST",
               "resolution": "Facility (PL.4) -> Universal ID",
-              "maxLengthCellIsConstraint": true,
+              "maxLengthCellIsConstraint": false,
               "constraintText": "Participant NHIC Organization ID",
-              "constraintKind": "named-value"
+              "constraintKind": "named-value",
+              "maxLength": 100,
+              "constraintSource": "guidance"
             },
             {
               "component": "7",
@@ -2576,11 +2629,21 @@
           ],
           "provenance": "nphies-table",
           "source": {
-            "pageId": "7766425",
+            "pageId": "873496616",
             "pageTitle": "PV1",
-            "row": "Table 10.1 (PV1.3)",
+            "row": "PV1.3 component table",
             "quote": "Field | Length\nPoint of Care | 50\nRoom | 50\nBed | 50\nFacility Universal ID | Participant NHIC Organization ID\nBuilding | 50\nFloor | 50\nLocation Description | 50"
-          }
+          },
+          "supersedes": {
+            "id": "7766425/Table-10.1",
+            "source": {
+              "pageId": "7766425",
+              "pageTitle": "PV1",
+              "row": "Table 10.1 (PV1.3)",
+              "quote": "Field | Length\nPoint of Care | 50\nRoom | 50\nBed | 50\nFacility Universal ID | Participant NHIC Organization ID\nBuilding | 50\nFloor | 50\nLocation Description | 50"
+            }
+          },
+          "refresh": "2026-10"
         }
       ]
     },
@@ -3343,7 +3406,7 @@
           },
           "alsoStatedOn": [
             {
-              "pageId": "7766496",
+              "pageId": "873496667",
               "pageTitle": "DG1"
             }
           ]
@@ -3571,7 +3634,7 @@
           },
           "alsoStatedOn": [
             {
-              "pageId": "7766519",
+              "pageId": "873824257",
               "pageTitle": "PR1"
             }
           ]
@@ -3595,7 +3658,7 @@
           },
           "alsoStatedOn": [
             {
-              "pageId": "7766519",
+              "pageId": "873824257",
               "pageTitle": "PR1"
             }
           ]
@@ -3619,7 +3682,7 @@
           },
           "alsoStatedOn": [
             {
-              "pageId": "7766519",
+              "pageId": "873824257",
               "pageTitle": "PR1"
             }
           ]
@@ -3643,7 +3706,7 @@
           },
           "alsoStatedOn": [
             {
-              "pageId": "7766425",
+              "pageId": "873496616",
               "pageTitle": "PV1"
             }
           ]
@@ -3667,7 +3730,7 @@
           },
           "alsoStatedOn": [
             {
-              "pageId": "7766425",
+              "pageId": "873496616",
               "pageTitle": "PV1"
             }
           ]
@@ -3691,7 +3754,7 @@
           },
           "alsoStatedOn": [
             {
-              "pageId": "7766425",
+              "pageId": "873496616",
               "pageTitle": "PV1"
             }
           ]
@@ -4815,12 +4878,36 @@
       "171278410",
       "7766314",
       "7766408",
-      "7766425",
+      "873496616",
       "7766452",
       "7766469",
-      "7766496",
-      "7766519"
+      "873496667",
+      "873824257"
     ],
     "goldenFilesValidated": 3
-  }
+  },
+  "refreshes": [
+    {
+      "id": "2026-10",
+      "at": "2026-11-03T00:00:00+00:00",
+      "note": "NPHIES changes published 20 Sep and 13 Oct 2026: PID, PV1, DG1 and PR1 moved to new page ids",
+      "changed": [
+        "873496667/Table-13.1",
+        "873824257/Table-14.1",
+        "873824257/Table-14.2",
+        "873496616/Table-10.2",
+        "873496616/Table-10.1",
+        "datatypes.CX.nphiesComponentRules[4].alsoStatedOn[1].pageId",
+        "datatypes.CX.nphiesComponentRules[5].alsoStatedOn[1].pageId",
+        "datatypes.XCN.nphiesComponentRules[0].alsoStatedOn[0].pageId",
+        "datatypes.XCN.nphiesComponentRules[12].alsoStatedOn[0].pageId",
+        "datatypes.XCN.nphiesComponentRules[13].alsoStatedOn[0].pageId",
+        "datatypes.XCN.nphiesComponentRules[14].alsoStatedOn[0].pageId",
+        "datatypes.XCN.nphiesComponentRules[15].alsoStatedOn[0].pageId",
+        "datatypes.XCN.nphiesComponentRules[16].alsoStatedOn[0].pageId",
+        "datatypes.XCN.nphiesComponentRules[17].alsoStatedOn[0].pageId",
+        "stats.sourcePagesUsed"
+      ]
+    }
+  ]
 }

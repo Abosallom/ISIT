@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
+import { t } from "../i18n";
 import { Badge, cx } from "../ui";
 
 /* ========================================================================== *
@@ -60,18 +61,18 @@ export interface WelcomeProps {
 const PROMISES: Array<{ glyph: string; title: string; body: string }> = [
   {
     glyph: "⌂",
-    title: "Nothing leaves this browser",
-    body: "The specification is compiled into the page. What you paste is parsed and checked here, and is never sent anywhere.",
+    get title() { return t("Nothing leaves this browser"); },
+    get body() { return t("The specification is compiled into the page. What you paste is parsed and checked here, and is never sent anywhere."); },
   },
   {
     glyph: "§",
-    title: "Every finding cites its page",
-    body: "Each rule the checker applies links to the specification page it rests on, so a finding can be read against the source that produced it.",
+    get title() { return t("Every finding cites its page"); },
+    get body() { return t("Each rule the checker applies links to the specification page it rests on, so a finding can be read against the source that produced it."); },
   },
   {
     glyph: "?",
-    title: "Unknown is reported as unknown",
-    body: "A rule with no evidence behind it is reported as unchecked — never as passed. A confidently wrong verdict costs a hospital more than an acknowledged gap.",
+    get title() { return t("Unknown is reported as unknown"); },
+    get body() { return t("A rule with no evidence behind it is reported as unchecked — never as passed. A confidently wrong verdict costs a hospital more than an acknowledged gap."); },
   },
 ];
 
@@ -81,19 +82,17 @@ export function Welcome({ firstRun, onCheckSample, onStart, onDismiss }: Welcome
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-6 py-10 sm:py-14">
         <header className="flex flex-col gap-3">
           <Badge tone="accent" className="self-start">
-            Welcome
+            {t("Welcome")}
           </Badge>
           <h1 id="welcome-title" className="text-2xl font-semibold tracking-tight text-ink">
-            Check the structure before the hospital submits.
+            {t("Check the structure before the hospital submits.")}
           </h1>
           <p className="max-w-xl text-base text-ink-2">
-            ISIT holds every NPHIES message structure — HL7 v2, FHIR, CDA and SOAP — as compiled
-            rules. Paste what your HIS produced and it shows each structural deviation, located in
-            the message and explained.
+            {t("ISIT holds every NPHIES message structure — HL7 v2, FHIR, CDA and SOAP — as compiled rules. Paste what your HIS produced and it shows each structural deviation, located in the message and explained.")}
           </p>
         </header>
 
-        <ul className="grid gap-3 sm:grid-cols-3" aria-label="What ISIT promises">
+        <ul className="grid gap-3 sm:grid-cols-3" aria-label={t("What ISIT promises")}>
           {PROMISES.map((p) => (
             <li key={p.title} className="flex flex-col gap-2 rounded-lg border border-line bg-surface p-4">
               <span
@@ -111,12 +110,12 @@ export function Welcome({ firstRun, onCheckSample, onStart, onDismiss }: Welcome
         <div className="grid gap-3 sm:grid-cols-2">
           <ActionCard
             primary
-            title="Check an official sample"
+            title={t("Check an official sample")}
             body="Opens the ADT use case with NPHIES' own published samples one click away — the quickest way to see what a finding looks like."
             onClick={onCheckSample}
           />
           <ActionCard
-            title="Start with my own message"
+            title={t("Start with my own message")}
             body="Pick a use case in the rail, paste what your system produced, and press Check."
             onClick={onStart}
           />
@@ -127,7 +126,7 @@ export function Welcome({ firstRun, onCheckSample, onStart, onDismiss }: Welcome
           onClick={onDismiss}
           className="self-start text-xs text-ink-3 underline-offset-2 transition-colors hover:text-ink hover:underline"
         >
-          {firstRun ? "Don't show this again" : "Close"}
+          {firstRun ? t("Don't show this again") : t("Close")}
         </button>
       </div>
     </section>
@@ -150,7 +149,7 @@ function ActionCard({
       type="button"
       onClick={onClick}
       className={cx(
-        "flex flex-col gap-2 rounded-lg border p-5 text-left transition-colors",
+        "flex flex-col gap-2 rounded-lg border p-5 text-start transition-colors",
         primary ? "border-accent bg-accent-soft" : "border-line bg-surface hover:border-accent hover:bg-accent-soft",
       )}
     >

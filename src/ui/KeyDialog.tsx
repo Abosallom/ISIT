@@ -6,6 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { t } from "../i18n";
 import { Button } from "./Button";
 import { cx } from "./cx";
 
@@ -13,6 +14,7 @@ export const API_KEY_STORAGE_KEY = "isit.anthropic-api-key";
 
 /** What the key was stored under before the tool was named ISIT. Read once, then migrated. */
 const LEGACY_API_KEY_STORAGE_KEY = "nphies-workbench.anthropic-api-key";
+
 
 /* ------------------------------------------------------------------ hook -- */
 
@@ -152,12 +154,12 @@ export function KeyDialog({
       >
         <div className="flex items-center justify-between border-b border-line px-3 py-2">
           <h2 id={titleId} className="text-lg font-semibold text-ink">
-            Anthropic API key
+            {t("Anthropic API key")}
           </h2>
           <button
             type="button"
             onClick={onClose}
-            aria-label="Close dialog"
+            aria-label={t("Close dialog")}
             className="rounded-xs px-1 text-ink-3 hover:bg-inset hover:text-ink"
           >
             <span aria-hidden="true">&times;</span>
@@ -173,20 +175,15 @@ export function KeyDialog({
           }}
         >
           <p id={descId} className="text-sm leading-5 text-ink-2">
-            Optional. Used only to: {purpose} Structure checking works without a
-            key &mdash; the rules are compiled from the NPHIES specification and
-            evaluated locally.
+            {t("Optional. Used only to:")}{" "}{purpose}{" "}{t("Structure checking works without a key — the rules are compiled from the NPHIES specification and evaluated locally.")}
           </p>
 
           <div className="rounded-sm border border-line bg-inset px-2.5 py-2 text-xs leading-4 text-ink-2">
             <strong className="font-semibold text-ink">
-              The key stays in this browser.
+              {t("The key stays in this browser.")}
             </strong>{" "}
-            It is saved in this browser&rsquo;s <code className="font-mono">localStorage</code> under{" "}
-            <code className="font-mono">{API_KEY_STORAGE_KEY}</code>, and is sent
-            only to <code className="font-mono">api.anthropic.com</code> from
-            this machine. This tool has no backend: nothing is uploaded, logged
-            or shared. Clearing it below removes it from storage immediately.
+            {t("It is saved in this browser’s")}{" "}<code className="font-mono">{t("localStorage")}</code>{" "}{t("under")}{" "}
+            <code className="font-mono">{API_KEY_STORAGE_KEY}</code>{t(", and is sent only to")}{" "}<code className="font-mono">{t("api.anthropic.com")}</code>{" "}{t("from this machine. This tool has no backend: nothing is uploaded, logged or shared. Clearing it below removes it from storage immediately.")}
           </div>
 
           <div className="space-y-1">
@@ -194,7 +191,7 @@ export function KeyDialog({
               htmlFor={inputId}
               className="block text-xs font-medium text-ink-2"
             >
-              Key
+              {t("Key")}
             </label>
             <div className="flex items-center gap-1.5">
               <input
@@ -217,20 +214,19 @@ export function KeyDialog({
               <Button
                 onClick={() => setReveal((r) => !r)}
                 aria-pressed={reveal}
-                aria-label={reveal ? "Hide key" : "Show key"}
+                aria-label={reveal ? t("Hide key") : t("Show key")}
               >
-                {reveal ? "Hide" : "Show"}
+                {reveal ? t("Hide") : t("Show")}
               </Button>
             </div>
             {looksWrong ? (
               <p id={`${inputId}-hint`} className="text-xs text-warn">
-                Anthropic keys normally start with{" "}
-                <code className="font-mono">sk-ant-</code>. Saving anyway is
-                fine if you know what you are doing.
+                {t("Anthropic keys normally start with")}{" "}
+                <code className="font-mono">{t("sk-ant-")}</code>{t(". Saving anyway is fine if you know what you are doing.")}
               </p>
             ) : value ? (
               <p className="text-xs text-ink-3">
-                Currently stored:{" "}
+                {t("Currently stored:")}{" "}
                 <code className="font-mono">{maskKey(value)}</code>
               </p>
             ) : null}
@@ -245,12 +241,12 @@ export function KeyDialog({
                 onSave("");
               }}
             >
-              Clear stored key
+              {t("Clear stored key")}
             </Button>
             <div className="flex items-center gap-1.5">
-              <Button onClick={onClose}>Cancel</Button>
+              <Button onClick={onClose}>{t("Cancel")}</Button>
               <Button variant="primary" type="submit">
-                Save
+                {t("Save")}
               </Button>
             </div>
           </div>

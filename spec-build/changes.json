@@ -1,0 +1,4035 @@
+{
+ "$schema": "isit/changes@1",
+ "refresh": "2026-10",
+ "title": "NPHIES changes published 20 Sep and 13 Oct 2026",
+ "baseline": "2026-09-15T19:34:14+00:00",
+ "appliedAt": "2026-10-31T18:40:00+00:00",
+ "summaryPage": {
+  "pageId": "7766314",
+  "title": "Segment Description",
+  "updatedAt": "2025-06-02T08:57:21.338Z",
+  "note": "NPHIES moved PID, PV1, DG1 and PR1 to new pages on 2026-09-20 but left this summary page as it was. Where the two disagree ISIT applies the milder reading and says so in the finding, as it does whenever two published tables disagree.",
+  "noteAr": "نقلت NPHIES مقاطع PID وPV1 وDG1 وPR1 إلى صفحات جديدة في 2026-09-20 وتركت صفحة الملخّص هذه كما هي. حيث تختلف الصفحتان يطبّق ISIT القراءة الأخفّ ويذكر ذلك في النتيجة، كما يفعل كلما اختلف جدولان منشوران."
+ },
+ "counts": {
+  "pages": 27,
+  "ruleChanges": 29,
+  "wordingChanges": 47,
+  "rowsAdded": 65,
+  "rowsRemoved": 0,
+  "valueSetsAdded": 33,
+  "valueSetsChanged": 2,
+  "linksAdded": 62,
+  "linksRemoved": 12,
+  "pending": 15
+ },
+ "pages": [
+  {
+   "pageId": "351797257",
+   "title": "Laboratory Order - Composition",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T09:05:18.354Z",
+   "area": "FHIR Laboratory Orders",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": null,
+     "name": "Encounter",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "location": "./encounter",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "The healthcare event (e.g. a patient and healthcare provider interaction) which this order is about.\nThe encounter reference represents the Encounter information (Encounter resource) and SHALL be present If KNOWN.\nIf present, the reference sub-element SHALL be present as relative reference to the Encounter resource in the bundle in the format:\n“Encounter/<UUDI in id of the Encounter resource>”\n(pattern: “<ResourceType/UUID>”)\nThe reference/identifier sub-element SHALL be present and SHALL contain exactly the same Identifier as in the referenced Encounter resource (“identifier” element).\nSee here"
+    }
+   ]
+  },
+  {
+   "pageId": "390299687",
+   "title": "Sub-section: Clinical Information Section",
+   "replaces": null,
+   "version": 2,
+   "updatedAt": "2026-09-20T09:00:59.383Z",
+   "area": "FHIR Radiology Orders",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "390627332",
+   "title": "Sub-section: Procedures Indications Section",
+   "replaces": null,
+   "version": 2,
+   "updatedAt": "2026-09-20T09:00:32.223Z",
+   "area": "FHIR Radiology Orders",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "391020558",
+   "title": "Radiology Order - Composition",
+   "replaces": null,
+   "version": 4,
+   "updatedAt": "2026-09-20T08:56:09.836Z",
+   "area": "FHIR Radiology Orders",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": null,
+     "name": "Encounter",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "location": "./encounter",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "The healthcare event (e.g. a patient and healthcare provider interaction) which this order is about.\nThe encounter reference represents the Encounter information (Encounter resource) and SHALL be present If KNOWN.\nIf present, the reference sub-element SHALL be present as relative reference to the Encounter resource in the bundle in the format:\n“Encounter/<UUDI in id of the Encounter resource>”\n(pattern: “<ResourceType/UUID>”)\nThe reference/identifier sub-element SHALL be present and SHALL contain exactly the same Identifier as in the referenced Encounter resource (“identifier” element).\nSee here"
+    }
+   ]
+  },
+  {
+   "pageId": "413892621",
+   "title": "Sub-section:  Key Images",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:46:13.742Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "413958156",
+   "title": "Radiology Report - Composition (embedded PDF)",
+   "replaces": null,
+   "version": 5,
+   "updatedAt": "2026-09-20T08:48:36.487Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage"
+     ],
+     "field": null,
+     "name": "Reference to Service Request resource",
+     "num": null,
+     "before": {
+      "usage": "M [1..*]",
+      "location": "./extension/url=”http://hl7.org/fhir/uv/lab-report/StructureDefinition/composition-basedOn-order-or-requisition“ | ./extension/valueReference",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./extension/url=”http://hl7.org/fhir/uv/lab-report/StructureDefinition/composition-basedOn-order-or-requisition“ | ./extension/valueReference",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": null
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "name",
+      "guidance"
+     ],
+     "field": null,
+     "name": "Author of the report (person and device)",
+     "num": null,
+     "before": {
+      "usage": "M [1..2]",
+      "location": "./author",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [2..2]",
+      "location": "./author",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "One to two author elements SHALL be present, containing the practitioner and/or device that is the author of the report.\nIn case the author element is a person:\nThe reference sub-element SHALL be present as relative reference to a PractitionerRole resource in the bundle in the format:\n“PractitionerRole/<UUDI in id of the PractitionerRole resource>”\n(pattern: “<ResourceType/UUID>”)\nThe reference/identifier sub-element SHALL be present and SHALL contain exactly the same Identifier as in the referenced PractitionerRole resource (“identifier” element).\nSee here\nIn case the author element is a device:\nThe reference sub-element SHALL be present as relative reference to a Device resource in the bundle in the format:\n“Device/<UUDI in id of the Device resource>”\n(pattern: “<ResourceType/UUID>”)\nThe reference/identifier sub-element SHALL be present and SHALL contain exactly the same Identifier as in the referenced Device resource (“identifier” element).\nSee here",
+     "guidanceAfter": "Exactly two authors elements SHALL be present, containing the practitioner and/or device that is the author of the report.\nIn case the author element is a person:\nThe reference sub-element SHALL be present as relative reference to a PractitionerRole resource in the bundle in the format:\n“PractitionerRole/<UUDI in id of the PractitionerRole resource>”\n(pattern: “<ResourceType/UUID>”)\nThe reference/identifier sub-element SHALL be present and SHALL contain exactly the same Identifier as in the referenced PractitionerRole resource (“identifier” element).\nSee here\nIn case the author element is a device:\nThe reference sub-element SHALL be present as relative reference to a Device resource in the bundle in the format:\n“Device/<UUDI in id of the Device resource>”\n(pattern: “<ResourceType/UUID>”)\nThe reference/identifier sub-element SHALL be present and SHALL contain exactly the same Identifier as in the referenced Device resource (“identifier” element).\nSee here"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Title",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./title",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./title",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "SHALL be set to “Radiology Report”",
+     "guidanceAfter": "SHALL be set to one of the following titles:\nCT Report\nMR Report\nNuclear Medicine Report\nPET Scan Report\nUltrasound Report\nObstetric Ultrasound Report\nX-Ray Report\nFluoroscopy Study Report\nMammography Screening Report\nMammography Diagnostic Report\nBone Density Report\nInterventional Radiology Report"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "name",
+      "guidance"
+     ],
+     "field": null,
+     "name": "Data enterer",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "location": "./attester",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./attester",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "Data element that represents the person who reviewed/authenticated the content of this document but does not take final responsibility for its content.\nThe mode sub-element SHALL be present and SHALL be set to “professional”.\nThe party/reference sub-element SHALL be present as relative reference to a PractitionerRole resource in the bundle in the format:\n“PractitionerRole/<UUDI in id of the PractitionerRole resource>”\n(pattern: “<ResourceType/UUID>”)\nThe party/reference/identifier sub-element SHALL be present and SHALL contain exactly the same Identifier as in the referenced PractitionerRole resource (“identifier” element).\nSee here",
+     "guidanceAfter": "The scanner operator who produced the scanned content SHALL be present.\nThe mode sub-element SHALL be present and SHALL be set to “professional”.\nThe party/reference sub-element SHALL be present as relative reference to a PractitionerRole resource in the bundle in the format:\n“PractitionerRole/<UUDI in id of the PractitionerRole resource>”\n(pattern: “<ResourceType/UUID>”)\nThe party/reference/identifier sub-element SHALL be present and SHALL contain exactly the same Identifier as in the referenced PractitionerRole resource (“identifier” element).\nSee here"
+    }
+   ]
+  },
+  {
+   "pageId": "413990915",
+   "title": "Clinical Information Section",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:36:18.553Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "414253059",
+   "title": "Impression Section",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:40:09.037Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "414449674",
+   "title": "Findings Section",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:39:03.403Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "414547978",
+   "title": "Radiology Report - Composition (structured)",
+   "replaces": null,
+   "version": 4,
+   "updatedAt": "2026-09-20T08:34:35.967Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage"
+     ],
+     "field": null,
+     "name": "Reference to Service Request resource",
+     "num": null,
+     "before": {
+      "usage": "M [1..*]",
+      "location": "./extension/url=”http://hl7.org/fhir/uv/lab-report/StructureDefinition/composition-basedOn-order-or-requisition“ | ./extension/valueReference",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./extension/url=”http://hl7.org/fhir/uv/lab-report/StructureDefinition/composition-basedOn-order-or-requisition“ | ./extension/valueReference",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": null
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Title",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./title",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./title",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "SHALL be set to “Radiology Report”",
+     "guidanceAfter": "SHALL be set to one of the following titles:\nCT Report\nMR Report\nNuclear Medicine Report\nPET Scan Report\nUltrasound Report\nObstetric Ultrasound Report\nX-Ray Report\nFluoroscopy Study Report\nMammography Screening Report\nMammography Diagnostic Report\nBone Density Report\nInterventional Radiology Report"
+    }
+   ]
+  },
+  {
+   "pageId": "414613515",
+   "title": "Sub-section: Communication",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:45:23.378Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "414646295",
+   "title": "Addendum Section",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:40:39.125Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "414744577",
+   "title": "Radiology Report - Diagnostic Report",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:50:45.645Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage"
+     ],
+     "field": null,
+     "name": "Imaging Study",
+     "num": null,
+     "before": {
+      "usage": "M [1..*] (otherwise); NP [0..0] (in case no images)",
+      "location": "./imagingStudy",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1] (otherwise); NP [0..0] (in case no images)",
+      "location": "./imagingStudy",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": null
+    }
+   ]
+  },
+  {
+   "pageId": "415006721",
+   "title": "Imaging Study Section",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:35:42.865Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nIf there are no Imaging Studies related to this Radiology Report, this section SHALL contain a representing narrative expression of this fact.\nExample: “This report includes no images”",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nIf there are no Imaging Studies related to this Radiology Report, this section SHALL contain a representing narrative expression of this fact.\nExample: “This report includes no images”\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage"
+     ],
+     "field": null,
+     "name": "Imaging study",
+     "num": null,
+     "before": {
+      "usage": "M [1..*] (otherwise); NP [0..0] (in case no images)",
+      "location": "./section/entry",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1] (otherwise); NP [0..0] (in case no images)",
+      "location": "./section/entry",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": null
+    }
+   ]
+  },
+  {
+   "pageId": "415039489",
+   "title": "Procedures Section",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:37:28.793Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "name",
+      "guidance"
+     ],
+     "field": null,
+     "name": "Procedure",
+     "num": null,
+     "before": {
+      "usage": "M [1..*]",
+      "location": "./section/entry",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/entry",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "One to many Imaging Procedure(s) SHALL be present.\nThe reference sub-element SHALL be present as relative reference to an Imaging Procedure resource in the bundle in the format:\n“Procedure/<UUDI in id of the Imaging Procedure resource>”\n(pattern: “<ResourceType/UUID>”)\nThe reference/identifier sub-element SHALL be present and SHALL contain exactly the same Identifier as in the referenced Procedure resource (“identifier” element).\nSee here",
+     "guidanceAfter": "One to many Imaging Procedure(s) SHALL be present.\nThe reference sub-element SHALL be present as relative reference to an Imaging Procedure resource in the bundle in the format:\n“Procedure/<UUDI in id of the Imaging Procedure resource>”\n(pattern: “<ResourceType/UUID>”)\nThe reference/identifier sub-element SHALL be present and SHALL contain exactly the same Identifier as in the referenced Procedure resource (“identifier” element).\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>\nSee here"
+    }
+   ]
+  },
+  {
+   "pageId": "415039498",
+   "title": "Comparison Section",
+   "replaces": null,
+   "version": 4,
+   "updatedAt": "2026-09-20T08:38:01.505Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "415137793",
+   "title": "Sub-section:  Radiation Exposure and Protection Information",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:44:05.102Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "415170561",
+   "title": "Clinical presentation Document Section (Embedded PDF)",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:49:30.193Z",
+   "area": "FHIR Radiology Report",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": null,
+     "name": "Text",
+     "num": null,
+     "before": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..1]",
+      "location": "./section/text",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.",
+     "guidanceAfter": "The text sub-element SHALL be present representing the narrative text summary of the section, for human interpretation.\nNarrative tags: The div sub-element SHALL only use the following tags supported by the portal: <title>, <paragraph>, <content>, <list>, <item>, <caption>, <table>, <thead>, <tbody>, <tr>, <th>, <td>, <foot>. The value SHALL NOT be wrapped in a <div> element.\nAny other tag SHALL NOT be sent, including <div> and XHTML tags such as <p>, <b>, <i>, <u>, <br>, <span>, <ul>, <ol>, <li>, <h1>–<h6>, and the XHTML namespace attribute (xmlns=\"http://www.w3.org/1999/xhtml \").\nExample: <paragraph>Section narrative text</paragraph>"
+    }
+   ]
+  },
+  {
+   "pageId": "67993727",
+   "title": "Laboratory Report - Service Request",
+   "replaces": null,
+   "version": 5,
+   "updatedAt": "2026-09-20T08:23:19.251Z",
+   "area": "FHIR Laboratory Results",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage"
+     ],
+     "field": null,
+     "name": "Ordering Provider",
+     "num": null,
+     "before": {
+      "usage": "R2 [0..1]",
+      "location": "./requester",
+      "role": "data"
+     },
+     "after": {
+      "usage": "R [0..1]",
+      "location": "./requester",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": null
+    }
+   ]
+  },
+  {
+   "pageId": "68091912",
+   "title": "Resources in the Laboratory Report Bundle",
+   "replaces": null,
+   "version": 3,
+   "updatedAt": "2026-09-20T08:22:13.662Z",
+   "area": "FHIR Laboratory Results",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage"
+     ],
+     "field": null,
+     "name": "Bundle entry(s) for Laboratory Report - Service Request",
+     "num": null,
+     "before": {
+      "usage": "M [1..*]",
+      "location": "./entry",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [1..*]",
+      "location": "./entry",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": null
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "guidance"
+     ],
+     "field": null,
+     "name": "Bundle entry(s) for Practitioner Role",
+     "num": null,
+     "before": {
+      "usage": "M [1..*] (in case device not present); O [0..*] (otherwise)",
+      "location": "./entry",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [2..*] (in case device not present); M [1..*] (otherwise)",
+      "location": "./entry",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "One to many entry(s) “Practitioner Role” SHALL be present, in case a device is not present.\nIn case a device is present, it MAY be present.\nSee here",
+     "guidanceAfter": "Two to many entry(s) “Practitioner Role” SHALL be present, in case a device is not present.\nIn case a device is present, one entry SHALL be present.\nSee here"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "guidance"
+     ],
+     "field": null,
+     "name": "Bundle entry(s) for Practitioner",
+     "num": null,
+     "before": {
+      "usage": "M [1..*] (in case device not present); O [0..*] (otherwise)",
+      "location": "./entry",
+      "role": "data"
+     },
+     "after": {
+      "usage": "M [2..*] (in case device not present); M [1..*] (otherwise)",
+      "location": "./entry",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "One to many entry(s) “Practitioner” SHALL be present, in case a device is not present.\nIn case a device is present, it MAY be present.\nSee here",
+     "guidanceAfter": "One to many entry(s) “Practitioner” SHALL be present, in case a device is not present.\nIn case a device is present, one entry SHALL be present.\nSee here"
+    }
+   ]
+  },
+  {
+   "pageId": "873038123",
+   "title": "ZDG1",
+   "replaces": null,
+   "version": 2,
+   "updatedAt": "2026-09-20T07:21:26.680Z",
+   "area": "ADT",
+   "status": "new",
+   "rows": [
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZDG1.1",
+     "name": "Custom field",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "I [0..*]",
+      "length": "200",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZDG1.2",
+     "name": "Morphology",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-PrincipalDiagnosis"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The histological classification of the neoplasm tissue (histopathological type) and a description of the course of development that a tumor is likely to take, e.g. benign or malignant (behavior).\nIt SHALL be present IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”, Otherwise NOT present.\nNote: Morphology codes do not contain decimals (.); the (/) is not counted as a character, and the last character can be only 0,1,2,3 6 or 9.\nElement “Identifier” SHALL be present and SHALL be set to a value out of CS-Clinical-PrincipalDiagnosis value set (“code”).\nElement “Text” MAY be present and SHALL be provided with the displayName of the code in “Identifier”\nElement “Name of Coding System” SHALL be present and SHALL be set to “2.16.840.1.113883.6.135”\nAn “alternate” code MAY be present. If present, the following constraints apply:\nElement “Alternate Identifier” SHALL be present\nElement “Alternate Text” MAY be present and SHALL be provided with the displayName of the code in “Alternate Identifier”\nElement “Name of Alternate Coding System” SHALL be present\nThe following fields lengths are accepted:\nField\nLength\nIdentifier\n50\nText\n2000\nName of Coding System\n﻿100\nAlternate Identifier\n50\nAlternate Text\n2000\nName of Alternate Coding System\n100\nExample: |M8010/3^Carcinoma, NOS^2.16.840.1.113883.6.135|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZDG1.3",
+     "name": "Condition Onset Flag",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-ConditionOnsetFlag"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: A qualifier for each coded diagnosis to indicate the onset of the condition relative to the beginning of the episode of care.\nIt SHALL be present IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”, Otherwise NOT present.\nIt SHALL contain a value out of the “CS-Clinical-ConditionOnsetFlag” value set."
+    }
+   ],
+   "note": "Not applied to messages yet: this segment belongs to the A08 discharge update, which is not a structure of its own in ISIT yet.",
+   "noteAr": "لا يُطبَّق على الرسائل بعد: هذا المقطع يخص تحديث الخروج A08، وليس له في ISIT هيكل خاص به بعد."
+  },
+  {
+   "pageId": "873300011",
+   "title": "ZPV1",
+   "replaces": null,
+   "version": 1,
+   "updatedAt": "2026-09-20T07:07:04.586Z",
+   "area": "ADT",
+   "status": "new",
+   "rows": [
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.1",
+     "name": "Custom field",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "I [0..*]",
+      "length": "200",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.2",
+     "name": "Custom field",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "I [0..*]",
+      "length": "200",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.3",
+     "name": "Custom field",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "I [0..*]",
+      "length": "200",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.4",
+     "name": "Custom field",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "I [0..*]",
+      "length": "200",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.5",
+     "name": "Custom field",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "I [0..*]",
+      "length": "200",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.6",
+     "name": "Custom field",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "I [0..*]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.7",
+     "name": "Custom field",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "I [0..*]",
+      "length": "200",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.8",
+     "name": "Discharge update flag",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "M [1..1]",
+      "length": "6",
+      "dataType": "ST",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "SHALL be set to “UPDATE”"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.9",
+     "name": "Hajj Season flag",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "CE",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-HajjFlag"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field SHALL be required IF KNOWN and used to report any person seeking medical service during the Hajj season regardless of his/her status in relation to performance of Hajj duties or nationality and travel area.\nIt SHALL contain a value out of “CS-Adm-HajjFlag” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.10",
+     "name": "Specialty on Admission",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "4",
+      "dataType": "CE",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-Speciality"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field SHALL be required IF KNOWN and contain the Admitting Consultant’s Specialty and SHALL contain a value out of “CS-Adm-Speciality” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.11",
+     "name": "Specialty at Discharge",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "4",
+      "dataType": "CE",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-Speciality"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field SHALL be required IF KNOWN and contain the Discharging Consultant's Specialty and SHALL contain a value out of “CS-Adm-Speciality” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.12",
+     "name": "Care provision modality",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-CareModality"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field indicates the modality through which care was provided during the encounter.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"outpatient\" (or) “Inpatient” (or) \"primary care”), Otherwise NOT present.\nIt SHALL contain a value out of “CS-Adm-CareModality” value set"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.13",
+     "name": "Care type",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-CareType"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field indicates nature of clinical service provided to an admitted patient during an episode of care, acute vs. sub-acute.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”, Otherwise NOT present.\nIt SHALL contain a value out of “CS-Adm-CareType” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.14",
+     "name": "Readmission flag",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-ReadmissionFlag"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: Re-admission is defined as a unplanned subsequent hospital admission in the same or different hospital for the same condition within 30 from previous discharge date.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”, Otherwise NOT present.\nIt SHALL contain a value out of “CS-Adm-ReadmissionFlag” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.15",
+     "name": "Neonate Admission Weight",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "4",
+      "dataType": "NM",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The admission weight of the neonate (age < 1 year) recorded in grams.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient” AND age is less than 1 year, Otherwise NOT present."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.16",
+     "name": "BMI",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "5",
+      "dataType": "NM",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: Body mass index is a value derived from the\nmass and height of a person. The BMI is defined as the body mass divided by the square of the body height.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”, (or) “Outpatient”, (or) “Primary care”, Otherwise NOT present."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.17",
+     "name": "ED Arrival Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The Date/Time of patient arrival to emergency department.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Emergency\", Otherwise NOT present.\nValue SHALL be no later than or equal admit date/time.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.18",
+     "name": "ED Arrival Mode",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-EDArrivalMode"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The mode of transport by which the person arrives at the emergency department.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Emergency\", Otherwise NOT present.\nIt SHALL contain a value out of “CS-Adm-EDArrivalMode” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.19",
+     "name": "ED Service Commencement Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The date/time on which non-admitted patient emergency department clinical care commences.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Emergency\", Otherwise NOT present.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.20",
+     "name": "ED Disposition",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-EDDisposition"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The status of the patient at the end of the non-admitted patient emergency department service episode\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Emergency\", Otherwise NOT present.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Primary care\" AND (Primary care reason for visit = urgent care), Otherwise NOT present.\nIt SHALL contain a value out of “CS-Adm-EDDisposition” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.21",
+     "name": "Triage Date /Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The date/time on which the patient is triaged.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Emergency\", Otherwise NOT present.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Primary care\" AND (Primary care reason for visit = urgent care), Otherwise NOT present.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.22",
+     "name": "Triage Category",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-TriageCategory"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The category assigned to a patient as a result of an initial assessment by medical or nursing staff in an Accident and Emergency Department. The triage category is used to determine the patient's priority for treatment, and to inform the patient of their waiting time\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Emergency\", Otherwise NOT present.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Primary care\" AND (Primary care reason for visit = urgent care), Otherwise NOT present.\nIt SHALL contain a value out of “CS-Adm-TriageCategory” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.23",
+     "name": "Initial or Subsequent Service Event",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-EventType"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: An indicator of whether the service event is the first service event for a new referral or a follow up service event.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"long term care\" (or) “dental” (or) “mental” (or) “Primary care” (or) “Outpatient”, Otherwise NOT present.\nIt SHALL contain a value out of “CS-Adm-EventType” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.24",
+     "name": "Patient complexity level",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-ComplexityLevel"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: A complex patient is one who needs more time to achieve the same level of care as a patient who is not clinically complex.\nThis field SHALL be required IF KNOWN discharging a patient (MSH.9 Message Type = “ADT^A08”) AND EITHER (Patient class PV1.2=\"long term care\" (or) “dental” (or) “dialysis” OR (Care provision modality=\"2\"), Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-ComplexityLevel” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.25",
+     "name": "Internal Transfer Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field SHALL be required IF KNOWN and contain the Date/Time of an inpatient transfer occurs when a patient moves between two services in the same hospital.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.26",
+     "name": "Internal Transfer Destination",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "5",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-MedicalUnitIdentifier"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field SHALL be required IF KNOWN and contain the Destination of inpatient transfer which occurs when a patient moves between two services in the same hospital.\nIt SHALL contain a value out of “CS-Adm-MedicalUnitIdentifier” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.27",
+     "name": "Internal Transfer Source",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "5",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-MedicalUnitIdentifier"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field SHALL be required IF KNOWN and contain the source of inpatient transfer which occurs when a patient moves between two services in the same hospital.\nIt SHALL contain a value out of “CS-Adm-MedicalUnitIdentifier” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.28",
+     "name": "External Referral flag",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-ExternalReferralFlag"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field SHALL be required IF KNOWN and indicates whether a hospital referred a patient to another hospital.\nIt SHALL contain a value out of “CS-Adm-ExternalReferralFlag” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.29",
+     "name": "External Referral Destination",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "14",
+      "dataType": "HD",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field SHALL be required IF KNOWN and contain the organization or hospital to which a patient is referred.\nElement “Namespace ID” SHALL NOT be present\nElement “Universal ID” SHALL be present and be set to the NHIC Organization ID\nElement “Universal ID Type” SHALL NOT be present\nExample: | ^15000000112233 |"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.30",
+     "name": "Intended Length of Stay",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-IntendedLOS"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The intention of the responsible clinician at the time of the patient's admission to hospital or at the time the patient is placed on an elective surgery waiting list, to discharge the patient either on the day of admission or a subsequent date.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”, Otherwise NOT present.\nIt SHALL contain a value out of “CS-Adm-IntendedLOS” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.31",
+     "name": "Patient out on Pass Start Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: This field contains the date/time when a patient leaves the hospital for a period of time more than one day within the hospital stay.\nIt SHALL be present IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”, Otherwise NOT present.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.32",
+     "name": "Patient out on Pass End Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: This field contains the date/time when a patient returns to the hospital after a period of time more than one day within the hospital stay.\nIt SHALL be present IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”, Otherwise NOT present.\nValue SHALL be later than Patient out on Pass Start Date/Time.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.33",
+     "name": "Critical care Start Date/ Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: This field contains the start Date/Time of an admission to Critical care unit.\nIt SHALL be present IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”, Otherwise NOT present.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.34",
+     "name": "Critical care End Date/ Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: This field contains the Date/Time of discharge from Critical care unit.\nIt SHALL be present IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”, Otherwise NOT present.\nValue SHALL be later than Critical care Start Date/ Time.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.35",
+     "name": "Critical care Type",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-CriticalCareType"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: This field contains type of critical care unit.\nIt SHALL be present IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient” AND Critical care Start Date/ Time exist; Otherwise NOT present.\nIt SHALL contain a value out of “CS-Adm-CriticalCareType” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.36",
+     "name": "Home care reason for visit",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-HomeCareRFV"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Care provision modality= home health care), Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-HomeCareRFV” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.37",
+     "name": "Type of skilled / technical home care",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-HomeCareType"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (ZPV1.14 Care provision modality= home care) AND (Home care reason for visit = \"5\" (or) \"6\" (or) \"7\"), Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-HomeCareType” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.38",
+     "name": "Functional limitations Assessment - Home care",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-FunctionalAssmt"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "The current scale used to assess functional limitations in home care is the Functional Limitations Profile (FLP). This assessment evaluates behaviours and feelings across 12 domains, including mobility, household management, and social functioning.\nField SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (ZPV1.14 Care provision modality= home health care) AND (Home care reason for visit = \"3\"), Otherwise it SHALL be present IF KNOWN.\nIt SHALL contain a value out of “CS-Clinical-FunctionalAssmt” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.39",
+     "name": "Primary care reason for visit",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-PrimaryCareRFV"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Primary care\", Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-PrimaryCareRFV” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.40",
+     "name": "Rehabilitation reason for visit",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-RehabRFV"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Rehabilitation\") AND (Rehabilitation service type = “2”), Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-RehabRFV” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.41",
+     "name": "Rehabilitation service type",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-RehabServiceType"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Rehabilitation\", Otherwise NOT present.\nIt SHALL contain a value out “CS-Clinical-RehabServiceType” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.42",
+     "name": "Type of Rehabilitation program",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-RehabProgram"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Rehabilitation\" AND (Rehabilitation service type = “1”), Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-RehabProgram” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.43",
+     "name": "Rehabilitation program Start Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Rehabilitation\" AND (Rehabilitation service type = “1”), Otherwise NOT present.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.44",
+     "name": "Rehabilitation program End Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Rehabilitation\" AND (Rehabilitation service type = “1”), Otherwise NOT present.\nValue SHALL be later than Rehabilitation program Start Date/Time.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.45",
+     "name": "Mental care reason for visit",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "C [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-MentalCareRFV"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Mental care\", Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-MentalCareRFV” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.46",
+     "name": "Dental care reason for visit",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "C [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-DentalCareRFV"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Dental care\", Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-DentalCareRFV” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.47",
+     "name": "Dental Complexity factors",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-DentalComplexity"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: Complexity factors (factors that increase the time and resources this patient needs)\nField SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Dental care\", Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-DentalComplexity” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.48",
+     "name": "Outpatient reason for visit (Domain)",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-OutpatientRFV"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Outpatient\", Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-OutpatientRFV” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.49",
+     "name": "Outpatient reason for visit (Subdomain)",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-OPD1",
+       "CS-Clinical-OPD10",
+       "CS-Clinical-OPD11",
+       "CS-Clinical-OPD12",
+       "CS-Clinical-OPD2",
+       "CS-Clinical-OPD3",
+       "CS-Clinical-OPD4",
+       "CS-Clinical-OPD5",
+       "CS-Clinical-OPD6",
+       "CS-Clinical-OPD7",
+       "CS-Clinical-OPD8",
+       "CS-Clinical-OPD9"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Outpatient\" AND “Outpatient reason for visit (Domain), EXIST”, Otherwise NOT present.\nIt SHALL contain a value out of the following value sets:\nCS-Clinical-OPD1\nCS-Clinical-OPD2\nCS-Clinical-OPD3\nCS-Clinical-OPD4\nCS-Clinical-OPD5\nCS-Clinical-OPD6\nCS-Clinical-OPD7\nCS-Clinical-OPD8\nCS-Clinical-OPD9\nCS-Clinical-OPD10\nCS-Clinical-OPD11\nCS-Clinical-OPD12\nNote: Subdomain value must be out of the related Outpatient reason for visit domain ONLY."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.50",
+     "name": "Type of Dialysis",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-TypeOfDialysis"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Dialysis\", Otherwise NOT present.\nIt SHALL contain a value out of ‘CS-Clinical-TypeOfDialysis” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.51",
+     "name": "Dialysis Complexity factors",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-DialysisComplexity"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: Complexity factors (factors that increase the time and resources this patient needs).\nField SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Dialysis\", Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-DialysisComplexity” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.52",
+     "name": "Medical Device Code",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "No max",
+      "dataType": "CWE",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-GMDNDevice"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field carries medical device information. The field sequences indicate multiple devices. Each repetition represents one device.\nElement “Identifier” SHALL be present IF KNOWN and SHALL contain a value from “CS-Clinical-GMDNDevice”.\nElement “Text” MAY be present.\nElement “Alternate Identifier” SHALL be present IF Element “Identifier” exists and SHALL contain the Medical Device Quantity (numeric).\nExample:\n|12345^Infusion pump^^2|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.53",
+     "name": "Primary eligibility for patient healthcare event",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-FacilitySector"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The primary eligibility for the patient based on their employer or the sector they belong to for an admitted patient episode or non-admitted patient service event.\nThis field SHALL be required IF KNOWN.\nThis field SHALL contain a value out of “CS-Adm-FacilitySector” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPV1.54",
+     "name": "Coding Note Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The Date/Time of final coding note that submitted by clinical coder for the episode of care\nIt SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient” AND (Clinical Coder Identifier) exist, Otherwise NOT present.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    }
+   ],
+   "note": "Not applied to messages yet: this segment belongs to the A08 discharge update, which is not a structure of its own in ISIT yet.",
+   "noteAr": "لا يُطبَّق على الرسائل بعد: هذا المقطع يخص تحديث الخروج A08، وليس له في ISIT هيكل خاص به بعد."
+  },
+  {
+   "pageId": "873496585",
+   "title": "PID",
+   "replaces": "7766393",
+   "version": 1,
+   "updatedAt": "2026-09-20T07:07:46.638Z",
+   "area": "ADT",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PID.7",
+     "name": "Date/Time of Birth",
+     "num": null,
+     "before": {
+      "usage": "R [1..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "after": {
+      "usage": "R [1..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "Date time of birth as Gregorian date with format YYYYMMDD. Hours, minutes and seconds are not required\ne.g. 20130113",
+     "guidanceAfter": "Date time of birth as Gregorian date with format YYYYMMDD. Hours, minutes and seconds are not required\nNote: Birth date SHALL be less or equal to admission date.\ne.g. 20130113"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "role",
+      "guidance",
+      "valueSets"
+     ],
+     "field": "PID.8",
+     "name": "Administrative Sex",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-Gender"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This field contains a code which defines the sex of the patient, and SHALL contain a value out of “CS-Adm-Gender” value set.",
+     "summaryStill": "I [0..1]"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "length",
+      "role",
+      "guidance"
+     ],
+     "field": "PID.11",
+     "name": "Patient Address",
+     "num": null,
+     "before": {
+      "usage": "I [0..*]",
+      "length": "250",
+      "dataType": "XAD",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "8",
+      "dataType": "XAD",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "The Patient Address SHALL be provided using the official Saudi Post (SPL) National Address short code format.\nThe value SHALL consist of exactly eight alphanumeric characters in the pattern AAAANNNN, where the first four characters are alphabetic (A–Z) and the last four characters are numeric (0–9).\nThe value SHALL be populated in XAD.1 Street Address",
+     "summaryStill": "I [0..*]"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "role",
+      "guidance",
+      "valueSets"
+     ],
+     "field": "PID.16",
+     "name": "Marital Status",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "250",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "250",
+      "dataType": "CE",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-MaritalStatus"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: a code that defines a patient's marital status.\nThis field SHALL be required IF KNOWN.\nField SHALL contain a value out of “CS-Adm-MaritalStatus” value set.",
+     "summaryStill": "I [0..1]"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "role",
+      "guidance",
+      "valueSets"
+     ],
+     "field": "PID.28",
+     "name": "Nationality",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-Country"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: The code used to describe the Nationality of the patient as stated in the identification document used for patient identity proof.\nThis field SHALL be required IF KNOWN.\nNote: If the document is not available at the time of registration, the nationality may be reported as “999- Unknown/Undetermined”. However, every effort should be made to update this information upon a patient’s subsequent visit.\nSHALL contain a value out of “CS-Adm-Country” value set.",
+     "summaryStill": "I [0..1]"
+    }
+   ]
+  },
+  {
+   "pageId": "873496616",
+   "title": "PV1",
+   "replaces": "7766425",
+   "version": 1,
+   "updatedAt": "2026-09-20T07:08:31.374Z",
+   "area": "ADT",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PV1.2",
+     "name": "Patient Class",
+     "num": null,
+     "before": {
+      "usage": "R [1..1]",
+      "length": "50",
+      "dataType": "IS",
+      "codeSet": "Patient Class",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-PatientClass"
+      ]
+     },
+     "after": {
+      "usage": "R [1..1]",
+      "length": "50",
+      "dataType": "IS",
+      "codeSet": "Patient Class",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-PatientClass"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "SHALL contain one of the following values out of the \"HL7 Patient Class\" value-set",
+     "guidanceAfter": "SHALL contain one of the following values out of the\n“CS-Adm-PatientClass\" value-set\nNote: The values “VR” Virtual care and “HH” home care SHALL NOT be allowed, if the encounter is a virtual or home care, it SHALL be specified in care provision modality field."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PV1.4",
+     "name": "Admission Type",
+     "num": null,
+     "before": {
+      "usage": "R [1..1]",
+      "length": "20",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-AdmissionMethod"
+      ]
+     },
+     "after": {
+      "usage": "R [1..1]",
+      "length": "20",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-AdmissionMethod"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "Refer to Method of Admission value-set.",
+     "guidanceAfter": "Definition: This field indicates the circumstances under which the patient was or will be admitted.\nSHALL be set to one of the following values out of the “CS-Adm-AdmissionMethod” value-set.\nNote: if A08 (Discharge update), the values are restricted to the below codes only.\nCode\nDisplay\n14\nElective\n15\nEmergency\nExample: |14|"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "guidance"
+     ],
+     "field": "PV1.7",
+     "name": "Attending Doctor",
+     "num": null,
+     "before": {
+      "usage": "O [0..*]",
+      "length": "No max",
+      "dataType": "XCN",
+      "role": "data"
+     },
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "No max",
+      "dataType": "XCN",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "Valued when admitting inpatient (MSH.9 Message Type is ADT^A01).\nMultiple repeats can be supplied.\nProvider Store requires the National Provider ID and Assigning Authority.\nAssigning Authority Universal ID must be set to “2.16.840.1.113883.3.3731.1.2.1”",
+     "guidanceAfter": "Definition: This field contains the attending physician information. Multiple names and identifiers for the same physician may be sent. The field sequences are not used to indicate multiple attending doctors. The legal name must be sent in the first sequence. If the legal name is not sent, then a repeat delimiter must be sent in the first sequence. Depending on local agreements, either ID or the name may be absent in this field.\nThis field SHALL be required IF KNOWN when discharging patient (MSH.9 Message Type is ADT^A08), otherwise it MAY be present.\nElement “ID Number” SHALL be present and contain the National Provider ID\nElement “Family Name” SHALL be present IF KNOWN\nSub-Element “Surname” SHALL be present and contain the family name\nElement “Given Name” SHALL be present IF KNOWN\nElement “Second and Further Given Names” SHALL be present IF KNOWN\nElement “Suffix” SHALL be present IF KNOWN\nElement “Prefix” SHALL be present IF KNOWN\nElement “Assigning Authority” SHALL be set to the National Provider Directory OID with the following sub-elements:\nSub-Element “Universal ID” SHALL be set to “2.16.840.1.113883.3.3731.1.2.1”\nSub-Element “Universal ID Type” SHALL be set to “ISO”\nMultiple repeats can be supplied.\nExample: |05RM10333^Gopal^Arjun^^^Dr^^^&2.16.840.1.113883.3.3731.1.2.1&ISO|",
+     "summaryStill": "R [1..*]"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "codeSet",
+      "guidance"
+     ],
+     "field": "PV1.10",
+     "name": "Hospital Service",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "50",
+      "dataType": "IS",
+      "codeSet": "Facility Medical Units and Departments Identifier",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-MedicalUnitIdentifier"
+      ]
+     },
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "50",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-MedicalUnitIdentifier"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "Refer to “Facility Medical Units and Departments Identifier” value set\nValued when admitting inpatient (MSH.9 Message Type is ADT^A01)",
+     "guidanceAfter": "Definition: This field contains the service under which a treatment or type of surgery the patient is scheduled to receive.\nThis field SHALL be required IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"outpatient\" (or) \"primary care”), Otherwise NOT present.\nSHALL be set to a value out of “CS-Adm-MedicalUnitIdentifier” value set.\nExample: |ME1.1|",
+     "summaryStill": "R [1..1]"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "guidance"
+     ],
+     "field": "PV1.36",
+     "name": "Discharge Disposition",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "50",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-DischargeDisposition"
+      ]
+     },
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "50",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Adm-DischargeDisposition"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "Refer to “KSA Discharge Disposition” value set",
+     "guidanceAfter": "Definition: This field contains the disposition of the patient at time of discharge (i.e., discharged to home, transferred, etc.).\nThis field SHALL be required IF KNOWN and set to a value from the following out of “CS-Adm-DischargeDisposition” value set.\nNote: If ADT A08 (update discharge), values SHALL be restricted to the following values:\nCode\nDisplay\n306689006\nHome/Other\n225928004\nLeft Against Medical Advice\n306691003\nDischarge /Transfer to a Residential Ageing Service\n306699001\nDischarge/transfer to an Acute Hospital\n306698009\nDischarge/Transfer to a Psychiatric Hospital\n306685000\nDischarge /Transfer to Other Health Care Accommodation\n306706006\nStatistical Discharge-Type Change\n20541009\nStatistical discharge from leave\n79779006\nDied\nExample: |306689006|",
+     "summaryStill": "O [0..1]"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "guidance"
+     ],
+     "field": "PV1.44",
+     "name": "Admit Date/Time",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "Provide if known\nFormat: YYYYMMDDHHMMSS",
+     "guidanceAfter": "Definition: This field contains the admit date/time. It is to be used if the event date/time is different than the admit date and time, i.e., a retroactive update. This field is also used to reflect the date/time of an outpatient/emergency patient registration.\nThe element SHALL be provided IF KNOWN.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|",
+     "summaryStill": "R [1..1]"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "guidance"
+     ],
+     "field": "PV1.45",
+     "name": "Discharge Date/Time",
+     "num": null,
+     "before": {
+      "usage": "O [0..*]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "after": {
+      "usage": "R2 [0..*]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "Provide if known\nFormat: YYYYMMDDHHMMSS",
+     "guidanceAfter": "Definition: This field contains the discharge date/time. It is to be used if the event date/time is different than the discharge date and time, that is, a retroactive update. This field is also used to reflect the date/time of an outpatient/emergency patient discharge.\nThe element SHALL be provided IF KNOWN.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|",
+     "summaryStill": "R [1..*]"
+    }
+   ]
+  },
+  {
+   "pageId": "873496667",
+   "title": "DG1",
+   "replaces": "7766496",
+   "version": 3,
+   "updatedAt": "2026-09-20T07:42:38.001Z",
+   "area": "ADT",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.1",
+     "name": "Set ID",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "SI",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "SI",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.2",
+     "name": "Diagnosis Coding Method",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "ID",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "ID",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "codeSet",
+      "guidance"
+     ],
+     "field": "DG1.3",
+     "name": "Diagnosis Code",
+     "num": null,
+     "before": {
+      "usage": "R [1..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "codeSet": "“Principal Diagnosis” value set",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-PrincipalDiagnosis"
+      ]
+     },
+     "after": {
+      "usage": "R [1..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-PrincipalDiagnosis"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "The Identifier and Name of Coding System are required.\nThe following fields are accepted:\nTable 13.1",
+     "guidanceAfter": "Definition: Use this field instead of DG1-2 - Diagnosis Coding Method and DG1-4 - Diagnosis Description, which have been retained, as of Version 2.3, for backward compatibility only. DG1-3 - Diagnosis Code - DG1 contains the diagnosis code assigned to this diagnosis.\nElement “Identifier” SHALL be present and SHALL be set to a value out of “CS-Clinical-PrincipalDiagnosis” (“code”)\nElement “Text” MAY be present and SHALL be provided with the displayName of the code in “Identifier”\nElement “Name of Coding System” SHALL be present and SHALL be set to “2.16.840.1.113883.6.135”\nAn “alternate” code MAY be present. If present, the following constraints apply:\nElement “Alternate Identifier” SHALL be present\nElement “Alternate Text” MAY be present and SHALL be provided with the displayName of the code in “Alternate Identifier”\nElement “Name of Alternate Coding System” SHALL be present\nIt SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”.\nThe following fields lengths are accepted:\nField\nLength\nIdentifier\n50\nText\n2000\nName of Coding System\n﻿100\nAlternate Identifier\n50\nAlternate Text\n2000\nName of Alternate Coding System\n100\nExample: |M25.46^Effusion of joint, lower leg^2.16.840.1.113883.6.135|"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.4",
+     "name": "Diagnosis Description",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": "Deprecated.\nIf this field is required, use DG1.3.5 Alternate Text instead.",
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.5",
+     "name": "Diagnosis Date/Time",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "after": {
+      "usage": "O [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: This field contains the date/time that the diagnosis was determined.\nIf precision includes time, the time zone offset is required.\nFormat: YYYYMMDD[HHMMSS+/-ZZZZ]\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "guidance",
+      "valueSets"
+     ],
+     "field": "DG1.6",
+     "name": "Diagnosis Type",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "50",
+      "dataType": "IS",
+      "role": "data"
+     },
+     "after": {
+      "usage": "O [0..1]",
+      "length": "50",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "Diagnosis Type (DG1)"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "“Type of Diagnosis”",
+     "guidanceAfter": "Definition: This field contains a code that identifies the type of diagnosis being sent.\nElements “Identifier” and “Text” SHALL be present and SHALL be set to a value out of the following codes:\nIdentifier\nText\nA\nAdmitting\nW\nWorking\nF\nFinal\nExample: |W^Working|"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.7",
+     "name": "Major Diagnostic Category",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.8",
+     "name": "Diagnostic-related Group",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.9",
+     "name": "DRG Approval Indicator",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "ID",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "ID",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.10",
+     "name": "DRG Grouper Review Code",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "IS",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "IS",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.11",
+     "name": "Outlier Type",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.12",
+     "name": "Outlier Days",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "3",
+      "dataType": "NM",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "3",
+      "dataType": "NM",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.13",
+     "name": "Outlier Cost",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "12",
+      "dataType": "CP",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "12",
+      "dataType": "CP",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.14",
+     "name": "Grouper Version And Type",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "4",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "4",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "guidance",
+      "valueSets"
+     ],
+     "field": "DG1.15",
+     "name": "Diagnosis Priority",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "3",
+      "dataType": "IS",
+      "role": "data"
+     },
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "3",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "Diagnosis Priority (DG1)"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "“Numeric representation of ranking of diagnosis”\nNon-numeric values will be rejected",
+     "guidanceAfter": "Definition: This field contains the number that identifies the significance or priority of the diagnosis code.\nThe elements “Identifier” SHALL be present and SHALL be set to a value out of the following codes:\nIdentifier\nText\n0\nNot included in diagnosis ranking\n1\nPrimary diagnosis\n2\nFor ranked secondary diagnosis\nOnly one diagnosis should be primary!\nPrimary (principal) diagnosis: The diagnosis established after study to be chiefly responsible for occasioning an\nepisode of admitted patient care, an episode of residential care or an attendance at the health care establishment, as represented by a code\nSecondary (additional) diagnosis: A condition or complaint either co-existing with the principal diagnosis or arising during the episode of admitted patient care, episode of residential care or attendance at a health care establishment, as represented by a code. External cause codes should be sequenced together with the additional diagnosis codes.\nExample: |1|",
+     "summaryStill": "O [0..1]"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.17",
+     "name": "Diagnosis Classification",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "IS",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "IS",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.19",
+     "name": "Attestation Date/Time",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.20",
+     "name": "Diagnosis Identifier",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "EI",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "No max",
+      "dataType": "EI",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "DG1.21",
+     "name": "Diagnosis Action Code",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "1",
+      "dataType": "ID",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "1",
+      "dataType": "ID",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    }
+   ]
+  },
+  {
+   "pageId": "873660638",
+   "title": "ZPR1",
+   "replaces": null,
+   "version": 1,
+   "updatedAt": "2026-09-20T07:28:59.701Z",
+   "area": "ADT",
+   "status": "new",
+   "rows": [
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPR1.1",
+     "name": "Custom field",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "I [0..*]",
+      "length": "200",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPR1.2",
+     "name": "Custom field",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "I [0..*]",
+      "length": "200",
+      "dataType": "ST",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPR1.3",
+     "name": "Procedure End Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: This field contains the end date/time of clinical intervention which is surgical in nature,; and/or carries a procedural risk; and/or carries an anesthetic risk; and/or requires specialized training; and/or requires special facilities or equipment only available in an acute care setting.\nThis SHALL be REQUIRED IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND “PR1.5 Procedure Date/Time” exists, Otherwise NOT present.\nValue SHALL be later than Procedure Date/Time.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPR1.4",
+     "name": "Operation Room Priority",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-ORPriority"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: Urgency of OR procedure (e.g. Elective/Emergency)\nIt SHALL be present IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2= “Inpatient”, Otherwise NOT present.\nIt SHALL contain a value out of “CS-Clinical-ORPriority” value set."
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPR1.5",
+     "name": "Recovery Start Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: Time/Date patient entered Recovery room\nIt SHALL be present IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2= “Inpatient”, Otherwise NOT present.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "added",
+     "kind": "rule",
+     "what": [],
+     "field": "ZPR1.6",
+     "name": "Recovery Finish Date/Time",
+     "num": null,
+     "before": null,
+     "after": {
+      "usage": "C [0..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Field SHALL be CONDITIONALLY required when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2= “Inpatient”, AND “ZPV1.66 Recovery Start Date/Time” exists, Otherwise NOT present.\nValue SHALL be later than Recovery Start Date/Time.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    }
+   ],
+   "note": "Not applied to messages yet: this segment belongs to the A08 discharge update, which is not a structure of its own in ISIT yet.",
+   "noteAr": "لا يُطبَّق على الرسائل بعد: هذا المقطع يخص تحديث الخروج A08، وليس له في ISIT هيكل خاص به بعد."
+  },
+  {
+   "pageId": "873824257",
+   "title": "PR1",
+   "replaces": "7766519",
+   "version": 1,
+   "updatedAt": "2026-09-20T07:57:27.702Z",
+   "area": "ADT",
+   "status": "changed",
+   "rows": [
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.1",
+     "name": "Set ID",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "4",
+      "dataType": "SI",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "4",
+      "dataType": "SI",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.2",
+     "name": "Procedure Coding Method",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "3",
+      "dataType": "IS",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "3",
+      "dataType": "IS",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "codeSet",
+      "guidance"
+     ],
+     "field": "PR1.3",
+     "name": "Procedure Code",
+     "num": null,
+     "before": {
+      "usage": "R [1..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "codeSet": "“KSA Procedures” value set\nand\n“Imaging Procedures” value set",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-Procedure",
+       "CS-Rad-Procedure"
+      ]
+     },
+     "after": {
+      "usage": "R [1..1]",
+      "length": "No max",
+      "dataType": "CE",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-Procedure",
+       "CS-Rad-Procedure"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "The Identifier and Name of Coding System are required.\nThe following fields are accepted:\nTable 14.1",
+     "guidanceAfter": "Definition: Use this field instead of PR1-2 - Procedure Coding Method and PR1-4 - Procedure Description. Those two fields have been retained for backward compatibility only. This field contains a unique identifier assigned to the procedure.\nElement “Identifier” SHALL be present and SHALL be set to a value out of the following value sets (“code”):\nCS-Clinical-Procedure\nCS-Rad-Procedure\nElement “Text” MAY be present and SHALL be provided with the displayName of the code in “Identifier”\nElement “Name of Coding System” SHALL be present and SHALL be set to:\nIf code element belongs to the Australian Classification of Health Interventions (ACHI): 2.16.840.1.113883.3.3731.50.2\nIf code element belongs to The Australian Schedule of Dental Services and Glossary (ADA): 2.16.840.1.113883.3.3731.50.3\nIf code element belongs to “Imaging Procedure” value set: 2.16.840.1.113883.3.3731.1.204.15\nAn “alternate” code MAY be present. If present, the following constraints apply:\nElement “Alternate Identifier” SHALL be present\nElement “Alternate Text” MAY be present and SHALL be provided with the displayName of the code in “Alternate Identifier”\nElement “Name of Alternate Coding System” SHALL be present\nIt SHALL be present when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient”.\nThe following field lengths are accepted:\nField\nLength\nIdentifier\n50\nText\n2000\nName of Coding System\n100\nAlternate Identifier\n50\nAlternate Text\n2000\nName of Alternate Coding System\n100\nExample: |40009-03^Removal of ventricular shunt^2.16.840.1.113883.3.3731.50.2|"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.4",
+     "name": "Procedure Description",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "2000",
+      "dataType": "ST",
+      "role": "data"
+     },
+     "after": {
+      "usage": "O [0..1]",
+      "length": "2000",
+      "dataType": "ST",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: Use the components of PR1-3 - Procedure Code instead of this field. The field contains a text description that describes the procedure.\nExample: |Removal of ventricular shunt|"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.5",
+     "name": "Procedure Date/Time",
+     "num": null,
+     "before": {
+      "usage": "R [1..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "after": {
+      "usage": "R [1..1]",
+      "length": "26",
+      "dataType": "TS",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "Format: YYYY[MM[DD[HHMM[SS[.S[S[S[S]]]]]]]][+/-ZZZZ]",
+     "guidanceAfter": "Definition: This field contains the start date/time that the procedure was performed.\nValue SHALL be less or equal to the Discharge Date and must be greater than or equal to the Admission Date.\nThe precision SHALL include time and time zone offset is required.\nFormat: YYYYMMDDHHMMSS+/-ZZZZ\nExample: |20231217051200+0300|"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "guidance",
+      "valueSets"
+     ],
+     "field": "PR1.6",
+     "name": "Procedure Functional Type",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "CS-Clinical-ProcedureType"
+      ]
+     },
+     "after": {
+      "usage": "O [0..1]",
+      "length": "1",
+      "dataType": "IS",
+      "role": "data",
+      "valueSets": [
+       "Procedure Functional Type (PR1)"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "“Procedure Functional Type” Value Set",
+     "guidanceAfter": "Definition: This field contains the optional code that further defines the type of procedure.\nElements “Identifier” and “Text” SHALL be present and SHALL be set to a value out of the following codes:\nIdentifier\nText\nA\nAnesthesia\nD\nDiagnostic procedure\nI\nInvasive procedure not classified elsewhere (e.g., IV, catheter, etc.)\nP\nProcedure for treatment (therapeutic, including operations)\nExample: |A |"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "role",
+      "name",
+      "guidance"
+     ],
+     "field": "PR1.7",
+     "name": "Procedure Minutes (Hours on Mechanical Ventilation)",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "4",
+      "dataType": "NM",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "R2 [0..1]",
+      "length": "4",
+      "dataType": "NM",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: Total number of hours an admitted patient has spent on ventilatory support.\nIt SHALL be present IF KNOWN when discharging a patient (MSH.9 Message Type = “ADT^A08”) AND (Patient class PV1.2=\"Daycase\" (or) “Inpatient” AND (Procedure code PR1.3 =13882-00 (or) 13882-01 (or) 13882-02, Otherwise NOT present.",
+     "summaryStill": "I [0..1]"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.8",
+     "name": "Anesthesiologist",
+     "num": null,
+     "before": {
+      "usage": "O [0..*]",
+      "length": "250",
+      "dataType": "XCN",
+      "role": "data"
+     },
+     "after": {
+      "usage": "O [0..*]",
+      "length": "250",
+      "dataType": "XCN",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "Provider Store only stores the first repeat of this field and requires the National Provider Id and Assigning Authority.\nAssigning Authority Universal ID must be set to “2.16.840.1.113883.3.3731.1.2.1”",
+     "guidanceAfter": "Definition: It contains the anesthesiologist who administered the anesthesia.\nElement “ID Number” SHALL be set to the National Provider ID of the provider\nElement “Family Name” SHALL be present IF KNOWN\nSub-Element “Surname” SHALL be present and contain the family name\nElement “Given Name” SHALL be present IF KNOWN\nElement “Second and Further Given Names” SHALL be present IF KNOWN\nElement “Suffix” SHALL be present IF KNOWN\nElement “Prefix” SHALL be present IF KNOWN\nElement “Assigning Authority” SHALL be set to the National Provider Directory OID with the following sub-elements:\nSub-Element “Universal ID” SHALL be set to “2.16.840.1.113883.3.3731.1.2.1”\nSub-Element “Universal ID Type” SHALL be set to “ISO”\nnphies only stores the first repeat of this field!\nExample: |05RM14422^Khan^Aditya^^^Dr^^^&2.16.840.1.113883.3.3731.1.2.1&ISO|"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "usage",
+      "role",
+      "guidance"
+     ],
+     "field": "PR1.9",
+     "name": "Anesthesia Code",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "data"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "2",
+      "dataType": "IS",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "Definition: This field contains a unique identifier of the anesthesia used during the procedure.\nUse a local code.\nExample: |A2|",
+     "summaryStill": "O [0..1]"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.10",
+     "name": "Anesthesia Minutes",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "4",
+      "dataType": "NM",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "4",
+      "dataType": "NM",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.11",
+     "name": "Surgeon",
+     "num": null,
+     "before": {
+      "usage": "O [0..*]",
+      "length": "250",
+      "dataType": "XCN",
+      "role": "data"
+     },
+     "after": {
+      "usage": "O [0..*]",
+      "length": "250",
+      "dataType": "XCN",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "Provider Store only stores the first repeat of this field and requires the National Provider Id and Assigning Authority.\nAssigning Authority Universal ID must be set to “2.16.840.1.113883.3.3731.1.2.1”",
+     "guidanceAfter": "Definition: It contains the surgeon who performed the procedure.\nElement “ID Number” SHALL be set to the National Provider ID of the provider\nElement “Family Name” SHALL be present IF KNOWN\nSub-Element “Surname” SHALL be present and contain the family name\nElement “Given Name” SHALL be present IF KNOWN\nElement “Second and Further Given Names” SHALL be present IF KNOWN\nElement “Suffix” SHALL be present IF KNOWN\nElement “Prefix” SHALL be present IF KNOWN\nElement “Assigning Authority” SHALL be set to the National Provider Directory OID with the following sub-elements:\nSub-Element “Universal ID” SHALL be set to “2.16.840.1.113883.3.3731.1.2.1”\nSub-Element “Universal ID Type” SHALL be set to “ISO”\nnphies only stores the first repeat of this field!\nExample: |05RM14422^Khan^Aditya^^^Dr^^^&2.16.840.1.113883.3.3731.1.2.1&ISO|"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.12",
+     "name": "Procedure Practitioner",
+     "num": null,
+     "before": {
+      "usage": "O [0..*]",
+      "length": "250",
+      "dataType": "XCN",
+      "role": "data"
+     },
+     "after": {
+      "usage": "O [0..*]",
+      "length": "250",
+      "dataType": "XCN",
+      "role": "data"
+     },
+     "quote": null,
+     "guidanceBefore": "Provider Store only stores the first repeat of this field and requires the National Provider Id Number and Assigning Authority.\nAssigning Authority Universal ID must be set to “2.16.840.1.113883.3.3731.1.2.1”",
+     "guidanceAfter": "Definition: This field contains the different types of practitioners associated with this procedure.\nElement “ID Number” SHALL be set to the National Provider ID of the provider\nElement “Family Name” SHALL be present IF KNOWN\nSub-Element “Surname” SHALL be present and contain the family name\nElement “Given Name” SHALL be present IF KNOWN\nElement “Second and Further Given Names” SHALL be present IF KNOWN\nElement “Suffix” SHALL be present IF KNOWN\nElement “Prefix” SHALL be present IF KNOWN\nElement “Assigning Authority” SHALL be set to the National Provider Directory OID with the following sub-elements:\nSub-Element “Universal ID” SHALL be set to “2.16.840.1.113883.3.3731.1.2.1”\nSub-Element “Universal ID Type” SHALL be set to “ISO”\nnphies only stores the first repeat of this field!\nExample: |05RM14422^Khan^Aditya^^^Dr^^^&2.16.840.1.113883.3.3731.1.2.1&ISO|"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.13",
+     "name": "Consent Code",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "250",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "250",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "guidance",
+      "valueSets"
+     ],
+     "field": "PR1.14",
+     "name": "Procedure Priority",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "2",
+      "dataType": "ID",
+      "role": "data"
+     },
+     "after": {
+      "usage": "O [0..1]",
+      "length": "2",
+      "dataType": "ID",
+      "role": "data",
+      "valueSets": [
+       "Procedure Priority (PR1)"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "“Numeric representation of ranking of procedure”\nNon-numeric values will be rejected",
+     "guidanceAfter": "Definition: This field contains a number that identifies the significance or priority of the procedure code.\nElements “Identifier” and “Text” SHALL be present and SHALL be set to a value out of the following codes:\nIdentifier\nText\n0\nNot included in procedure ranking\n1\nPrimary procedure\n2\nFor ranked procedure diagnosis\nOnly one procedure should be primary!\nExample: |1|"
+    },
+    {
+     "change": "changed",
+     "kind": "rule",
+     "what": [
+      "codeSet",
+      "guidance"
+     ],
+     "field": "PR1.15",
+     "name": "Associated Diagnosis Code",
+     "num": null,
+     "before": {
+      "usage": "O [0..1]",
+      "length": "250",
+      "dataType": "CE",
+      "codeSet": "ICD10-AM",
+      "role": "data",
+      "valueSets": [
+       "ICD10-AM"
+      ]
+     },
+     "after": {
+      "usage": "O [0..1]",
+      "length": "250",
+      "dataType": "CE",
+      "role": "data",
+      "valueSets": [
+       "ICD10-AM"
+      ]
+     },
+     "quote": null,
+     "guidanceBefore": "The Identifier and Name of Coding System are required.\nThe following fields are accepted:\nTable 14.2",
+     "guidanceAfter": "Definition: This field contains the diagnosis that is the primary reason this procedure was performed.\nElement “Identifier” SHALL be present and SHALL be set to a value out of ICD10-AM\nElement “Text” MAY be present and SHALL be provided with the displayName of the code in “Identifier”\nElement “Name of Coding System” SHALL be present and SHALL be set to “2.16.840.1.113883.6.135”\nAn “alternate” code MAY be present. If present, the following constraints apply:\nElement “Alternate Identifier” SHALL be present\nElement “Alternate Text” MAY be present and SHALL be provided with the displayName of the code in “Alternate Identifier”\nElement “Name of Alternate Coding System” SHALL be present\nThe following field lengths are accepted:\nField\nLength\nIdentifier\n50\nText\n2000\nName of Coding System\n100\nAlternate Identifier\n50\nAlternate Text\n2000\nName of Alternate Coding System\n100\nExample: |M25.46^Effusion of joint, lower leg^2.16.840.1.113883.6.135|"
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.16",
+     "name": "Procedure Code Modifier",
+     "num": null,
+     "before": {
+      "usage": "I [0..*]",
+      "length": "250",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..*]",
+      "length": "250",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.17",
+     "name": "Procedure DRG Type",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "20",
+      "dataType": "IS",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "20",
+      "dataType": "IS",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.18",
+     "name": "Tissue Type Code",
+     "num": null,
+     "before": {
+      "usage": "I [0..*]",
+      "length": "250",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..*]",
+      "length": "250",
+      "dataType": "CE",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.19",
+     "name": "Procedure Identifier",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "427",
+      "dataType": "EI",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "427",
+      "dataType": "EI",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    },
+    {
+     "change": "changed",
+     "kind": "wording",
+     "what": [
+      "guidance"
+     ],
+     "field": "PR1.20",
+     "name": "Procedure Action Code",
+     "num": null,
+     "before": {
+      "usage": "I [0..1]",
+      "length": "1",
+      "dataType": "ID",
+      "role": "omit"
+     },
+     "after": {
+      "usage": "I [0..1]",
+      "length": "1",
+      "dataType": "ID",
+      "role": "omit"
+     },
+     "quote": null,
+     "guidanceBefore": null,
+     "guidanceAfter": "This element will be IGNORED by nphies, if sent."
+    }
+   ]
+  }
+ ],
+ "valueSets": {
+  "added": [
+   {
+    "id": "cs-clinical-rehabrfv",
+    "title": "CS-Clinical-RehabRFV",
+    "pageId": "872611942",
+    "concepts": 12
+   },
+   {
+    "id": "cs-clinical-rehabservicetype",
+    "title": "CS-Clinical-RehabServiceType",
+    "pageId": "872611952",
+    "concepts": 2
+   },
+   {
+    "id": "cs-clinical-dentalcarerfv",
+    "title": "CS-Clinical-DentalCareRFV",
+    "pageId": "872611967",
+    "concepts": 3
+   },
+   {
+    "id": "cs-clinical-opd1",
+    "title": "CS-Clinical-OPD1",
+    "pageId": "872612017",
+    "concepts": 6
+   },
+   {
+    "id": "cs-clinical-opd4",
+    "title": "CS-Clinical-OPD4",
+    "pageId": "872612049",
+    "concepts": 3
+   },
+   {
+    "id": "cs-clinical-typeofdialysis",
+    "title": "CS-Clinical-TypeOfDialysis",
+    "pageId": "872612110",
+    "concepts": 6
+   },
+   {
+    "id": "cs-clinical-outpatientrfv",
+    "title": "CS-Clinical-OutpatientRFV",
+    "pageId": "873037985",
+    "concepts": 12
+   },
+   {
+    "id": "cs-clinical-opd2",
+    "title": "CS-Clinical-OPD2",
+    "pageId": "873038009",
+    "concepts": 12
+   },
+   {
+    "id": "cs-clinical-opd3",
+    "title": "CS-Clinical-OPD3",
+    "pageId": "873038020",
+    "concepts": 12
+   },
+   {
+    "id": "cs-clinical-opd6",
+    "title": "CS-Clinical-OPD6",
+    "pageId": "873038032",
+    "concepts": 5
+   },
+   {
+    "id": "cs-clinical-dialysiscomplexity",
+    "title": "CS-Clinical-DialysisComplexity",
+    "pageId": "873038048",
+    "concepts": 9
+   },
+   {
+    "id": "cs-clinical-homecarerfv",
+    "title": "CS-Clinical-HomeCareRFV",
+    "pageId": "873300043",
+    "concepts": 23
+   },
+   {
+    "id": "cs-clinical-functionalassmt",
+    "title": "CS-Clinical-FunctionalAssmt",
+    "pageId": "873300076",
+    "concepts": 3
+   },
+   {
+    "id": "cs-clinical-primarycarerfv",
+    "title": "CS-Clinical-PrimaryCareRFV",
+    "pageId": "873300088",
+    "concepts": 23
+   },
+   {
+    "id": "cs-clinical-dentalcomplexity",
+    "title": "CS-Clinical-DentalComplexity",
+    "pageId": "873300127",
+    "concepts": 8
+   },
+   {
+    "id": "cs-clinical-gmdndevice",
+    "title": "CS-Clinical-GMDNDevice",
+    "pageId": "873300270",
+    "concepts": 0
+   },
+   {
+    "id": "cs-clinical-homecaretype",
+    "title": "CS-Clinical-HomeCareType",
+    "pageId": "873332790",
+    "concepts": 9
+   },
+   {
+    "id": "cs-clinical-rehabprogram",
+    "title": "CS-Clinical-RehabProgram",
+    "pageId": "873332855",
+    "concepts": 20
+   },
+   {
+    "id": "cs-clinical-mentalcarerfv",
+    "title": "CS-Clinical-MentalCareRFV",
+    "pageId": "873332883",
+    "concepts": 12
+   },
+   {
+    "id": "cs-clinical-opd9",
+    "title": "CS-Clinical-OPD9",
+    "pageId": "873332942",
+    "concepts": 3
+   },
+   {
+    "id": "cs-clinical-complexitylevel",
+    "title": "CS-Clinical-ComplexityLevel",
+    "pageId": "873660424",
+    "concepts": 3
+   },
+   {
+    "id": "cs-clinical-opd5",
+    "title": "CS-Clinical-OPD5",
+    "pageId": "873660547",
+    "concepts": 5
+   },
+   {
+    "id": "cs-clinical-opd7",
+    "title": "CS-Clinical-OPD7",
+    "pageId": "873660557",
+    "concepts": 2
+   },
+   {
+    "id": "cs-clinical-opd10",
+    "title": "CS-Clinical-OPD10",
+    "pageId": "873660572",
+    "concepts": 12
+   },
+   {
+    "id": "cs-clinical-opd11",
+    "title": "CS-Clinical-OPD11",
+    "pageId": "873660582",
+    "concepts": 9
+   },
+   {
+    "id": "cs-clinical-conditiononsetflag",
+    "title": "CS-Clinical-ConditionOnsetFlag",
+    "pageId": "873660625",
+    "concepts": 3
+   },
+   {
+    "id": "cs-clinical-opd8",
+    "title": "CS-Clinical-OPD8",
+    "pageId": "873725963",
+    "concepts": 3
+   },
+   {
+    "id": "cs-clinical-opd12",
+    "title": "CS-Clinical-OPD12",
+    "pageId": "873725996",
+    "concepts": 2
+   },
+   {
+    "id": "cs-clinical-orpriority",
+    "title": "CS-Clinical-ORPriority",
+    "pageId": "873726017",
+    "concepts": 2
+   },
+   {
+    "id": "local-873496667-1",
+    "title": "Diagnosis Type (DG1)",
+    "pageId": "873496667",
+    "concepts": 3,
+    "pageLocal": true
+   },
+   {
+    "id": "local-873496667-2",
+    "title": "Diagnosis Priority (DG1)",
+    "pageId": "873496667",
+    "concepts": 3,
+    "pageLocal": true
+   },
+   {
+    "id": "local-873824257-1",
+    "title": "Procedure Functional Type (PR1)",
+    "pageId": "873824257",
+    "concepts": 4,
+    "pageLocal": true
+   },
+   {
+    "id": "local-873824257-2",
+    "title": "Procedure Priority (PR1)",
+    "pageId": "873824257",
+    "concepts": 3,
+    "pageLocal": true
+   }
+  ],
+  "changed": [
+   {
+    "id": "laboratory-specimen-type",
+    "pageId": "30736696",
+    "before": {
+     "title": "Laboratory Specimen Type",
+     "previousName": null,
+     "version": null,
+     "definition": "Identify types of specimens for laboratory testing",
+     "valueSetOid": "2.16.840.1.113883.3.3731.1.201.5",
+     "codeSystemOid": "2.16.840.1.113883.18.311",
+     "external": false,
+     "validation": "enumerated",
+     "conceptCount": 315,
+     "sampleCodes": [
+      "ABS",
+      "...",
+      "ACNE",
+      "ACNFLD",
+      "AIRS",
+      "ALL"
+     ]
+    },
+    "after": {
+     "title": "CS-Lab-SpecimenType",
+     "previousName": "Specimen Type",
+     "version": "2.0",
+     "definition": null,
+     "valueSetOid": null,
+     "codeSystemOid": null,
+     "external": false,
+     "validation": "enumerated",
+     "conceptCount": 1819,
+     "sampleCodes": [
+      "116251003",
+      "414781009",
+      "41329004",
+      "79068005",
+      "16216331000119100",
+      "16216291000119100"
+     ]
+    },
+    "note": null
+   },
+   {
+    "id": "imaging-procedures",
+    "pageId": "23168870",
+    "before": {
+     "title": "Imaging Procedures",
+     "previousName": null,
+     "version": null,
+     "definition": null,
+     "valueSetOid": "2.16.840.1.113883.3.3731.1.204.15.1",
+     "codeSystemOid": "2.16.840.1.113883.3.3731.1.204.15",
+     "external": true,
+     "validation": "format-only",
+     "conceptCount": 0,
+     "sampleCodes": []
+    },
+    "after": {
+     "title": "CS-Rad-Procedure",
+     "previousName": "Imaging Procedure",
+     "version": "2.0",
+     "definition": null,
+     "valueSetOid": "2.16.840.1.113883.3.3731.1.204.15.1",
+     "codeSystemOid": "2.16.840.1.113883.3.3731.1.204.15",
+     "external": true,
+     "validation": "format-only",
+     "conceptCount": 0,
+     "sampleCodes": []
+    },
+    "note": "Renamed from \"Imaging Procedures\" on 2026-09-20. The page lists no codes and no longer says where to obtain them; PR1.3 still names its code system 2.16.840.1.113883.3.3731.1.204.15."
+   }
+  ],
+  "empty": [
+   {
+    "id": "cs-clinical-gmdndevice",
+    "title": "CS-Clinical-GMDNDevice",
+    "pageId": "873300270"
+   }
+  ]
+ },
+ "notJudged": [
+  {
+   "pageId": "873496616",
+   "fieldKey": "PV1.4 / Admission Type",
+   "quote": "Note: if A08 (Discharge update), the values are restricted to the below codes only.",
+   "why": "The listed codes apply to the A08 discharge update only; the value set stays the check, the A08 list is shown",
+   "whyAr": "الرموز المذكورة تنطبق على تحديث الخروج A08 فقط؛ يبقى الفحص بمجموعة القيم، وتُعرض قائمة A08."
+  },
+  {
+   "pageId": "873496616",
+   "fieldKey": "PV1.36 / Discharge Disposition",
+   "quote": "Note: If ADT A08 (update discharge), values SHALL be restricted to the following values:",
+   "why": "The listed codes apply to the A08 discharge update only; the value set stays the check, the A08 list is shown",
+   "whyAr": "الرموز المذكورة تنطبق على تحديث الخروج A08 فقط؛ يبقى الفحص بمجموعة القيم، وتُعرض قائمة A08."
+  },
+  {
+   "pageId": "873300011",
+   "fieldKey": "ZPV1 / ZDG1 / ZPR1",
+   "why": "New usage \"C\" (conditional): the condition is a sentence in the guidance, so it is never judged. These three segments belong to the A08 discharge update, which is not a structure of its own in ISIT yet, so for now their rules are listed here and not applied to messages.",
+   "whyAr": "استخدام جديد \"C\" (مشروط): الشرط جملة في الإرشادات، فلا يُحكم عليه. وهذه المقاطع الثلاثة تخص تحديث الخروج A08، وليس له في ISIT هيكل خاص به بعد، فقواعدها مذكورة هنا ولا تُطبَّق على الرسائل حاليًا."
+  },
+  {
+   "pageId": "873300011",
+   "fieldKey": "ZPV1.49 / Outpatient reason for visit (Subdomain)",
+   "why": "The code must come from the subdomain of the domain in ZPV1.48; ISIT checks it is in one of the twelve, not which one.",
+   "whyAr": "يجب أن يكون الرمز من المجال الفرعي للمجال المذكور في ZPV1.48؛ يتحقق ISIT أنه في إحدى المجموعات الاثنتي عشرة، لا في أيّها."
+  }
+ ],
+ "checker": [
+  {
+   "change": "A field that cites several value sets takes a code from any of them",
+   "why": "ZPV1.49 names twelve value sets (CS-Clinical-OPD1 to OPD12). Judging a code against each one reported a valid code as wrong eleven times. A code is now reported only when it is in none of them, and not at all when one of the cited sets cannot be checked.",
+   "changeAr": "الحقل الذي يستشهد بعدة مجموعات قيم يقبل رمزًا من أيٍّ منها",
+   "whyAr": "يذكر ZPV1.49 اثنتي عشرة مجموعة قيم (CS-Clinical-OPD1 إلى OPD12). الحكم على الرمز مقابل كل واحدة على حدة كان يعدّ الرمز الصحيح خطأً إحدى عشرة مرة. الآن لا يُبلَّغ عن الرمز إلا إذا لم يكن في أيٍّ منها، ولا يُبلَّغ إطلاقًا إذا تعذّر فحص إحدى المجموعات المذكورة."
+  }
+ ],
+ "pending": [
+  {
+   "pageId": "125206589",
+   "title": "Sample Messages",
+   "updatedAt": "2026-10-13T08:23:02.119Z",
+   "version": 17,
+   "why": "New official samples (13 Oct 2026); ISIT still checks itself against the earlier samples.",
+   "whyAr": "عينات رسمية جديدة (13 أكتوبر 2026)؛ ما زال ISIT يختبر نفسه على العينات السابقة."
+  },
+  {
+   "pageId": "927432706",
+   "title": "Samples - Non-raqeeb",
+   "updatedAt": "2026-10-13T08:19:40.146Z",
+   "version": 1,
+   "why": "New official non-Raqeeb medication samples (13 Oct 2026), not yet among ISIT's official samples.",
+   "whyAr": "عينات رسمية جديدة (13 أكتوبر 2026)؛ ما زال ISIT يختبر نفسه على العينات السابقة."
+  },
+  {
+   "pageId": "927268883",
+   "title": "Samples - Raqeeb",
+   "updatedAt": "2026-10-13T08:17:57.987Z",
+   "version": 1,
+   "why": "New official Raqeeb medication samples (13 Oct 2026), not yet among ISIT's official samples.",
+   "whyAr": "عينات رسمية جديدة (13 أكتوبر 2026)؛ ما زال ISIT يختبر نفسه على العينات السابقة."
+  },
+  {
+   "pageId": "414089220",
+   "title": "Sample - Radiology Report",
+   "updatedAt": "2026-10-13T08:15:50.614Z",
+   "version": 7,
+   "why": "New official Radiology Report samples (13 Oct 2026), not yet among ISIT's official samples.",
+   "whyAr": "عينات رسمية جديدة (13 أكتوبر 2026)؛ ما زال ISIT يختبر نفسه على العينات السابقة."
+  },
+  {
+   "pageId": "387481602",
+   "title": "Sample - Radiology Orders",
+   "updatedAt": "2026-10-13T08:15:06.159Z",
+   "version": 5,
+   "why": "New official Radiology Order samples (13 Oct 2026), not yet among ISIT's official samples.",
+   "whyAr": "عينات رسمية جديدة (13 أكتوبر 2026)؛ ما زال ISIT يختبر نفسه على العينات السابقة."
+  },
+  {
+   "pageId": "358514693",
+   "title": "Sample - Laboratory Results",
+   "updatedAt": "2026-10-13T08:14:30.141Z",
+   "version": 4,
+   "why": "New official Laboratory Results samples (13 Oct 2026), not yet among ISIT's official samples.",
+   "whyAr": "عينات رسمية جديدة (13 أكتوبر 2026)؛ ما زال ISIT يختبر نفسه على العينات السابقة."
+  },
+  {
+   "pageId": "358776855",
+   "title": "Sample - Laboratory Orders",
+   "updatedAt": "2026-10-13T08:13:28.439Z",
+   "version": 3,
+   "why": "New official Laboratory Order samples (13 Oct 2026), not yet among ISIT's official samples.",
+   "whyAr": "عينات رسمية جديدة (13 أكتوبر 2026)؛ ما زال ISIT يختبر نفسه على العينات السابقة."
+  },
+  {
+   "pageId": "58687511",
+   "title": "Error Handling Guide",
+   "updatedAt": "2026-10-12T12:04:19.482Z",
+   "version": 3,
+   "why": "The error catalogue (Error Decoder) is not re-read yet; one change is a 1.5 MiB size limit.",
+   "whyAr": "دليل الأخطاء (فك رموز الأخطاء) لم يُقرأ بعد؛ من تغييراته حدّ حجم 1.5 ميغابايت."
+  },
+  {
+   "pageId": "351698947",
+   "title": "Resources in the Laboratory Order Bundle",
+   "updatedAt": "2026-09-20T09:04:34.454Z",
+   "version": 3,
+   "why": "Which resources a Laboratory Order bundle must carry (entry counts) is not re-read into the bundle structure yet.",
+   "whyAr": "عدد الموارد التي يجب أن تحملها الحزمة لم يُقرأ في هيكل الحزمة بعد."
+  },
+  {
+   "pageId": "387383323",
+   "title": "Resources in the Radiology Order Bundle",
+   "updatedAt": "2026-09-20T08:54:58.113Z",
+   "version": 6,
+   "why": "Which resources a Radiology Order bundle must carry (entry counts) is not re-read into the bundle structure yet.",
+   "whyAr": "عدد الموارد التي يجب أن تحملها الحزمة لم يُقرأ في هيكل الحزمة بعد."
+  },
+  {
+   "pageId": "414679041",
+   "title": "Radiology Results Report (embedded pdf)",
+   "updatedAt": "2026-09-20T08:31:11.140Z",
+   "version": 3,
+   "why": "Which resources an embedded-PDF Radiology Report bundle must carry is not re-read into the bundle structure yet.",
+   "whyAr": "عدد الموارد التي يجب أن تحملها الحزمة لم يُقرأ في هيكل الحزمة بعد."
+  },
+  {
+   "pageId": "414154754",
+   "title": "Radiology Results Report (structured)",
+   "updatedAt": "2026-09-20T08:29:27.742Z",
+   "version": 3,
+   "why": "Which resources a structured Radiology Report bundle must carry is not re-read into the bundle structure yet.",
+   "whyAr": "عدد الموارد التي يجب أن تحملها الحزمة لم يُقرأ في هيكل الحزمة بعد."
+  },
+  {
+   "pageId": "118063972",
+   "title": "ADT Event Use-Cases, Clinical Workflows, and Purposes",
+   "updatedAt": "2026-09-20T08:29:27.646Z",
+   "version": 9,
+   "why": "Use-case prose; it names the A08 discharge update, which is not a structure of its own yet.",
+   "whyAr": "نص حالات الاستخدام؛ يذكر تحديث الخروج A08، وليس له هيكل خاص به بعد."
+  },
+  {
+   "pageId": "873660693",
+   "title": "Additional fields (A08-Discharge update)",
+   "updatedAt": "2026-09-20T07:59:28.040Z",
+   "version": 1,
+   "why": "Part of the A08 discharge-update variant, which is not a structure of its own in ISIT yet.",
+   "whyAr": "جزء من نوع تحديث الخروج A08، وليس له في ISIT هيكل خاص به بعد."
+  },
+  {
+   "pageId": "873463809",
+   "title": "ADT Event - Message Structure and Connectivity",
+   "updatedAt": "2026-09-20T04:56:53.656Z",
+   "version": 1,
+   "why": "The A08 discharge-update message is a new variant (ZPV1.8 = \"UPDATE\" marks it); ISIT does not have it as a structure of its own yet, so the new ZPV1, ZDG1 and ZPR1 rules are not applied to messages.",
+   "whyAr": "رسالة تحديث الخروج A08 نوع جديد (يميّزه ZPV1.8 = \"UPDATE\")؛ وليس لها في ISIT هيكل خاص بها بعد، فقواعد ZPV1 وZDG1 وZPR1 الجديدة لا تُطبَّق على الرسائل."
+  }
+ ]
+}

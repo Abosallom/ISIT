@@ -11,13 +11,13 @@
     "quarantinedOids": 11,
     "sampleDefects": 127,
     "specDefects": 15,
-    "specNodes": 3515,
-    "specPages": 289,
+    "specNodes": 3580,
+    "specPages": 292,
     "structuresVerifiedAgainstSample": 22,
     "useCases": 26,
-    "valueSetBindings": 329,
-    "valueSetConcepts": 44508,
-    "valueSets": 123
+    "valueSetBindings": 379,
+    "valueSetConcepts": 46249,
+    "valueSets": 156
   },
   "coverage": {
     "missing": [],
@@ -42,8 +42,8 @@
       "file": "fields/hl7v2.json",
       "id": "hl7v2",
       "label": "HL7 v2.5.1 (ADT / ORU / ACK)",
-      "nodes": 754,
-      "pages": 24,
+      "nodes": 817,
+      "pages": 27,
       "segments": [
         "AL1",
         "DG1",
@@ -59,9 +59,12 @@
         "PID",
         "PR1",
         "PV1",
-        "PV2"
+        "PV2",
+        "ZDG1",
+        "ZPR1",
+        "ZPV1"
       ],
-      "tables": 33
+      "tables": 36
     },
     {
       "areas": [
@@ -75,7 +78,7 @@
       "file": "fields/fhir.json",
       "id": "fhir",
       "label": "FHIR R4 (medications, laboratory, radiology)",
-      "nodes": 1053,
+      "nodes": 1055,
       "pages": 103,
       "segments": [],
       "tables": 112
@@ -123,6 +126,7 @@
     }
   ],
   "files": {
+    "changes": "changes.json",
     "constants": "constants.json",
     "datatypes": "datatypes.json",
     "errors": "errors.json",
@@ -139,6 +143,7 @@
     "valueSetIndex": "valuesets/index.json"
   },
   "files_written": [
+    "changes.json",
     "constants.json",
     "datatypes.json",
     "errors.json",
@@ -198,14 +203,43 @@
     "valuesets/cs-allergy-severity.json",
     "valuesets/cs-allergy-substance.json",
     "valuesets/cs-allergy-type.json",
+    "valuesets/cs-clinical-complexitylevel.json",
+    "valuesets/cs-clinical-conditiononsetflag.json",
     "valuesets/cs-clinical-confidentialflag.json",
     "valuesets/cs-clinical-deliverymethod.json",
+    "valuesets/cs-clinical-dentalcarerfv.json",
+    "valuesets/cs-clinical-dentalcomplexity.json",
     "valuesets/cs-clinical-diagnosistype.json",
+    "valuesets/cs-clinical-dialysiscomplexity.json",
+    "valuesets/cs-clinical-functionalassmt.json",
+    "valuesets/cs-clinical-gmdndevice.json",
+    "valuesets/cs-clinical-homecarerfv.json",
+    "valuesets/cs-clinical-homecaretype.json",
+    "valuesets/cs-clinical-mentalcarerfv.json",
+    "valuesets/cs-clinical-opd1.json",
+    "valuesets/cs-clinical-opd10.json",
+    "valuesets/cs-clinical-opd11.json",
+    "valuesets/cs-clinical-opd12.json",
+    "valuesets/cs-clinical-opd2.json",
+    "valuesets/cs-clinical-opd3.json",
+    "valuesets/cs-clinical-opd4.json",
+    "valuesets/cs-clinical-opd5.json",
+    "valuesets/cs-clinical-opd6.json",
+    "valuesets/cs-clinical-opd7.json",
+    "valuesets/cs-clinical-opd8.json",
+    "valuesets/cs-clinical-opd9.json",
+    "valuesets/cs-clinical-orpriority.json",
+    "valuesets/cs-clinical-outpatientrfv.json",
+    "valuesets/cs-clinical-primarycarerfv.json",
     "valuesets/cs-clinical-principaldiagnosis.json",
     "valuesets/cs-clinical-procedure.json",
     "valuesets/cs-clinical-procedurepriority.json",
     "valuesets/cs-clinical-procedureranking.json",
     "valuesets/cs-clinical-proceduretype.json",
+    "valuesets/cs-clinical-rehabprogram.json",
+    "valuesets/cs-clinical-rehabrfv.json",
+    "valuesets/cs-clinical-rehabservicetype.json",
+    "valuesets/cs-clinical-typeofdialysis.json",
     "valuesets/cs-lab-observationunit.json",
     "valuesets/cs-lab-ordersandresults.json",
     "valuesets/cs-lab-serology.json",
@@ -253,6 +287,10 @@
     "valuesets/license-validity.json",
     "valuesets/local-118063524-1.json",
     "valuesets/local-17629689-1.json",
+    "valuesets/local-873496667-1.json",
+    "valuesets/local-873496667-2.json",
+    "valuesets/local-873824257-1.json",
+    "valuesets/local-873824257-2.json",
     "valuesets/loinc-codes.json",
     "valuesets/medication-frequency.json",
     "valuesets/modalities.json",
@@ -275,16 +313,16 @@
     "valuesets/type-of-the-social-history-observation.json",
     "valuesets/vital-signs-observations.json"
   ],
-  "generatedAt": "2026-09-16T06:54:17.553Z",
+  "generatedAt": "2026-11-03T16:36:55.501Z",
   "generator": "scripts/compile-spec.mjs",
   "inputs": [
     {
-      "bytes": 5231963,
+      "bytes": 5376770,
       "error": null,
       "kind": "extraction",
       "name": "spec-build/fields.json",
       "present": true,
-      "sha256": "78cf7ab5f924f64aa56ac67059eeaa1c172d96069b78783dc3ea8acd12f12bde"
+      "sha256": "aa3559f349073053637b0691d1150983fc37893fa0d47c3a127c8827031fc2be"
     },
     {
       "bytes": 1074188,
@@ -295,12 +333,12 @@
       "sha256": "bb601e667abcfedc49ab3c30a815b836a53fd6c91ff614b64139be67f8eceb96"
     },
     {
-      "bytes": 3615287,
+      "bytes": 3810171,
       "error": null,
       "kind": "extraction",
       "name": "spec-build/valuesets.json",
       "present": true,
-      "sha256": "66d89f8d544d6c4af03242cf203692cb2b857012e5f7534ac51c696d79c22e59"
+      "sha256": "c9997f4a88aa3549a8daae73e9db118f87f95ae58ffa9ce9f22e8603831c56fe"
     },
     {
       "bytes": 205981,
@@ -311,20 +349,20 @@
       "sha256": "db16ffceb4d07c32f74b3c50c7a2531cb609289301cac9365ddae94acac68907"
     },
     {
-      "bytes": 1185263,
+      "bytes": 1185927,
       "error": null,
       "kind": "extraction",
       "name": "spec-build/constants.json",
       "present": true,
-      "sha256": "6ac77712b2b04cac95434a442704b0f2f36c5525640bc047d2eff6681ff645bf"
+      "sha256": "71d3fa91dec0feb73df6630d2b09c9450a88c6ab288ef1bcfa98c65de09bfa72"
     },
     {
-      "bytes": 152464,
+      "bytes": 156583,
       "error": null,
       "kind": "extraction",
       "name": "spec-build/datatypes.json",
       "present": true,
-      "sha256": "13c7da17868e282c357436f09d005d402fdd065ae98b8e55149d63ee1a7c931f"
+      "sha256": "f2e56357a1391c2eefb25d5fec1c41292d606e837b7600c2b571f2f26f5d99d4"
     },
     {
       "bytes": 738748,
@@ -519,6 +557,10 @@
         "meaning": "segment is not present in this message",
         "validator": "error-if-present"
       },
+      "C": {
+        "meaning": "conditional (the condition is stated in the guidance)",
+        "validator": "ok"
+      },
       "I": {
         "meaning": "ignored (accepted then discarded by NPHIES)",
         "validator": "ignored"
@@ -575,33 +617,36 @@
         "7766314",
         "7766363",
         "7766378",
-        "7766393",
         "7766408",
-        "7766425",
         "7766452",
         "7766469",
-        "7766496",
-        "7766519",
         "7766542",
         "7766578",
         "7766593",
-        "7766610"
+        "7766610",
+        "873038123",
+        "873300011",
+        "873496585",
+        "873496616",
+        "873496667",
+        "873660638",
+        "873824257"
       ],
       "specPages": [
         "7766314",
         "7766363",
         "7766378",
-        "7766393",
         "7766408",
-        "7766425",
         "7766452",
         "7766469",
-        "7766496",
-        "7766519",
         "7766542",
         "7766578",
         "7766593",
-        "7766610"
+        "7766610",
+        "873496585",
+        "873496616",
+        "873496667",
+        "873824257"
       ],
       "status": "complete",
       "statusReasons": [],

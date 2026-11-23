@@ -1,4 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { getLang, t } from "../i18n";
+import { eventOrigin } from "../ui/host";
+import { SourceBadge } from "./SourceBadge";
 import {
   Badge,
   Button,
@@ -21,6 +24,7 @@ import { loadGoldenIndex, structureForSample, type GoldenSample } from "../lib/w
 import { BuildView } from "./BuildView";
 import { CheckView } from "./CheckView";
 import { CoverageView } from "./CoverageView";
+import { ChangesView } from "./ChangesView";
 import { DecoderView } from "./DecoderView";
 import { ExplainView } from "./ExplainView";
 import { IngestView } from "./IngestView";
@@ -37,9 +41,9 @@ import { useGolden, useRegistry, useResolved } from "./useSpec";
  * work, and the Readiness matrix can report what has actually been checked in this session.
  * ========================================================================== */
 
-type ActiveTab = "build" | "check" | "explain" | "ingest" | "readiness" | "decoder" | "coverage";
+type ActiveTab = "build" | "check" | "explain" | "ingest" | "readiness" | "decoder" | "coverage" | "changes";
 
-const GLOBAL_TABS = new Set<ActiveTab>(["readiness", "decoder", "coverage"]);
+const GLOBAL_TABS = new Set<ActiveTab>(["readiness", "decoder", "coverage", "changes"]);
 
 /**
  * Where "Check an official sample" lands. ADT is the message every hospital sends first and
@@ -59,13 +63,13 @@ export function Shell() {
   const [tab, setTab] = useState<ActiveTab>("check");
   const [states, setStates] = useState<Record<string, UseCaseState>>({});
   const [results, setResults] = useState<Record<string, SessionResult>>({});
-  const [keyOpen, setKeyOpen] = useState(false);
 
   const { theme, setTheme } = useTheme();
   /* The one useDensity instance: it stamps <html data-density>, which the CSS scale reads,
    * and its value goes down as a prop only to the views whose virtualised row heights are
    * JavaScript constants — those are the sole places a token cannot reach. */
   const { density, setDensity } = useDensity();
+  const [keyOpen, setKeyOpen] = useState(false);
   const { key, setKey } = useApiKey();
   const welcome = useWelcome();
   const railRef = useRef<UseCaseRailHandle>(null);
@@ -190,7 +194,7 @@ export function Shell() {
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
-      const t = e.target as HTMLElement | null;
+      const t = eventOrigin(e) as HTMLElement | null;
       if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable)) return;
       e.preventDefault();
       railRef.current?.focusFilter();
@@ -200,13 +204,17 @@ export function Shell() {
   }, []);
 
   const result = selectedId ? results[selectedId] : undefined;
+  const openChanges = () => {
+    setTab("changes");
+    if (welcomeOpen) dismissWelcome();
+  };
 
   const tabs: TabItem[] = [
-    { id: "build", label: "Build", title: "What this message type requires — and what NPHIES ignores" },
+    { id: "build", label: t("Build"), title: t("What this message type requires — and what NPHIES ignores") },
     {
       id: "check",
-      label: "Check",
-      title: "Validate a message against the compiled structural rules",
+      label: t("Check"),
+      title: t("Validate a message against the compiled structural rules"),
       badge:
         result && result.errors + result.warns > 0 ? (
           <span className="font-mono text-2xs">
@@ -216,11 +224,12 @@ export function Shell() {
           </span>
         ) : undefined,
     },
-    { id: "explain", label: "Explain", title: "Walk the compiled rules for this message type" },
-    { id: "ingest", label: "Ingest", title: "Map a HIS spreadsheet onto this message type and generate a message from one row" },
-    { id: "readiness", label: "Readiness", startsGroup: true, title: "Global: which use cases have been checked" },
-    { id: "decoder", label: "Error Decoder", title: "Global: decode an NPHIES rejection" },
-    { id: "coverage", label: "Coverage", title: "Global: what the workbench does not know" },
+    { id: "explain", label: t("Explain"), title: t("Walk the compiled rules for this message type") },
+    { id: "ingest", label: t("Ingest"), title: t("Map a HIS spreadsheet onto this message type and generate a message from one row") },
+    { id: "readiness", label: t("Readiness"), startsGroup: true, title: t("Global: which use cases have been checked") },
+    { id: "decoder", label: t("Error Decoder"), title: t("Global: decode an NPHIES rejection") },
+    { id: "coverage", label: t("Coverage"), title: t("Global: what the workbench does not know") },
+    { id: "changes", label: t("NPHIES changes"), title: t("Global: what NPHIES changed in the rules, and what is not in them yet") },
   ];
 
   return (
@@ -233,28 +242,41 @@ export function Shell() {
           >
             N
           </span>
-          <span className="text-xs font-semibold tracking-tight">ISIT</span>
+          <span className="text-xs font-semibold tracking-tight">{t("ISIT")}</span>
         </span>
         <Badge mono className="shrink-0">
-          NPHIES message structure
+          {t("NPHIES message structure")}
         </Badge>
         <span className="hidden text-2xs text-ink-3 sm:inline">
-          Nothing you paste leaves this browser.
+          {t("Nothing you paste leaves this browser.")}
         </span>
+        <SourceBadge onOpenChanges={openChanges} />
 
-        <div className="ml-auto flex items-center gap-1.5">
+        <div className="ms-auto flex items-center gap-1.5">
           <Tooltip
             wide
             content={
               key
-                ? `Anthropic key stored in this browser (${maskKey(key)}). Used only when you ask for an explanation.`
-                : "No Anthropic key stored. Every structural check works without one."
+                ? `${t("Anthropic key stored in this browser")} (${maskKey(key)}). ${t("Used only when you ask for an explanation.")}`
+                : t("No Anthropic key stored. Every structural check works without one.")
             }
           >
-            <Button variant="ai" onClick={() => setKeyOpen(true)}>{key ? "API key set" : "Set API key"}</Button>
+            <Button variant="ai" onClick={() => setKeyOpen(true)}>{key ? t("API key set") : t("Set API key")}</Button>
           </Tooltip>
-          <Tooltip content="About ISIT — what it is for and what it promises.">
-            <Button aria-label="About ISIT" onClick={welcome.reopen} className="font-mono">
+          <Button
+            onClick={() => {
+              const next = getLang() === "ar" ? "en" : "ar";
+              try { localStorage.setItem("isit.lang", next); } catch { /* storage blocked */ }
+              const u = new URL(location.href);
+              u.searchParams.set("lang", next);
+              location.href = u.toString();
+            }}
+            lang={getLang() === "ar" ? "en" : "ar"}
+          >
+            {getLang() === "ar" ? "English" : "عربي"}
+          </Button>
+          <Tooltip content={t("About ISIT — what it is for and what it promises.")}>
+            <Button aria-label={t("About ISIT")} onClick={welcome.reopen} className="font-mono">
               ?
             </Button>
           </Tooltip>
@@ -276,12 +298,12 @@ export function Shell() {
                 </>
               ) : (
                 <span className="text-xs text-ink-3">
-                  {registry.loading ? "Loading the compiled spec…" : "No use case selected"}
+                  {registry.loading ? t("Loading the compiled spec…") : t("No use case selected")}
                 </span>
               )}
             </span>
             <Tabs
-              aria-label="Workflow"
+              aria-label={t("Workflow")}
               items={tabs}
               activeId={tab}
               onChange={(id) => {
@@ -289,7 +311,7 @@ export function Shell() {
                 // Choosing a tab is choosing to work; the welcome has done its job.
                 if (welcomeOpen) dismissWelcome();
               }}
-              className="ml-auto"
+              className="ms-auto"
             />
           </div>
 
@@ -298,7 +320,7 @@ export function Shell() {
               /* A broken bundle outranks the welcome: nothing may stand in front of that. */
               <EmptyState
                 fill
-                title="The compiled spec bundle could not be loaded"
+                title={t("The compiled spec bundle could not be loaded")}
                 description={registry.error}
               />
             ) : welcomeOpen ? (
@@ -319,6 +341,8 @@ export function Shell() {
               />
             ) : tab === "decoder" ? (
               <DecoderView baseUrl={CONFLUENCE_BASE} />
+            ) : tab === "changes" ? (
+              <ChangesView baseUrl={CONFLUENCE_BASE} />
             ) : tab === "coverage" ? (
               <CoverageView registry={registry.data} baseUrl={CONFLUENCE_BASE} density={density} />
             ) : tab === "build" ? (
@@ -378,13 +402,13 @@ export function Shell() {
         <span className="font-mono">{structure ? structure.id : (selectedId ?? "—")}</span>
         {registry.data ? (
           <span>
-            {registry.data.entries.length} use cases ·{" "}
-            {Number(registry.data.manifest.counts.specNodes ?? 0).toLocaleString()} compiled rules ·{" "}
-            {Number(registry.data.manifest.counts.goldenSamples ?? 0)} official samples
+            {registry.data.entries.length}{" "}{t("use cases ·")}{" "}
+            {Number(registry.data.manifest.counts.specNodes ?? 0).toLocaleString()}{" "}{t("compiled rules ·")}{" "}
+            {Number(registry.data.manifest.counts.goldenSamples ?? 0)}{" "}{t("official samples")}
           </span>
         ) : null}
-        <span className="ml-auto">
-          Press <kbd className="rounded-xs border border-line px-1 font-mono">/</kbd> to filter use cases
+        <span className="ms-auto">
+          {t("Press")}{" "}<kbd className="rounded-xs border border-line px-1 font-mono">/</kbd>{" "}{t("to filter use cases")}
         </span>
       </footer>
 

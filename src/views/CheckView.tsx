@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { t } from "../i18n";
 import {
   AnatomyMap,
   Badge,
@@ -381,8 +382,8 @@ export function CheckView({
       <EmptyState
         fill
         glyph="⎔"
-        title="No compiled structure"
-        description="The spec bundle holds no message structure for this use case, so there is nothing to check a message against."
+        title={t("No compiled structure")}
+        description={t("The spec bundle holds no message structure for this use case, so there is nothing to check a message against.")}
       />
     );
   }
@@ -396,7 +397,7 @@ export function CheckView({
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <Toolbar
         dense
-        aria-label="Check"
+        aria-label={t("Check")}
         end={
           <div className="flex items-center gap-1.5">
             {text.trim() ? (
@@ -404,7 +405,7 @@ export function CheckView({
             ) : null}
             {!editing ? (
               <Button size="xs" onClick={() => setEditing(true)}>
-                Edit message
+                {t("Edit message")}
               </Button>
             ) : null}
             <Button
@@ -413,15 +414,15 @@ export function CheckView({
               onClick={check}
               disabled={!text.trim() || analysis.loading}
             >
-              {analysis.loading ? "Checking…" : "Check structure"}
+              {analysis.loading ? t("Checking…") : t("Check structure")}
             </Button>
           </div>
         }
       >
-        <ToolbarTitle>Check</ToolbarTitle>
+        <ToolbarTitle>{t("Check")}</ToolbarTitle>
         {structures.length > 1 ? (
           <label className="flex items-center gap-1 text-2xs text-ink-3">
-            <span className="sr-only">Variant</span>
+            <span className="sr-only">{t("Variant")}</span>
             <select
               className="rounded-xs border border-line bg-surface px-1 py-0.5 font-mono text-2xs text-ink"
               value={structure.id}
@@ -436,11 +437,11 @@ export function CheckView({
             </select>
           </label>
         ) : null}
-        <Badge mono title={`Messages for this use case are ${ENCODING_LABEL[structure.encoding]}`}>
+        <Badge mono title={t("Messages for this use case are {enc}", { enc: ENCODING_LABEL[structure.encoding] })}>
           {structure.encoding}
         </Badge>
         {summary && roomy && showResult ? (
-          <span className="ml-1 flex min-w-0 items-center gap-3">
+          <span className="ms-1 flex min-w-0 items-center gap-3">
             <span className="w-56 shrink-0" data-verdict-bar>
               <ProportionBar
                 segments={verdictSegments}
@@ -466,15 +467,15 @@ export function CheckView({
               wide
               content={
                 summary.readinessBasis === "measured"
-                  ? `${summary.requiredSatisfied} of ${summary.requiredTotal} required elements the checker evaluated are present.`
-                  : "No required elements were evaluated, so no readiness figure is claimed."
+                  ? t("{a} of {b} required elements the checker evaluated are present.", { a: summary.requiredSatisfied, b: summary.requiredTotal })
+                  : t("No required elements were evaluated, so no readiness figure is claimed.")
               }
             >
               <span
                 data-stat-tile
                 className="inline-flex items-baseline gap-1.5 rounded-xs border border-line bg-raised px-1.5 py-px"
               >
-                <span className="text-2xs text-ink-3">required</span>
+                <span className="text-2xs text-ink-3">{t("required")}</span>
                 <span className="text-xs font-semibold text-ink">
                   {summary.readinessBasis === "measured"
                     ? `${summary.requiredSatisfied}/${summary.requiredTotal}`
@@ -484,7 +485,7 @@ export function CheckView({
             </Tooltip>
           </span>
         ) : summary ? (
-          <span className="ml-1 flex items-center gap-2">
+          <span className="ms-1 flex items-center gap-2">
             <SeverityCount severity="error" count={counts.error} />
             <SeverityCount severity="warn" count={counts.warn} />
             <SeverityCount severity="ok" count={counts.ok} />
@@ -493,12 +494,12 @@ export function CheckView({
               wide
               content={
                 summary.readinessBasis === "measured"
-                  ? `${summary.requiredSatisfied} of ${summary.requiredTotal} required elements the checker evaluated are present.`
-                  : "No required elements were evaluated, so no readiness figure is claimed."
+                  ? t("{a} of {b} required elements the checker evaluated are present.", { a: summary.requiredSatisfied, b: summary.requiredTotal })
+                  : t("No required elements were evaluated, so no readiness figure is claimed.")
               }
             >
               <span className="text-2xs text-ink-3">
-                required{" "}
+                {t("required")}{" "}
                 {summary.readinessBasis === "measured"
                   ? `${summary.requiredSatisfied}/${summary.requiredTotal}`
                   : "—"}
@@ -514,18 +515,17 @@ export function CheckView({
       ) : null}
       {analysis.data?.parse.failure ? (
         <Banner tone="error">
-          <strong className="font-semibold">The message could not be parsed.</strong>{" "}
-          {analysis.data.parse.failure} Nothing was checked — reporting structural findings
-          against a tree the parser could not build would be guesswork.
+          <strong className="font-semibold">{t("The message could not be parsed.")}</strong>{" "}
+          {analysis.data.parse.failure}{" "}{t("Nothing was checked — reporting structural findings against a tree the parser could not build would be guesswork.")}
         </Banner>
       ) : null}
       {analysis.error ? <Banner tone="error">{analysis.error}</Banner> : null}
       {analysis.conditions.length && showResult ? (
         <Banner tone="info">
-          Checked as <strong className="font-semibold">{analysis.conditions.join(", ")}</strong>
+          {t("Checked as")}{" "}<strong className="font-semibold">{analysis.conditions.join(", ")}</strong>
           {declared ? " — condition declared by analyst, suggested by model." : "."}{" "}
           <button type="button" className="underline decoration-dotted hover:text-ink" onClick={() => run()}>
-            Re-check without it
+            {t("Re-check without it")}
           </button>
         </Banner>
       ) : null}
@@ -555,15 +555,15 @@ export function CheckView({
             selectedId={selectedBlockId}
             onSelect={onBlockSelect}
             height={ANATOMY_HEIGHT[density]}
-            aria-label="Message anatomy — one block per top-level part, tinted by its worst finding"
+            aria-label={t("Message anatomy — one block per top-level part, tinted by its worst finding")}
           />
           {model.anatomy.unplaced > 0 || model.anatomy.folded > 0 ? (
             <p className="mt-1 text-2xs text-ink-3">
               {model.anatomy.folded > 0
-                ? `${model.anatomy.folded} further blocks are folded into the last tile. `
+                ? t("{n} further blocks are folded into the last tile. ", { n: model.anatomy.folded })
                 : ""}
               {model.anatomy.unplaced > 0
-                ? `${model.anatomy.unplaced} ${model.anatomy.unplaced === 1 ? "finding sits" : "findings sit"} outside these blocks (on the message itself or on nothing present) and ${model.anatomy.unplaced === 1 ? "is" : "are"} not shown here.`
+                ? t(model.anatomy.unplaced === 1 ? "{n} finding sits outside these blocks (on the message itself or on nothing present) and is not shown here." : "{n} findings sit outside these blocks (on the message itself or on nothing present) and are not shown here.", { n: model.anatomy.unplaced })
                 : ""}
             </p>
           ) : null}
@@ -576,7 +576,7 @@ export function CheckView({
           <div className="flex h-full min-h-0 flex-col gap-2 p-3">
             <textarea
               className="min-h-0 flex-1 resize-none rounded-sm border border-line bg-surface p-2.5 font-mono text-xs leading-5 text-ink outline-none placeholder:text-ink-3 focus:border-accent"
-              placeholder={`Paste the ${ENCODING_LABEL[structure.encoding]} message your HIS produced…`}
+              placeholder={t("Paste the {enc} message your HIS produced…", { enc: ENCODING_LABEL[structure.encoding] })}
               value={text}
               spellCheck={false}
               onChange={(e) => onTextChange(e.target.value)}
@@ -594,21 +594,21 @@ export function CheckView({
                 onChange={(e) => onFile(e.target.files?.[0])}
               />
               <Button size="xs" onClick={() => fileRef.current?.click()}>
-                Open file…
+                {t("Open file…")}
               </Button>
               {text.trim() ? (
                 <Button size="xs" variant="ghost" onClick={() => onTextChange("")}>
-                  Clear
+                  {t("Clear")}
                 </Button>
               ) : null}
-              <span className="ml-auto text-2xs text-ink-3">
-                {text ? `${text.length.toLocaleString()} characters` : "Nothing pasted yet"}
+              <span className="ms-auto text-2xs text-ink-3">
+                {text ? `${text.length.toLocaleString()} characters` : t("Nothing pasted yet")}
               </span>
             </div>
             {samples.length ? (
               <div className="rounded-sm border border-line bg-surface p-2">
                 <div className="mb-1.5 text-2xs font-semibold uppercase tracking-wide text-ink-3">
-                  Official NPHIES samples
+                  {t("Official NPHIES samples")}
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {samples.map((s) => (
@@ -619,14 +619,12 @@ export function CheckView({
                       disabled={loadingSample === s.path}
                       title={`${s.path}${s.variantTags.length ? ` · ${s.variantTags.join(", ")}` : ""}`}
                     >
-                      {loadingSample === s.path ? "Loading…" : shortName(s.fileName)}
+                      {loadingSample === s.path ? t("Loading…") : shortName(s.fileName)}
                     </Button>
                   ))}
                 </div>
                 <p className="mt-1.5 text-2xs text-ink-3">
-                  These are the reference messages NPHIES publishes. They are the ground truth
-                  the structural rules were verified against — and five of them are themselves
-                  defective, which the checker will tell you about.
+                  {t("These are the reference messages NPHIES publishes. They are the ground truth the structural rules were verified against — and five of them are themselves defective, which the checker will tell you about.")}
                 </p>
               </div>
             ) : null}
@@ -647,7 +645,7 @@ export function CheckView({
               <span className="flex items-center gap-1.5">
                 {useCaseCode ?? structure.title}
                 <span className="font-normal normal-case tracking-normal text-ink-3">
-                  {model.nodeCount.toLocaleString()} nodes
+                  {model.nodeCount.toLocaleString()}{" "}{t("nodes")}
                 </span>
               </span>
             }
@@ -715,7 +713,7 @@ export function CheckFindingFooter({ finding, line, structure, skeleton, doubted
           className="self-start text-2xs text-ink-2 underline decoration-dotted underline-offset-2 hover:text-ink"
           data-model-doubt
         >
-          model doubts this — see below
+          {t("model doubts this — see below")}
         </button>
       ) : null}
     </div>

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { t } from "../i18n";
 import {
   Badge,
   Button,
@@ -260,8 +261,8 @@ export function IngestView({
       <EmptyState
         fill
         glyph="⇥"
-        title="No compiled structure"
-        description="Nothing was extracted for this use case, so there are no positions to map a spreadsheet onto."
+        title={t("No compiled structure")}
+        description={t("Nothing was extracted for this use case, so there are no positions to map a spreadsheet onto.")}
       />
     );
   }
@@ -272,22 +273,22 @@ export function IngestView({
     <div className="flex h-full min-h-0 flex-col bg-canvas">
       <Toolbar
         dense
-        aria-label="Ingest"
+        aria-label={t("Ingest")}
         end={
           mapping ? (
-            <Button size="xs" onClick={exportMapping} title="Download the mapping as JSON, tagged with the structure it was built for">
-              Export mapping JSON
+            <Button size="xs" onClick={exportMapping} title={t("Download the mapping as JSON, tagged with the structure it was built for")}>
+              {t("Export mapping JSON")}
             </Button>
           ) : null
         }
       >
-        <ToolbarTitle>Ingest</ToolbarTitle>
+        <ToolbarTitle>{t("Ingest")}</ToolbarTitle>
         {structures.length > 1 && onStructureChange ? (
           <select
             className="rounded-xs border border-line bg-surface px-1 py-0.5 font-mono text-2xs text-ink"
             value={structure.id}
             onChange={(e) => onStructureChange(e.target.value)}
-            aria-label="Variant"
+            aria-label={t("Variant")}
           >
             {structures.map((s) => (
               <option key={s.id} value={s.id}>
@@ -297,7 +298,7 @@ export function IngestView({
             ))}
           </select>
         ) : null}
-        <Badge mono title={`Messages for this use case are ${ENCODING_LABEL[structure.encoding]}`}>
+        <Badge mono title={t("Messages for this use case are {enc}", { enc: ENCODING_LABEL[structure.encoding] })}>
           {structure.encoding}
         </Badge>
         <span className="hidden truncate text-2xs text-ink-3 lg:inline">{PRIVACY_SENTENCE}</span>
@@ -305,47 +306,45 @@ export function IngestView({
 
       <div className="flex min-h-0 flex-1 overflow-x-auto">
         {/* ------------------------------------------------------- 1. upload */}
-        <Panel step={1} title="Upload" className={panelWidth} roomy={roomy}>
+        <Panel step={1} title={t("Upload")} className={panelWidth} roomy={roomy}>
           <DropZone onFile={onFile} reading={reading} roomy={roomy} />
           <p className={cx("text-2xs text-ink-3", roomy && "leading-relaxed")}>
-            {PRIVACY_SENTENCE} A CSV is read here with no dependency; an .xlsx / .xls / .ods workbook
-            loads the spreadsheet library (7 MB) only at that moment, and only its first worksheet is
-            read.
+            {PRIVACY_SENTENCE}{" "}{t("A CSV is read here with no dependency; an .xlsx / .xls / .ods workbook loads the spreadsheet library (7 MB) only at that moment, and only its first worksheet is read.")}
           </p>
-          {readError ? <Notice label="Could not read the file">{readError}</Notice> : null}
+          {readError ? <Notice label={t("Could not read the file")}>{readError}</Notice> : null}
           {sheet ? (
             <>
               <div className="flex flex-wrap items-center gap-1.5 text-xs text-ink">
                 <span className="truncate font-medium">{loaded?.fileName}</span>
                 <Badge mono>
-                  {sheet.columns.length} columns
+                  {sheet.columns.length}{" "}{t("columns")}
                 </Badge>
                 <Badge mono>
-                  {sheet.rows.length} rows{sheet.truncated ? " (truncated)" : ""}
+                  {sheet.rows.length}{" "}{t("rows")}{sheet.truncated ? " (truncated)" : ""}
                 </Badge>
-                {sheet.name ? <Badge mono>sheet {sheet.name}</Badge> : null}
+                {sheet.name ? <Badge mono>{t("sheet")}{" "}{sheet.name}</Badge> : null}
               </div>
               {sheet.columns.length ? (
                 <table className="w-full border-collapse text-xs">
                   <thead className="text-2xs uppercase tracking-wide text-ink-3">
                     <tr className="border-b border-line">
-                      <th className="py-1 pr-2 text-left font-semibold">Column</th>
-                      <th className="px-1 py-1 text-right font-semibold" title="Cells with a non-blank value">
-                        filled
+                      <th className="py-1 pe-2 text-start font-semibold">{t("Column")}</th>
+                      <th className="px-1 py-1 text-end font-semibold" title={t("Cells with a non-blank value")}>
+                        {t("filled")}
                       </th>
-                      <th className="px-1 py-1 text-right font-semibold" title="Distinct non-blank values">
-                        distinct
+                      <th className="px-1 py-1 text-end font-semibold" title={t("Distinct non-blank values")}>
+                        {t("distinct")}
                       </th>
-                      <th className="py-1 pl-2 text-left font-semibold">First values</th>
+                      <th className="py-1 ps-2 text-start font-semibold">{t("First values")}</th>
                     </tr>
                   </thead>
                   <tbody>
                     {sheet.columns.map((c) => (
                       <tr key={c.name} className="border-b border-line/60 align-top">
-                        <td className="py-1 pr-2 font-mono text-ink">{c.name}</td>
-                        <td className="px-1 py-1 text-right font-mono tabular-nums text-ink-2">{c.nonEmpty}</td>
-                        <td className="px-1 py-1 text-right font-mono tabular-nums text-ink-2">{c.distinct}</td>
-                        <td className="py-1 pl-2 font-mono text-2xs text-ink-3">
+                        <td className="py-1 pe-2 font-mono text-ink">{c.name}</td>
+                        <td className="px-1 py-1 text-end font-mono tabular-nums text-ink-2">{c.nonEmpty}</td>
+                        <td className="px-1 py-1 text-end font-mono tabular-nums text-ink-2">{c.distinct}</td>
+                        <td className="py-1 ps-2 font-mono text-2xs text-ink-3">
                           {c.sampleValues.length ? c.sampleValues.map(truncate).join(" · ") : "—"}
                         </td>
                       </tr>
@@ -353,35 +352,33 @@ export function IngestView({
                   </tbody>
                 </table>
               ) : (
-                <Notice label="The sheet is empty">No header row was found, so there is nothing to map.</Notice>
+                <Notice label={t("The sheet is empty")}>{t("No header row was found, so there is nothing to map.")}</Notice>
               )}
             </>
           ) : null}
         </Panel>
 
         {/* ---------------------------------------------------------- 2. map */}
-        <Panel step={2} title="Map" className={roomy ? "min-w-[34rem]" : "min-w-[28rem]"} roomy={roomy}>
+        <Panel step={2} title={t("Map")} className={roomy ? "min-w-[34rem]" : "min-w-[28rem]"} roomy={roomy}>
           {!sheet || !mapping ? (
-            <p className="text-xs text-ink-3">Upload a sheet first. Its column names are matched against the {profile.title} profile by exact name; nothing is guessed.</p>
+            <p className="text-xs text-ink-3">{t("Upload a sheet first. Its column names are matched against the")}{" "}{profile.title}{" "}{t("profile by exact name; nothing is guessed.")}</p>
           ) : (
             <>
               <p className={cx("text-2xs text-ink-2", roomy && "leading-relaxed")}>
-                <strong className="font-semibold text-ink">{mapping.entries.length}</strong> of {sheet.columns.length} columns
-                mapped, {confirmedCount} confirmed.{" "}
+                <strong className="font-semibold text-ink">{mapping.entries.length}</strong>{" "}{t("of")}{" "}{sheet.columns.length}{" "}{t("columns mapped,")}{" "}{confirmedCount}{" "}{t("confirmed.")}{" "}
                 {mapping.unmapped.length
                   ? `${mapping.unmapped.length} unmapped: ${mapping.unmapped.map((c) => `"${c}"`).join(", ")}.`
-                  : "Every column has a target."}{" "}
-                Only confirmed entries are ever written.
+                  : t("Every column has a target.")}{" "}
+                {t("Only confirmed entries are ever written.")}
               </p>
 
               {mappingIsStale ? (
-                <Notice label="Built for another variant">
-                  This mapping was built for <code className="font-mono">{mapping.structureId}</code>; the selected variant is{" "}
-                  <code className="font-mono">{structure.id}</code>. The generator will refuse it. Rebuilding by name starts
-                  over from the exact-name pass and drops your choices.
+                <Notice label={t("Built for another variant")}>
+                  {t("This mapping was built for")}{" "}<code className="font-mono">{mapping.structureId}</code>{t("; the selected variant is")}{" "}
+                  <code className="font-mono">{structure.id}</code>{t(". The generator will refuse it. Rebuilding by name starts over from the exact-name pass and drops your choices.")}
                   <div className="mt-1.5">
                     <Button size="xs" onClick={() => startMapping(sheet)}>
-                      Rebuild by name for {structure.variantLabel ?? structure.variant ?? structure.id}
+                      {t("Rebuild by name for")}{" "}{structure.variantLabel ?? structure.variant ?? structure.id}
                     </Button>
                   </div>
                 </Notice>
@@ -390,10 +387,10 @@ export function IngestView({
               <table className="w-full border-collapse text-xs">
                 <thead className="text-2xs uppercase tracking-wide text-ink-3">
                   <tr className="border-b border-line">
-                    <th className="py-1 pr-2 text-left font-semibold">Column</th>
-                    <th className="px-1 py-1 text-left font-semibold">Target position</th>
-                    <th className="px-1 py-1 text-left font-semibold">via</th>
-                    <th className="py-1 pl-1 text-left font-semibold">Confirmed</th>
+                    <th className="py-1 pe-2 text-start font-semibold">{t("Column")}</th>
+                    <th className="px-1 py-1 text-start font-semibold">{t("Target position")}</th>
+                    <th className="px-1 py-1 text-start font-semibold">{t("via")}</th>
+                    <th className="py-1 ps-1 text-start font-semibold">{t("Confirmed")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -416,8 +413,8 @@ export function IngestView({
 
               {mapping.notes.length ? (
                 <div>
-                  <h4 className="mb-1 text-2xs font-semibold uppercase tracking-wider text-ink-3">Why some columns were left alone</h4>
-                  <ul className="list-disc space-y-0.5 pl-4 text-2xs text-ink-2">
+                  <h4 className="mb-1 text-2xs font-semibold uppercase tracking-wider text-ink-3">{t("Why some columns were left alone")}</h4>
+                  <ul className="list-disc space-y-0.5 ps-4 text-2xs text-ink-2">
                     {mapping.notes.map((n, i) => (
                       <li key={i}>{n}</li>
                     ))}
@@ -427,12 +424,12 @@ export function IngestView({
 
               {/* ------------------------------------------------ the model */}
               <section
-                aria-label="Model proposal"
+                aria-label={t("Model proposal")}
                 className={cx("rounded-sm border border-dashed border-line-strong p-2", roomy ? "space-y-2" : "space-y-1.5")}
               >
                 <div className="flex flex-wrap items-center gap-1.5">
-                  <Badge tone="ai">Model</Badge>
-                  <span className="text-2xs text-ink-2">Model opinion — not a structural verdict. Nothing here changes the findings.</span>
+                  <Badge tone="ai">{t("Model")}</Badge>
+                  <span className="text-2xs text-ink-2">{t("Model opinion — not a structural verdict. Nothing here changes the findings.")}</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-1.5">
                   <Button
@@ -441,21 +438,18 @@ export function IngestView({
                     onClick={ask}
                     disabled={!key || asking || !columnsToAsk.length || mappingIsStale}
                   >
-                    {asking ? "Asking…" : "Ask the model to propose the rest"}
+                    {asking ? t("Asking…") : t("Ask the model to propose the rest")}
                   </Button>
                   {!key ? (
                     <span className="text-2xs text-ink-3">
-                      Inert: no Anthropic API key is stored in this browser. Set one in the header to enable it; the name
-                      matcher, the table above and the generator do not need it.
+                      {t("Inert: no Anthropic API key is stored in this browser. Set one in the header to enable it; the name matcher, the table above and the generator do not need it.")}
                     </span>
                   ) : !columnsToAsk.length ? (
-                    <span className="text-2xs text-ink-3">Nothing left to propose: every column has a target.</span>
+                    <span className="text-2xs text-ink-3">{t("Nothing left to propose: every column has a target.")}</span>
                   ) : (
                     <span className="text-2xs text-ink-3">
-                      Sends only the {columnsToAsk.length} unmapped column name{columnsToAsk.length === 1 ? "" : "s"} and the{" "}
-                      {candidates.length}-position candidate list to Anthropic — ≈{askPayload.tokens.toLocaleString()} tokens of
-                      your data, plus the workbench&rsquo;s fixed instructions, which carry nothing from the sheet. No cell
-                      values.
+                      {t("Sends only the")}{" "}{columnsToAsk.length}{" "}{t("unmapped column name")}{columnsToAsk.length === 1 ? "" : "s"}{" "}{t("and the")}{" "}
+                      {candidates.length}{t("-position candidate list to Anthropic — ≈")}{askPayload.tokens.toLocaleString()}{" "}{t("tokens of your data, plus the workbench’s fixed instructions, which carry nothing from the sheet. No cell values.")}
                     </span>
                   )}
                 </div>
@@ -467,7 +461,7 @@ export function IngestView({
                       onClick={() => setPreviewOpen((v) => !v)}
                       aria-expanded={previewOpen}
                     >
-                      {previewOpen ? "Hide what will be sent" : "Preview what will be sent"}
+                      {previewOpen ? t("Hide what will be sent") : t("Preview what will be sent")}
                     </button>
                     {previewOpen ? (
                       <pre className="mt-1 max-h-48 overflow-auto whitespace-pre-wrap rounded-xs border border-line bg-inset p-2 font-mono text-2xs leading-4 text-ink-2">
@@ -476,13 +470,11 @@ export function IngestView({
                     ) : null}
                   </div>
                 ) : null}
-                {askError ? <Notice label="The model call failed">{askError}</Notice> : null}
+                {askError ? <Notice label={t("The model call failed")}>{askError}</Notice> : null}
                 {opinion ? (
                   <div className={cx("text-2xs text-ink-2", roomy && "leading-relaxed")}>
                     <p>
-                      The model was shown {opinion.sentColumns} column name{opinion.sentColumns === 1 ? "" : "s"}. Its proposals
-                      entered the table above as <span className="font-mono">model</span> entries, unconfirmed: tick one only
-                      after checking it, or it will be skipped at generation. Its reasons, verbatim:
+                      {t("The model was shown")}{" "}{opinion.sentColumns}{" "}{t("column name")}{opinion.sentColumns === 1 ? "" : "s"}{t(". Its proposals entered the table above as")}{" "}<span className="font-mono">{t("model")}</span>{" "}{t("entries, unconfirmed: tick one only after checking it, or it will be skipped at generation. Its reasons, verbatim:")}
                     </p>
                     <ul className="mt-1 list-disc space-y-0.5 pl-4">
                       {opinion.mappings.map((m, i) => (
@@ -490,13 +482,13 @@ export function IngestView({
                           <span className="font-mono text-ink">{m.column}</span>
                           {" → "}
                           <span className="font-mono text-ink">{m.locator ?? "nothing"}</span>
-                          <span className="text-ink-3"> (model confidence {m.confidence})</span>
+                          <span className="text-ink-3">{" "}{t("(model confidence")}{" "}{m.confidence})</span>
                           {m.why ? <> — {m.why}</> : null}
                         </li>
                       ))}
                       {opinion.unmapped.map((c) => (
                         <li key={`u-${c}`}>
-                          <span className="font-mono text-ink">{c}</span> — the model found no defensible target.
+                          <span className="font-mono text-ink">{c}</span>{" "}{t("— the model found no defensible target.")}
                         </li>
                       ))}
                     </ul>
@@ -508,7 +500,7 @@ export function IngestView({
         </Panel>
 
         {/* ----------------------------------------------------- 3. generate */}
-        <Panel step={3} title="Generate" className={roomy ? "min-w-[34rem]" : "min-w-[28rem]"} roomy={roomy} last>
+        <Panel step={3} title={t("Generate")} className={roomy ? "min-w-[34rem]" : "min-w-[28rem]"} roomy={roomy} last>
           <div className="flex flex-wrap items-center gap-3 text-xs text-ink-2">
             <label className="flex items-center gap-1">
               <input
@@ -518,17 +510,16 @@ export function IngestView({
                 disabled={!samples.length}
                 onChange={() => setTemplateChoice("sample")}
               />
-              Official sample
+              {t("Official sample")}
             </label>
             <label className="flex items-center gap-1">
               <input type="radio" name="ingest-template" checked={templateSource === "own"} onChange={() => setTemplateChoice("own")} />
-              Paste my own template
+              {t("Paste my own template")}
             </label>
           </div>
           {!samples.length ? (
             <p className="text-2xs text-ink-3">
-              No official sample is shipped for this use case, so a template has to be pasted: a message your HIS already sends
-              is the usual choice.
+              {t("No official sample is shipped for this use case, so a template has to be pasted: a message your HIS already sends is the usual choice.")}
             </p>
           ) : null}
 
@@ -539,7 +530,7 @@ export function IngestView({
                   className="max-w-full rounded-xs border border-line bg-surface px-1 py-0.5 font-mono text-2xs text-ink"
                   value={selectedSample?.path ?? ""}
                   onChange={(e) => setSamplePath(e.target.value)}
-                  aria-label="Official sample"
+                  aria-label={t("Official sample")}
                 >
                   {samples.map((s) => (
                     <option key={s.path} value={s.path}>
@@ -551,28 +542,25 @@ export function IngestView({
               ) : selectedSample ? (
                 <div className="font-mono text-2xs text-ink-2">{selectedSample.fileName}</div>
               ) : null}
-              {sampleError ? <Notice label="The sample could not be loaded">{sampleError}</Notice> : null}
+              {sampleError ? <Notice label={t("The sample could not be loaded")}>{sampleError}</Notice> : null}
               {sampleVariantMismatch ? (
-                <Notice label="Sample and variant disagree">
-                  This sample is tagged for{" "}
-                  <code className="font-mono">{sampleVariantMismatch.variantLabel ?? sampleVariantMismatch.variant ?? sampleVariantMismatch.id}</code>, the
-                  selected variant is <code className="font-mono">{structure.variantLabel ?? structure.variant ?? structure.id}</code>.
-                  Pick the matching sample or switch the variant; filling this one would produce a message of the other type.
+                <Notice label={t("Sample and variant disagree")}>
+                  {t("This sample is tagged for")}{" "}
+                  <code className="font-mono">{sampleVariantMismatch.variantLabel ?? sampleVariantMismatch.variant ?? sampleVariantMismatch.id}</code>{t(", the selected variant is")}{" "}<code className="font-mono">{structure.variantLabel ?? structure.variant ?? structure.id}</code>{t(". Pick the matching sample or switch the variant; filling this one would produce a message of the other type.")}
                 </Notice>
               ) : null}
               {templateText ? (
                 <p className="text-2xs text-ink-3">
-                  Template loaded: {templateText.length.toLocaleString()} characters. Only positions this template already has can be
-                  written; nothing is added or removed.
+                  {t("Template loaded:")}{" "}{templateText.length.toLocaleString()}{" "}{t("characters. Only positions this template already has can be written; nothing is added or removed.")}
                 </p>
               ) : !sampleError ? (
-                <p className="text-2xs text-ink-3">Loading the sample…</p>
+                <p className="text-2xs text-ink-3">{t("Loading the sample…")}</p>
               ) : null}
             </div>
           ) : (
             <textarea
               className="h-28 w-full resize-y rounded-sm border border-line bg-surface p-2 font-mono text-2xs leading-4 text-ink outline-none placeholder:text-ink-3 focus:border-accent"
-              placeholder={`Paste a ${ENCODING_LABEL[structure.encoding]} message to use as the template…`}
+              placeholder={t("Paste a {enc} message to use as the template…", { enc: ENCODING_LABEL[structure.encoding] })}
               value={ownTemplate}
               spellCheck={false}
               onChange={(e) => setOwnTemplate(e.target.value)}
@@ -581,13 +569,13 @@ export function IngestView({
 
           <div className="flex flex-wrap items-center gap-1.5">
             <label className="flex items-center gap-1 text-2xs text-ink-2">
-              Row
+              {t("Row")}
               <select
                 className="max-w-64 rounded-xs border border-line bg-surface px-1 py-0.5 font-mono text-2xs text-ink"
                 value={rows.length ? Math.min(rowIndex, rows.length - 1) : ""}
                 disabled={!rows.length}
                 onChange={(e) => setRowIndex(Number(e.target.value))}
-                aria-label="Sheet row"
+                aria-label={t("Sheet row")}
               >
                 {rows.length ? (
                   rows.map((r, i) => (
@@ -596,21 +584,19 @@ export function IngestView({
                     </option>
                   ))
                 ) : (
-                  <option value="">no rows</option>
+                  <option value="">{t("no rows")}</option>
                 )}
               </select>
             </label>
             <Button size="xs" variant="primary" onClick={generate} disabled={!canGenerate}>
-              {generating ? "Generating…" : "Generate from this row"}
+              {generating ? t("Generating…") : t("Generate from this row")}
             </Button>
           </div>
           <p className={cx("text-2xs text-ink-3", roomy && "leading-relaxed")}>
-            An empty cell is written as an empty value on purpose: the message then shows what the extract actually holds, and
-            the checker reports the truth about it rather than a placeholder hiding it. Unconfirmed entries are skipped, not
-            written.
+            {t("An empty cell is written as an empty value on purpose: the message then shows what the extract actually holds, and the checker reports the truth about it rather than a placeholder hiding it. Unconfirmed entries are skipped, not written.")}
           </p>
 
-          {generateError ? <Notice label="Could not generate">{generateError}</Notice> : null}
+          {generateError ? <Notice label={t("Could not generate")}>{generateError}</Notice> : null}
 
           {generated ? (
             <GeneratedOutput
@@ -646,7 +632,7 @@ function Panel({
   return (
     <section
       aria-label={title}
-      className={cx("flex min-h-0 flex-1 flex-col", !last && "border-r border-line", className)}
+      className={cx("flex min-h-0 flex-1 flex-col", !last && "border-e border-line", className)}
     >
       <header className="flex h-7 shrink-0 items-center gap-1.5 border-b border-line bg-surface px-2.5">
         <span
@@ -710,10 +696,10 @@ function DropZone({
           e.target.value = "";
         }}
       />
-      <span className="text-xs text-ink-2">Drop a HIS extract here</span>
-      <span className="font-mono text-2xs text-ink-3">.xlsx · .xls · .ods · .csv</span>
+      <span className="text-xs text-ink-2">{t("Drop a HIS extract here")}</span>
+      <span className="font-mono text-2xs text-ink-3">{t(".xlsx · .xls · .ods · .csv")}</span>
       <Button size="xs" onClick={() => fileRef.current?.click()} disabled={reading !== "idle"}>
-        {reading === "workbook" ? "Loading the spreadsheet library…" : reading === "csv" ? "Reading…" : "Choose a file…"}
+        {reading === "workbook" ? t("Loading the spreadsheet library…") : reading === "csv" ? t("Reading…") : t("Choose a file…")}
       </Button>
     </div>
   );
@@ -768,12 +754,12 @@ function MappingRow({
 
   return (
     <tr className="border-b border-line/60 align-top">
-      <td className="py-1 pr-2 font-mono text-ink">{column}</td>
+      <td className="py-1 pe-2 font-mono text-ink">{column}</td>
       <td className="px-1 py-1">
         <select
           className="max-w-56 rounded-xs border border-line bg-surface px-1 py-0.5 font-mono text-2xs text-ink"
           value={selectValue}
-          aria-label={`Target position for ${column}`}
+          aria-label={t("Target position for {c}", { c: column })}
           onChange={(e) => {
             const v = e.target.value;
             if (v === CUSTOM) {
@@ -784,7 +770,7 @@ function MappingRow({
             onChoose(v === "" ? null : v);
           }}
         >
-          <option value="">— unmapped —</option>
+          <option value="">{t("— unmapped —")}</option>
           {groups.map((g) => (
             <optgroup key={g.obligation} label={OBLIGATION_LABEL[g.obligation]}>
               {g.items.map((c) => (
@@ -794,14 +780,14 @@ function MappingRow({
               ))}
             </optgroup>
           ))}
-          <option value={CUSTOM}>Other position (e.g. a component such as PID-3.1)…</option>
+          <option value={CUSTOM}>{t("Other position (e.g. a component such as PID-3.1)…")}</option>
         </select>
         {showInput ? (
           <input
             className="mt-1 w-40 rounded-xs border border-line bg-surface px-1 py-0.5 font-mono text-2xs text-ink outline-none focus:border-accent"
             value={draft}
-            placeholder="PID-3.1"
-            aria-label={`Custom position for ${column}`}
+            placeholder={t("PID-3.1")}
+            aria-label={t("Custom position for {c}", { c: column })}
             onChange={(e) => setDraft(e.target.value)}
             onBlur={commit}
             onKeyDown={(e) => {
@@ -811,7 +797,7 @@ function MappingRow({
         ) : null}
       </td>
       <td className="px-1 py-1">{entry ? <Badge mono>{entry.via}</Badge> : <span className="text-ink-3">—</span>}</td>
-      <td className="py-1 pl-1">
+      <td className="py-1 ps-1">
         {entry ? (
           <label className="flex items-center gap-1 text-2xs text-ink-2">
             <input type="checkbox" checked={entry.confirmed} onChange={(e) => onConfirm(e.target.checked)} />
@@ -839,13 +825,13 @@ function GeneratedOutput({
   return (
     <div className={roomy ? "space-y-2.5" : "space-y-2"}>
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-xs font-medium text-ink">Generated from row {rowNumber}</span>
-        <Badge mono>{result.applied.length} written</Badge>
-        <Badge mono>{result.skipped.length} skipped</Badge>
-        <span className="ml-auto flex items-center gap-1.5">
+        <span className="text-xs font-medium text-ink">{t("Generated from row")}{" "}{rowNumber}</span>
+        <Badge mono>{result.applied.length}{" "}{t("written")}</Badge>
+        <Badge mono>{result.skipped.length}{" "}{t("skipped")}</Badge>
+        <span className="ms-auto flex items-center gap-1.5">
           <CopyButton size="xs" value={result.text} what="the generated message" />
           <Button size="xs" variant="primary" onClick={onOpenInCheck}>
-            Check this message
+            {t("Check this message")}
           </Button>
         </span>
       </div>
@@ -854,7 +840,7 @@ function GeneratedOutput({
       </pre>
       {result.applied.length ? (
         <p className="text-2xs text-ink-2">
-          Written and verified present after re-parsing:{" "}
+          {t("Written and verified present after re-parsing:")}{" "}
           {result.applied.map((l, i) => (
             <span key={l}>
               {i ? ", " : ""}
@@ -864,11 +850,11 @@ function GeneratedOutput({
           .
         </p>
       ) : (
-        <p className="text-2xs text-ink-2">Nothing was written; the template came back unchanged.</p>
+        <p className="text-2xs text-ink-2">{t("Nothing was written; the template came back unchanged.")}</p>
       )}
       {result.skipped.length ? (
         <div>
-          <h4 className="mb-1 text-2xs font-semibold uppercase tracking-wider text-ink-3">Not written, and why</h4>
+          <h4 className="mb-1 text-2xs font-semibold uppercase tracking-wider text-ink-3">{t("Not written, and why")}</h4>
           <ul className="space-y-1 text-2xs text-ink-2">
             {result.skipped.map((s, i) => (
               <li key={i}>
@@ -881,7 +867,7 @@ function GeneratedOutput({
         </div>
       ) : null}
       <p className="text-2xs text-ink-3">
-        Nothing here is a verdict. Check judges the message against the compiled rules and shows its evidence.
+        {t("Nothing here is a verdict. Check judges the message against the compiled rules and shows its evidence.")}
       </p>
     </div>
   );
@@ -914,5 +900,5 @@ function rowLabel(row: Record<string, string>, index: number, sheet: Sheet | nul
     .filter((v) => v && v.trim())
     .slice(0, 2)
     .map(truncate);
-  return `Row ${index + 1}${cells.length ? ` — ${cells.join(" · ")}` : " — (all cells empty)"}`;
+  return t("Row {n}", { n: index + 1 }) + (cells.length ? ` — ${cells.join(" · ")}` : t(" — (all cells empty)"));
 }

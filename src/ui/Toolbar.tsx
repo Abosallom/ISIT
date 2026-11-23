@@ -31,14 +31,15 @@ export function Toolbar({
       aria-label={ariaLabel}
       aria-orientation="horizontal"
       className={cx(
-        "flex shrink-0 items-center gap-2 border-b border-line bg-surface px-2",
-        dense ? "h-7" : "h-9 px-3",
+        // Wraps instead of overlapping when the space is narrow (a narrow window, a phone).
+        "flex shrink-0 flex-wrap items-center gap-x-2 gap-y-1 border-b border-line bg-surface px-2 py-0.5",
+        dense ? "min-h-7" : "min-h-9 px-3",
         sticky && "sticky top-0 z-20",
         className,
       )}
     >
-      <div className="flex min-w-0 flex-1 items-center gap-2">{children}</div>
-      {end ? <div className="flex shrink-0 items-center gap-1.5">{end}</div> : null}
+      <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">{children}</div>
+      {end ? <div className="ms-auto flex shrink-0 flex-wrap items-center gap-1.5">{end}</div> : null}
     </div>
   );
 }

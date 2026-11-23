@@ -93,8 +93,9 @@ export interface Evidenced {
  *
  *   R  required · R2 required if known · O optional · I ignored (accepted then discarded)
  *   M  mandatory · X not used · NP SHALL NOT be present · `-` not present in this message
+ *   C  conditional: the condition is prose in the guidance (the A08 discharge-update Z-segments), shown, never judged
  */
-export type UsageCode = "M" | "R" | "R2" | "O" | "I" | "X" | "NP" | "-";
+export type UsageCode = "M" | "R" | "R2" | "O" | "I" | "X" | "NP" | "C" | "-";
 
 /** What a validator does about a node carrying this usage. */
 export type ValidatorVerdict =
@@ -124,6 +125,7 @@ export const USAGE_SEMANTICS: Readonly<Record<UsageCode, UsageSemantics>> = {
   I: { meaning: "ignored (accepted then discarded by NPHIES)", validator: "ignored" },
   X: { meaning: "not used", validator: "warn-if-present" },
   NP: { meaning: "SHALL NOT be present", validator: "error-if-present" },
+  C: { meaning: "conditional (the condition is stated in the guidance)", validator: "ok" },
   "-": { meaning: "segment is not present in this message", validator: "error-if-present" },
 };
 
@@ -1137,6 +1139,8 @@ export interface SpecManifest {
     specDefects?: string;
     /** Defects in the OFFICIAL samples themselves, so a checker does not copy them. */
     sampleDefects?: string;
+    /** "What NPHIES changed" (spec-build/changes.py), from the first refresh on. */
+    changes?: string;
   };
   families: FamilySummary[];
   useCases: UseCaseSummary[];
@@ -1448,6 +1452,73 @@ export function loadSpecDefects(): Promise<SpecDefectsBundle> {
 /** Defects in the OFFICIAL samples. Shipped so a checker never copies a sample's mistake. */
 export function loadSampleDefects(): Promise<Record<string, unknown>> {
   return loadFile<Record<string, unknown>>("sample-defects.json");
+}
+
+/** One side of a changed row in "What NPHIES changed" (spec-build/changes.py). */
+export interface SpecChangeSide {
+  usage?: string | null;
+  length?: string | null;
+  dataType?: string;
+  codeSet?: string;
+  location?: string;
+  role?: string;
+  valueSets?: string[];
+}
+
+/** "What NPHIES changed": what the last refresh changed in the rules, and what it has not carried in yet. */
+export interface SpecChanges {
+  refresh: string;
+  title: string;
+  baseline: string;
+  appliedAt: string;
+  summaryPage: { pageId: string; title: string; updatedAt: string; note: string; noteAr?: string };
+  counts: Record<string, number>;
+  pages: {
+    pageId: string;
+    title: string;
+    replaces: string | null;
+    version: number | null;
+    updatedAt: string | null;
+    area: string | null;
+    status: "new" | "changed";
+    note?: string;
+    noteAr?: string;
+    rows: {
+      change: "added" | "removed" | "changed";
+      kind: "rule" | "wording";
+      what: string[];
+      field: string | null;
+      name: string | null;
+      num: string | null;
+      before: SpecChangeSide | null;
+      after: SpecChangeSide | null;
+      quote: string | null;
+      guidanceBefore: string | null;
+      guidanceAfter: string | null;
+      summaryStill?: string;
+    }[];
+  }[];
+  valueSets: {
+    added: { id: string; title: string; pageId: string; concepts: number; pageLocal?: boolean }[];
+    changed: {
+      id: string;
+      pageId: string;
+      before: Record<string, unknown> & { title?: string; conceptCount?: number; sampleCodes?: string[] };
+      after: Record<string, unknown> & { title?: string; conceptCount?: number; sampleCodes?: string[] };
+      note?: string | null;
+    }[];
+    empty: { id: string; title: string; pageId: string }[];
+  };
+  notJudged: { pageId: string; fieldKey: string; why: string; whyAr?: string; quote?: string }[];
+  checker: { change: string; why: string; changeAr?: string; whyAr?: string }[];
+  pending: { pageId: string; title: string; updatedAt: string; version: number | null; why: string; whyAr?: string }[];
+}
+
+/** The change list, or null for a bundle compiled before any refresh. */
+export async function loadChanges(): Promise<SpecChanges | null> {
+  const manifest = await loadManifest();
+  if (!manifest.files.changes) return null;
+  return loadFile<SpecChanges>("changes.json");
 }
 
 export function loadGolden(): Promise<Record<string, unknown>> {

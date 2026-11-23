@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { t } from "../i18n";
 import {
   Badge,
   Button,
@@ -52,38 +53,38 @@ export function DecoderView({ baseUrl }: DecoderViewProps) {
   );
 
   if (catalogue.error) {
-    return <EmptyState fill title="The error catalogue could not be loaded" description={catalogue.error} />;
+    return <EmptyState fill title={t("The error catalogue could not be loaded")} description={catalogue.error} />;
   }
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-canvas">
-      <Toolbar dense aria-label="Error Decoder">
-        <ToolbarTitle>Error Decoder</ToolbarTitle>
-        <Badge mono>{catalogue.data ? catalogue.data.entries.length + catalogue.data.xds.length : "…"} catalogued</Badge>
-        <span className="text-2xs text-ink-3">Error Handling Guide · 38 tables</span>
+      <Toolbar dense aria-label={t("Error Decoder")}>
+        <ToolbarTitle>{t("Error Decoder")}</ToolbarTitle>
+        <Badge mono>{catalogue.data ? catalogue.data.entries.length + catalogue.data.xds.length : "…"}{" "}{t("catalogued")}</Badge>
+        <span className="text-2xs text-ink-3">{t("Error Handling Guide · 38 tables")}</span>
       </Toolbar>
 
       <div className="flex min-h-0 flex-1">
-        <div className="flex min-w-0 flex-1 flex-col border-r border-line">
+        <div className="flex min-w-0 flex-1 flex-col border-e border-line">
           <div className="shrink-0 p-3">
             <label className="mb-1 block text-2xs font-semibold uppercase tracking-wide text-ink-3">
-              Paste the rejection NPHIES returned
+              {t("Paste the rejection NPHIES returned")}
             </label>
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
               spellCheck={false}
               rows={5}
-              placeholder="Required field missing PID/PatientIdentifierList[0]/IDNumber"
+              placeholder={t("Required field missing PID/PatientIdentifierList[0]/IDNumber")}
               className="w-full resize-y rounded-sm border border-line bg-surface p-2 font-mono text-xs leading-5 text-ink outline-none placeholder:text-ink-3 focus:border-accent"
             />
             {text.trim() ? (
               <div className="mt-1.5 flex items-center gap-2">
                 <Button size="xs" variant="ghost" onClick={() => setText("")}>
-                  Clear
+                  {t("Clear")}
                 </Button>
                 <span className="text-2xs text-ink-3">
-                  {matches.length} catalogue {matches.length === 1 ? "entry" : "entries"} matched
+                  {matches.length}{" "}{t("catalogue")}{" "}{matches.length === 1 ? "entry" : "entries"}{" "}{t("matched")}
                 </span>
               </div>
             ) : null}
@@ -101,15 +102,15 @@ export function DecoderView({ baseUrl }: DecoderViewProps) {
                 </ul>
               ) : (
                 <EmptyState
-                  title="No catalogue entry matches"
-                  description="The Error Handling Guide does not describe this wording. Check the message structurally instead — most rejections are structural, and the Check surface locates those precisely."
+                  title={t("No catalogue entry matches")}
+                  description={t("The Error Handling Guide does not describe this wording. Check the message structurally instead — most rejections are structural, and the Check surface locates those precisely.")}
                 />
               )
             ) : (
               <EmptyState
                 glyph="⊘"
-                title="Paste a rejection"
-                description="The decoder matches it against the published error catalogue and tells you which position in the message the error is about."
+                title={t("Paste a rejection")}
+                description={t("The decoder matches it against the published error catalogue and tells you which position in the message the error is about.")}
               />
             )}
           </div>
@@ -122,7 +123,7 @@ export function DecoderView({ baseUrl }: DecoderViewProps) {
             <input
               value={browse}
               onChange={(e) => setBrowse(e.target.value)}
-              placeholder="Browse the catalogue…"
+              placeholder={t("Browse the catalogue…")}
               className="w-full rounded-xs border border-line bg-surface px-1.5 py-1 text-xs text-ink outline-none placeholder:text-ink-3 focus:border-accent"
             />
           </div>
@@ -167,7 +168,7 @@ function EntryCard({
         {/* Evidence can be a whole rejection line; it wraps and breaks inside long tokens so
             the card never scrolls sideways, and the line loosens at presentation scale. */}
         <p className="mb-1.5 cursor-help text-2xs text-ink-3 [[data-density=roomy]_&]:mb-2 [[data-density=roomy]_&]:leading-relaxed">
-          matched on {MATCH_LABEL[match.kind]}:{" "}
+          {t("matched on")}{" "}{MATCH_LABEL[match.kind]}:{" "}
           <code className="break-words rounded-xs bg-inset px-1 font-mono text-ink-2 [[data-density=roomy]_&]:px-1.5">
             {match.evidence}
           </code>
@@ -179,12 +180,12 @@ function EntryCard({
       {entry.condition ? <p className="mb-1 text-ink-2">{entry.condition}</p> : null}
 
       {entry.possibleCause ? (
-        <Field label="Likely cause">{entry.possibleCause}</Field>
+        <Field label={t("Likely cause")}>{entry.possibleCause}</Field>
       ) : null}
-      {entry.recommendation ? <Field label="What to change">{entry.recommendation}</Field> : null}
+      {entry.recommendation ? <Field label={t("What to change")}>{entry.recommendation}</Field> : null}
 
       {entry.locators?.length ? (
-        <Field label="Position in the message">
+        <Field label={t("Position in the message")}>
           <span className="flex flex-wrap gap-1">
             {entry.locators.map((l, i) => (
               <Badge key={i} mono title={l.kind}>
@@ -222,7 +223,7 @@ function EntrySummary({ entry, onPick }: { entry: ErrorEntry; onPick: () => void
     <button
       type="button"
       onClick={onPick}
-      className="w-full rounded-xs border border-line bg-surface px-2 py-1.5 text-left text-2xs hover:bg-inset"
+      className="w-full rounded-xs border border-line bg-surface px-2 py-1.5 text-start text-2xs hover:bg-inset"
     >
       <div className="flex items-center gap-1.5">
         <span className="font-mono text-ink">{entry.code ?? entry.ref ?? entry.id.slice(0, 18)}</span>

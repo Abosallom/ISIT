@@ -6,6 +6,7 @@ import {
   useState,
   type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
+import { t } from "../i18n";
 import { cx } from "./cx";
 import { SEV_DOT, IGNORED_EXPLANATION } from "./severity";
 import { SEVERITY_GLYPH, SEVERITY_LABEL, type StructureNode } from "./types";
@@ -305,11 +306,11 @@ function TreeRow({
       title={n.path}
       style={{ height: rowHeight, paddingLeft: 6 + row.depth * 12 }}
       className={cx(
-        "flex cursor-pointer select-none items-center gap-1.5 pr-2 text-xs",
-        "border-l-2 transition-colors",
+        "flex cursor-pointer select-none items-center gap-1.5 pe-2 text-xs",
+        "border-s-2 transition-colors",
         selected
-          ? "border-l-accent bg-sel"
-          : "border-l-transparent hover:bg-inset",
+          ? "border-s-accent bg-sel"
+          : "border-s-transparent hover:bg-inset",
         isIgnored && "opacity-70",
       )}
     >
@@ -375,11 +376,10 @@ function TreeRow({
           wide
           content={
             <span className="block">
-              <span className="block font-medium text-ink">Fixed value</span>
+              <span className="block font-medium text-ink">{t("Fixed value")}</span>
               <span className="block font-mono break-all">{n.fixedValue}</span>
               <span className="block text-ink-3">
-                The specification pins this exact value. Any other value is a
-                structural defect.
+                {t("The specification pins this exact value. Any other value is a structural defect.")}
               </span>
             </span>
           }
